@@ -1,8 +1,6 @@
 # First Last
 Lead Software Engineer  
-555-555-5555  
-xxxxxxxxxxx@gmail.com  
-Champaign, IL  
+Please DM for contact information.
 
 ## Objective
 Seasoned Lead Software Engineer with a robust background in DevOps, specializing in CI/CD processes and cloud-based solution design. Proven track record in managing large-scale, on-premises enterprise environments, optimizing software processes, and enhancing system efficiency. Eager to leverage my technical leadership and DevOps expertise to drive operational excellence in a challenging role.
