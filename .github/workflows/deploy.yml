@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: '18'
     - name: Install dependencies
-      run: npm install showdown semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+      run: npm install showdown
     - name: Convert Markdown to HTML
       run: node convert.js
     - name: Deploy to GitHub Pages
