@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/northcutted/resume/compare/v1.1.0...v1.2.0) (2023-07-15)
+
+
+### Features
+
+* resume updates ([576dc88](https://github.com/northcutted/resume/commit/576dc883aebd8ee596b188ce3e0c918d651d09cd))
+
 # [1.1.0](https://github.com/northcutted/resume/compare/v1.0.1...v1.1.0) (2023-07-15)
 
 
