@@ -39,17 +39,17 @@ _Summer 2017 - Spring 2018_
 -  B.S. in Agricultural and Consumer Economics - University of Illinois at Urbana Champaign (_Fall 2014 - Spring 2018_)
     - Concentration in Finance in Agribusiness
     - Relevent Course Work:
-        - CS 225 Data Structures
-        - Fin 221 Corporate Finance
-        - ACE 449 Retirement and Benefit Planning
+        - Data Structures (CS 225)
+        - Corporate Finance (FIN 221)
+        - Retirement and Benefit Planning (ACE 449)
 
 ## Skills
 ### Technical Skills:
-- **Programming Languages:** Golang, Java, Javascript, Typescript
-- **Tools:** Git, Docker, Terraform, Shell Scripting
+- **Programming Languages:** Java, Javascript, Typescript, Python, Golang, Ruby, HTML, CSS.
+- **Tools:** Git, Docker, Terraform, Shell Scripting, Ansible, Kubernetes
 - **Cloud Platforms:** AWS, Pivotal Cloud Foundry
 - **Others:** Automated Software Testing, Data Visualization, ELK Stack, GitLab (including CI/CD), GitHub, Linux System administration, Log Analysis, Microsoft Office Suite (Excel, Word, PowerPoint), Puppet, Spring Framework, Spring Boot, SQL, System Design, Troubleshooting
 
 ## Certifications
-- 2020 - AWS Cloud Practitioner
-- 2021 - AWS Solutions Architect Associate
+- AWS Cloud Practitioner (2020)
+- AWS Solutions Architect Associate (2021)
