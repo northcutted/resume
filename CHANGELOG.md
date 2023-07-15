@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/northcutted/resume/compare/v1.0.0...v1.0.1) (2023-07-15)
+
+
+### Bug Fixes
+
+* update styling ([a38d484](https://github.com/northcutted/resume/commit/a38d484a0eba4a7ddf8744275bb12fe1bb016d8a))
+
 # 1.0.0 (2023-07-15)
 
 
