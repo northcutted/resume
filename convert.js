@@ -11,7 +11,9 @@ const htmlWithStyles = `
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<div class="container">
     ${html}
+</div>
 </body>
 </html>
 `;
