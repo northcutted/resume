@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install showdown
+
+    - name: Convert Markdown to HTML
+      run: |
+        const showdown  = require('showdown');
+        const fs = require('fs');
+        const converter = new showdown.Converter();
+        const text = fs.readFileSync('resume.md', 'utf8');
+        const html = converter.makeHtml(text);
+        fs.writeFileSync('index.html', html);
+      shell: node
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
