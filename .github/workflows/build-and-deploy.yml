@@ -32,7 +32,7 @@ jobs:
           pandoc resume-site.md -f markdown -t html -c resume-stylesheet.css -s -o output/index.html
           pandoc resume.md -f markdown -t html -c resume-stylesheet.css -s -o output/to_pdf.html
       - name: "Convert HTML to PDF "
-        run: "wkhtmltopdf --zoom 0.6 --enable-local-file-access output/to_pdf.html output/Eddie_Northcutt_Resume.pdf"
+        run: "wkhtmltopdf --zoom 0.8 --enable-local-file-access output/to_pdf.html output/Eddie_Northcutt_Resume.pdf"
       - name: Fix permissions
         run: |
           chmod -c -R +rX "output/" | while read line; do
