@@ -35,7 +35,7 @@ jobs:
           pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/${{ env.RESUME_HTML }}
           pandoc ${{ env.RESUME_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/to_pdf.html
       - name: "Convert HTML to PDF "
-        run: "wkhtmltopdf --zoom 0.70 --enable-local-file-access output/to_pdf.html output/${{ env.RESUME_PDF }}"
+        run: "wkhtmltopdf --zoom 0.6 --enable-local-file-access output/to_pdf.html output/${{ env.RESUME_PDF }}"
       - name: Fix permissions
         run: |
           chmod -c -R +rX "output/" | while read line; do
