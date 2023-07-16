@@ -30,7 +30,7 @@ jobs:
         run: |
           cp ${{ env.RESUME_MD }} ${{ env.RESUME_SITE_MD }}
           echo "\n\n### Like what you see? Download a PDF copy here by clicking the link below:\n[${{ env.RESUME_PDF }}](https://${{ github.event.repository.owner.login }}.github.io/${{ github.event.repository.name }}/${{ env.RESUME_PDF }})" >> ${{ env.RESUME_SITE_MD }}
-          echo "\n\n _Want to see how this was is built and hosted? Checkout the Github Repo [here](${{ github.repository }})_ >> ${{ env.RESUME_SITE_MD }}
+          echo "\n\n _Want to see how this was is built and hosted? Checkout the Github Repo [here](${{ github.repository }})_" >> ${{ env.RESUME_SITE_MD }}
       - name: "Convert MD to HTML"
         run: |
           pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/${{ env.RESUME_HTML }}
