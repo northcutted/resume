@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/northcutted/resume/compare/v2.0.0...v2.0.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* update formatting ([ec4d936](https://github.com/northcutted/resume/commit/ec4d936bb7a8c8d8b24c8550f79a5c2b5ac59126))
+
 # [2.0.0](https://github.com/northcutted/resume/compare/v1.2.0...v2.0.0) (2023-07-16)
 
 
