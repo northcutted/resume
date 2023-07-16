@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/northcutted/resume/compare/v2.1.0...v2.1.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* remove duplicate information ([e9ac8c4](https://github.com/northcutted/resume/commit/e9ac8c48fd1c5a33111b6566d4504d1d8dd22f9e))
+
 # [2.1.0](https://github.com/northcutted/resume/compare/v2.0.3...v2.1.0) (2023-07-16)
 
 
