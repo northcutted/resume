@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/northcutted/resume/compare/v1.2.0...v2.0.0) (2023-07-16)
+
+
+### Bug Fixes
+
+* fix link to generated pdf ([d7f531a](https://github.com/northcutted/resume/commit/d7f531a2b351ab0497840a4164d4375b67a5ebb9))
+
+
+### Features
+
+* Render pdf documents ([0c3e1a7](https://github.com/northcutted/resume/commit/0c3e1a7096e6a350479017886d065eb3106aac1b))
+
+
+### BREAKING CHANGES
+
+* Entire impl change
+
 # [1.2.0](https://github.com/northcutted/resume/compare/v1.1.0...v1.2.0) (2023-07-15)
 
 
