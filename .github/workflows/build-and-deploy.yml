@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}-ci:latest
+      # platform: linux/amd64
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -17,12 +20,6 @@ jobs:
           mkdir output
           cp resume-stylesheet.css output/resume-stylesheet.css
           cp resume.md output/${{ github.actor }}-resume.md
-      - name: "Install pandoc and wkhtmltopdf"
-        run: |
-          wget https://github.com/jgm/pandoc/releases/download/3.0.1/pandoc-3.0.1-1-amd64.deb
-          wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
-          sudo apt install ./pandoc-3.0.1-1-amd64.deb
-          sudo apt install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
       - name: Create resume-site.md
         run: |
           cp resume.md resume-site.md
