@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/northcutted/resume/compare/v2.0.1...v2.0.2) (2023-07-16)
+
+
+### Bug Fixes
+
+* update headers ([6043011](https://github.com/northcutted/resume/commit/604301134eda81a666e39c8ad0e8e0f984f27b20))
+
 ## [2.0.1](https://github.com/northcutted/resume/compare/v2.0.0...v2.0.1) (2023-07-16)
 
 
