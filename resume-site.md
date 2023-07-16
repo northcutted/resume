@@ -75,4 +75,4 @@ _Summer 2017 - Spring 2018_
   - Retirement and Benefit Planning (ACE 449)
  
 ### Like what you see? Download a PDF copy here by clicking the link below:
-[Edward_Northcutt_Resume.pdf](https://northcutted.github.io/markdown-resume/Eddie_Northcutt_Resume.pdf)
+[Edward_Northcutt_Resume.pdf](https://northcutted.github.io/resume/Eddie_Northcutt_Resume.pdf)
