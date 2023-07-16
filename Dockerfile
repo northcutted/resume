@@ -6,7 +6,3 @@ RUN apt update \
 && wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
 && apt install ./pandoc-3.0.1-1-amd64.deb -y \
 && apt install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb -y
-
-USER 1000
-
-ENTRYPOINT ["/bin/bash"]
