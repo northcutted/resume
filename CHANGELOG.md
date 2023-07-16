@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/northcutted/resume/compare/v2.1.1...v2.2.0) (2023-07-16)
+
+
+### Bug Fixes
+
+* update deployment workflow to use ci image instead of installing dependencies each time ([165f22b](https://github.com/northcutted/resume/commit/165f22b69b4d52b08c741adac5fd118c379aaedd))
+
+
+### Features
+
+* add ci image to speed up pipeline ([bf00aa8](https://github.com/northcutted/resume/commit/bf00aa8a4f8cb193067386af1727aa861fbe5cd8))
+
 ## [2.1.1](https://github.com/northcutted/resume/compare/v2.1.0...v2.1.1) (2023-07-16)
 
 
