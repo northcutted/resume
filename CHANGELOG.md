@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/northcutted/resume/compare/v2.0.3...v2.1.0) (2023-07-16)
+
+
+### Features
+
+* remove need to maintain two resume files ([2268d6d](https://github.com/northcutted/resume/commit/2268d6d3c206ced87bf457386e443dac476ba647))
+
 ## [2.0.3](https://github.com/northcutted/resume/compare/v2.0.2...v2.0.3) (2023-07-16)
 
 
