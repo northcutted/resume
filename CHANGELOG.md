@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/northcutted/resume/compare/v2.2.0...v2.2.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* add blurb about seeing how the resume was built with a link to the repo ([7966415](https://github.com/northcutted/resume/commit/7966415f7be92e1fe83e983cfb6a786d05e0b08c))
+
 # [2.2.0](https://github.com/northcutted/resume/compare/v2.1.1...v2.2.0) (2023-07-16)
 
 
