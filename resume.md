@@ -31,7 +31,7 @@ Accomplished Lead Software Engineer with a strong background in DevOps and a spe
 
 ## Experience
 
-### Lead Software Engineer, State Farm (_Blooimington/Hyrbid-Remote_)
+### Lead Software Engineer, State Farm (_Bloomington, IL/Hyrbid-Remote_)
 
 _August 2020 - Present_
 

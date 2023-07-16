@@ -23,6 +23,10 @@ jobs:
           wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
           sudo apt install ./pandoc-3.0.1-1-amd64.deb
           sudo apt install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+      - name: Create resume-site.md
+        run: |
+          cp resume.md resume-site.md
+          echo -e "\n\n### Like what you see? Download a PDF copy here by clicking the link below:\n[Edward_Northcutt_Resume.pdf](https://northcutted.github.io/resume/Eddie_Northcutt_Resume.pdf)" >> resume-site.md
       - name: "Convert MD to HTML"
         run: |
           pandoc resume-site.md -f markdown -t html -c resume-stylesheet.css -s -o output/index.html
