@@ -1,0 +1,24 @@
+# Jekyll build output
+output
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*~
+.project
+.settings
+*.tmproj
+*.sublime-workspace
+
+# Jekyll cache and logs
+.jekyll-cache/
+.jekyll-metadata
+.jekyll-keep
+
+# Generated Gemfile.lock
+Gemfile.lock
+
+# Local development files
+vendor/bundle/
