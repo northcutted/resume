@@ -6,7 +6,7 @@ on:
       - Dockerfile
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}-ci:latest
+  IMAGE_NAME: ghcr.io/${{ github.repository }}-ci:latest
 
 jobs:
   build-and-push:
