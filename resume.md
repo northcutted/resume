@@ -79,9 +79,3 @@ _Fall 2014 - Spring 2018_
   - Data Structures (CS 225)
   - Corporate Finance (FIN 221)
   - Retirement and Benefit Planning (ACE 449)
-
-- Concentration in Finance in Agribusiness
-- Relevent Course Work:
-  - Data Structures (CS 225)
-  - Corporate Finance (FIN 221)
-  - Retirement and Benefit Planning (ACE 449)
