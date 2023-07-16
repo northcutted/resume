@@ -20,6 +20,7 @@ subject: 'Subject'
 ---
 ###### [Please DM for contact information.]
 
+## Who am I? 
 Accomplished Lead Software Engineer with a strong background in DevOps and a specialization in CI/CD processes and cloud-based solution architecture. Demonstrated success in managing large-scale, on-premises enterprise environments, streamlining software processes, and boosting system efficiency. Seeking a challenging technical leadership role in a forward-thinking company where I can apply my DevOps expertise and contribute to operational excellence.
 
 ## Skills

@@ -20,6 +20,7 @@ subject: 'Subject'
 ---
 ###### [Please DM for contact information.]
 
+## Who am I? 
 Accomplished Lead Software Engineer with a strong background in DevOps and a specialization in CI/CD processes and cloud-based solution architecture. Demonstrated success in managing large-scale, on-premises enterprise environments, streamlining software processes, and boosting system efficiency. Seeking a challenging technical leadership role in a forward-thinking company where I can apply my DevOps expertise and contribute to operational excellence.
 
 ## Skills
@@ -32,15 +33,13 @@ Accomplished Lead Software Engineer with a strong background in DevOps and a spe
 ## Experience
 
 ### Lead Software Engineer, State Farm
-_August 2020 - Present_
-
+_Aug 2020 - Present_
 - Directed and enhanced Source Control Management (SCM) and Continuous Integration/Continuous Deployment (CI/CD) capabilities, providing support to over 10,000 engineers in various stages of the software development lifecycle, including CI/CD Pipelines, application architecture, service resiliency, and development practices.
 - Implemented Agile workflows and partnered with product teams to realize future enhancement visions.
 - Developed and presented educational materials for internal employees.
 - Mentored peers, fostering a collaborative and knowledge-sharing environment.
 
 _Achievements:_
-
 - Engineered a shared CI/CD service using Gitlab Runners, which allowed internal users to leverage shared infrastructure. This service enabled users to provide their own runtime via a container image and securely facilitated container builds using sysbox for enhanced isolation. By 2022, this system managed over half of all pipelines at State Farm, leading to significant optimizations and economies of scale. In 2023 this system was successfully migrated from an on-premises environment to AWS and now provides robust autoscaling.
 - Launched and supported various inner-source projects to accelerate development, including Terraform modules, container images for pipeline usage, and example projects for internal documentation.
 - Developed a cloud-based solution to collect CI/CD metrics and used Grafana to create consumer-facing dashboards, showcasing current and historic usage of the shared CI/CD platform.
@@ -48,14 +47,13 @@ _Achievements:_
 
 ### Software Developer, State Farm
 
-_June 2018 - August 2020_
+_June 2018 - Aug 2020_
 
 - Collaborated with a team of seven engineers to maintain and enhance a proprietary tool used for the design and implementation of insurance products. This tool was a complex system comprising a user interface, a backend for validation of intricate models, and an IBM DB2 database storage backend.
 - Maintained a diverse set of backend components, including REST endpoints and Java IMS services, which communicated asynchronously with an IBM Message Queue (MQ) server.
 - Assisted in the migration of these components to a strategic internal platform that utilized technologies such as Postgres, RabbitMQ, Spring Boot, and Pivotal Cloud Foundry.
 
 _Achievements:_
-
 - Developed an internal tool used to scan projects, identify vulnerable dependencies, and provide upgrade suggestions or automatic upgrades to a secure version. This tool was eventually handed-off to an application security team and included in their tooling.
 - Played a pivotal role in the successful migration of applications from a legacy WAS platform to an internal Pivotal Cloud Foundry platform by migrating several components independently.
 
