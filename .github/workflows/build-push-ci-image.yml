@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - Dockerfile
+      - .github/workflows/build-push-ci-image.yml
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}-ci:latest
