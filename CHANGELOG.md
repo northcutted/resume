@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/northcutted/resume/compare/v2.2.1...v2.2.2) (2023-07-16)
+
+
+### Bug Fixes
+
+* hardcode url so that it goes back to original repo ([ae394fc](https://github.com/northcutted/resume/commit/ae394fc123adc7bd309502f68098e91898e0de8f))
+
 ## [2.2.1](https://github.com/northcutted/resume/compare/v2.2.0...v2.2.1) (2023-07-16)
 
 
