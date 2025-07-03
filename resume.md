@@ -20,20 +20,40 @@ subject: 'Subject'
 ---
 ###### [Please DM for contact information.]
 
-Accomplished Lead Software Engineer with a strong background in DevOps and a specialization in CI/CD processes and cloud-based solution architecture. Demonstrated success in managing large-scale, on-premises enterprise environments, streamlining software processes, and boosting system efficiency. Seeking a challenging technical leadership role in a forward-thinking company where I can apply my DevOps expertise and contribute to operational excellence.
+Experienced Software Engineer with a strong focus on platform engineering, DevOps, and secure, scalable cloud infrastructure. Specializes in building shared systems—including enterprise container images, CI/CD platforms, and developer tooling that simplify workflows, reduce duplication, and drive efficiency at scale. Proven track record of delivering solutions used by thousands of engineers, leading complex migrations, and embedding automation and security into core development platforms.
 
 ## Skills
-
-- **Programming Languages:** Java, Javascript, Typescript, Python, Golang, Ruby, HTML, CSS.
-- **Tools:** Git, Docker, Terraform, Shell Scripting, Ansible, Kubernetes
-- **Cloud Platforms:** AWS, Pivotal Cloud Foundry
-- **Others:** Automated Software Testing, Data Visualization, ELK Stack, GitLab (including CI/CD), GitHub, Linux System administration, Log Analysis, Microsoft Office Suite (Excel, Word, PowerPoint), Puppet, Spring Framework, Spring Boot, SQL, System Design, Troubleshooting
+- **Programming/Scripting/Markup Languages:** Java, JavaScript, TypeScript, Python, Golang, Ruby, HTML, CSS, Bash  
+- **Infrastructure & DevOps Tools:** Docker, Kubernetes, Terraform, Ansible, Puppet, Sysbox, Helm, GitLab CI/CD, GitHub Actions, Shell Scripting, GitHub CoPilot
+- **Cloud Platforms & Services:** AWS (EC2, ECR, S3, IAM, CloudWatch), Pivotal Cloud Foundry, Fargate, VPC Networking, Red Hat Openshift  
+- **CI/CD & Automation:** GitLab Runners (custom and shared), CI/CD Pipeline design, Jenkins (usage and administrative), Multi-stage Docker Builds, Automated Build & Vulnerability Pipelines  
+- **Observability & Monitoring:** Grafana, ELK Stack (Elasticsearch, Logstash, Kibana), Prometheus, CloudWatch  
+- **Development & System Tools:** Linux System Administration, System Design, Troubleshooting, SQL, Spring Boot, Spring Framework, Testing, Log Analysis, LLM workflow integration.
+- **Productivity & Documentation:** Microsoft 365 Suite, Markdown, Data Visualization, MKDocs/Static Site Building.
 
 ## Experience
 
+### Lead Software Engineer II, State Farm (_Bloomington, IL/Hybrid-Remote_)
+
+_April 2024 - Present_
+
+Sole engineer responsible for designing, building, and launching a curated suite of internal base container images supporting Java, Node.js, Python, Golang, Nginx, and general-purpose Linux workloads.
+
+_Achievements:_
+
+- Designed a modular, layered image architecture to reduce storage costs and promote reuse across teams.
+- Built both runtime and development variants to support CI/CD pipelines, development, and production use cases.
+- Implemented automated build and vulnerability remediation pipelines to ensure secure, compliant, and up-to-date images.
+- Standardized image builds across engineering teams, reducing duplication and improving patch velocity at scale.
+- Collaborated with senior engineers and product stakeholders to ensure alignment and drive enterprise-wide adoption.
+- Advocated for and established managed base images as a shared platform offering to reduce fragmentation and improve trust.
+- Enabled rapid OS base pivots in response to licensing, security, or compliance needs with minimal downstream disruption.
+
+This effort laid the foundation for a secure, scalable, and cost-efficient container strategy—led end-to-end by a single engineer, in close partnership with cross-functional teams.
+
 ### Lead Software Engineer, State Farm (_Bloomington, IL/Hyrbid-Remote_)
 
-_August 2020 - Present_
+_August 2020 - April 2024_
 
 - Directed and enhanced Source Control Management (SCM) and Continuous Integration/Continuous Deployment (CI/CD) capabilities, providing support to over 10,000 engineers in various stages of the software development lifecycle, including CI/CD Pipelines, application architecture, service resiliency, and development practices.
 - Implemented Agile workflows and partnered with product teams to realize future enhancement visions.
