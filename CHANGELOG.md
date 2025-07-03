@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/northcutted/resume/compare/v2.2.2...v2.3.0) (2025-07-03)
+
+
+### Features
+
+* add new role to resume and update skills ([3ef119d](https://github.com/northcutted/resume/commit/3ef119d61678864d5161c65cf22fb06a941079b2))
+
 ## [2.2.2](https://github.com/northcutted/resume/compare/v2.2.1...v2.2.2) (2023-07-16)
 
 
