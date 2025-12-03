@@ -6,53 +6,13 @@ on:
     branches:
       - main
 
-env:
-  RESUME_STYLESHEET: resume-stylesheet.css
-  RESUME_MD: resume.md
-  RESUME_SITE_MD: resume-site.md
-  RESUME_HTML: index.html
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/northcutted/resume-ci:latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      
-      - name: Extract Name for PDF
-        id: get_filename
-        run: |
-          # Extract 'title' from frontmatter, replace spaces with underscores
-          PDF_NAME=$(grep "^title:" resume.md | sed 's/title: //g' | tr -d '"' | tr ' ' '_')
-          echo "PDF_NAME=${PDF_NAME}.pdf" >> $GITHUB_ENV
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      artifact_name: resume-build-output
+      retention_days: 1
 
-      - name: "Create a folder called output"
-        run: |
-          mkdir output
-          cp ${{ env.RESUME_STYLESHEET }} output/${{ env.RESUME_STYLESHEET }}
-          cp ${{ env.RESUME_MD }} output/${{ github.actor }}-${{ env.RESUME_MD }}
-      - name: Create resume-site.md
-        run: |
-          cp ${{ env.RESUME_MD }} ${{ env.RESUME_SITE_MD }}
-          echo "\n\n### Like what you see? Download a PDF copy here by clicking the link below:\n[Download PDF](${{ env.PDF_NAME }})" >> ${{ env.RESUME_SITE_MD }}
-          echo "\n\n _Want to see how this is built and hosted? Checkout the Github Repo [here](https://github.com/northcutted/resume)_" >> ${{ env.RESUME_SITE_MD }}
-      - name: "Convert MD to HTML"
-        run: |
-          pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/${{ env.RESUME_HTML }}
-          pandoc ${{ env.RESUME_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/to_pdf.html
-      - name: "Convert HTML to PDF "
-        run: "wkhtmltopdf --zoom 0.6 --enable-local-file-access output/to_pdf.html output/${{ env.PDF_NAME }}"
-      - name: Fix permissions
-        run: |
-          chmod -c -R +rX "output/" | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: output
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -63,8 +23,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: resume-build-output
+          path: output
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
