@@ -4,18 +4,18 @@
 ARCH=$(uname -m)
 case $ARCH in
     x86_64)
-        TARGET_ARCH="amd64"
+        TARGETARCH="amd64"
         ;;
     aarch64|arm64)
-        TARGET_ARCH="arm64"
+        TARGETARCH="arm64"
         ;;
     *)
-        TARGET_ARCH="amd64" # Default fallback
+        TARGETARCH="amd64" # Default fallback
         ;;
 esac
 
 # 1. Build the image (or pull it if you prefer)
-podman build --build-arg TARGET_ARCH=$TARGET_ARCH -t resume-local .
+podman build --build-arg TARGETARCH=$TARGETARCH -t resume-local .
 
 # 2. Run the container to generate output
 # We mount the current directory to /data in the container
