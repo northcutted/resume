@@ -527,7 +527,7 @@ h2 {
 
 h3 {
     font-size: 18px;
-    color: #333
+    color: #333;
     -webkit-margin-before: 0.01em;
     -webkit-margin-after: 0.01em;
 }
@@ -818,6 +818,30 @@ sub {
     pre code {
         background-color: white !important;
         overflow: visible
+    }
+
+    /* Hide the download link and footer in print view */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+
+    /* Ensure background colors (like code blocks) print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Reset margins for print to let the printer handle it, 
+       or enforce specific ones if needed */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Prevent page breaks inside elements */
+    h2, h3, p, li {
+        page-break-inside: avoid;
     }
 }
 
@@ -1153,4 +1177,40 @@ sub {
 
 .author {
     display: none
+}
+
+/* Print-specific styles */
+@media print {
+    /* Hide the download link and footer in print view */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+
+    /* Ensure background colors (like code blocks) print */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Reset margins for print to let the printer handle it, 
+       or enforce specific ones if needed */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Prevent page breaks inside elements */
+    h2, h3, p, li {
+        page-break-inside: avoid;
+    }
+}
+
+/* Improve general readability on screen */
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    line-height: 1.6;
+    color: #333;
 }

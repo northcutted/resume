@@ -17,6 +17,11 @@ keywords:
 author:
 - Eddie Northcutt
 subject: 'Subject'
+header-includes:
+  - <meta property="og:title" content="Edward Northcutt - Resume" />
+  - <meta property="og:type" content="website" />
+  - <meta property="og:description" content="Experienced Software Engineer specializing in DevOps, Platform Engineering, and Cloud Infrastructure." />
+  # - <meta property="og:image" content="https://your-site.com/preview-image.png" />
 ---
 ###### [Please DM for contact information.]
 
