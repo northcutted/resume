@@ -1,0 +1,138 @@
+/* Theme: Classic */
+/* Elegant, Serif, Traditional */
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Merriweather', 'Georgia', serif;
+    color: #111;
+    line-height: 1.6;
+    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', 'Georgia', serif;
+    color: #000;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.2em;
+    font-weight: normal;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Links */
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #333;
+}
+
+/* Lists */
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 3px;
+}
+
+/* Theme Switcher Styles */
+#theme-switcher {
+    background: #fff;
+    border: 1px double #000;
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+}
+
+#theme-switcher label {
+    font-weight: normal;
+    font-style: italic;
+    display: block;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+#theme-select {
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 0;
+    font-family: 'Georgia', serif;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 14px;
+        margin-top: 10px;
+        border-bottom: 1px solid #999;
+    }
+
+    h3 {
+        font-size: 12px;
+    }
+    
+    /* Hide download link */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+    
+    /* Reset margins for print to let the printer handle it */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff;
+    }
+
+    #theme-switcher {
+        display: none !important;
+    }
+}

@@ -12,7 +12,6 @@ on:
         default: 1
 
 env:
-  RESUME_STYLESHEET: resume-stylesheet.css
   RESUME_MD: resume.md
   RESUME_SITE_MD: resume-site.md
   RESUME_HTML: index.html
@@ -36,7 +35,8 @@ jobs:
       - name: "Create a folder called output"
         run: |
           mkdir output
-          cp ${{ env.RESUME_STYLESHEET }} output/${{ env.RESUME_STYLESHEET }}
+          cp theme-*.css output/
+          cp theme-switcher.html output/
           cp ${{ env.RESUME_MD }} output/${{ github.actor }}-${{ env.RESUME_MD }}
 
       - name: Create resume-site.md
@@ -47,11 +47,38 @@ jobs:
 
       - name: "Convert MD to HTML"
         run: |
-          pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/${{ env.RESUME_HTML }}
-          pandoc ${{ env.RESUME_MD }} -f markdown -t html -c ${{ env.RESUME_STYLESHEET }} -s -o output/to_pdf.html
+          # Generate main HTML with default theme (clean) and switcher
+          pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c theme-clean.css -s --include-before-body=theme-switcher.html -o output/${{ env.RESUME_HTML }}
+          
+          # Add ID to the link tag so JS can find it
+          sed -i 's/href="theme-clean.css"/href="theme-clean.css" id="theme-style"/' output/${{ env.RESUME_HTML }}
 
       - name: "Convert HTML to PDF "
-        run: "wkhtmltopdf --zoom 0.6 --enable-local-file-access output/to_pdf.html output/${{ env.PDF_NAME }}"
+        run: |
+          # Define themes
+          THEMES=('clean' 'modern' 'classic' 'dark' 'terminal' 'bold')
+          BASE_NAME="$PDF_NAME"
+          BASE_NAME_NO_EXT="${BASE_NAME%.pdf}"
+          
+          for theme in "${THEMES[@]}"; do
+              echo "Building PDF for theme: $theme"
+              
+              # Create a temp html for this theme
+              pandoc ${{ env.RESUME_MD }} -f markdown -t html -c "theme-$theme.css" -s -o "output/resume-$theme.html"
+              
+              # Determine PDF filename
+              if [ "$theme" == "clean" ]; then
+                  OUT_PDF="output/$BASE_NAME"
+              else
+                  OUT_PDF="output/${BASE_NAME_NO_EXT}-$theme.pdf"
+              fi
+              
+              # Generate PDF
+              wkhtmltopdf --page-size Letter --margin-top 10mm --margin-bottom 10mm --margin-left 10mm --margin-right 10mm --enable-local-file-access "output/resume-$theme.html" "$OUT_PDF"
+              
+              # Cleanup temp html
+              rm "output/resume-$theme.html"
+          done
       
       - name: Fix permissions
         run: |

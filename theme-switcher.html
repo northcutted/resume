@@ -1,0 +1,92 @@
+<div id="theme-switcher" style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
+    <label for="theme-select">Select Theme:</label>
+    <select id="theme-select" onchange="changeTheme(this.value)">
+        <option value="clean">Clean (Default)</option>
+        <option value="modern">Modern</option>
+        <option value="classic">Classic</option>
+        <option value="dark">Dark Mode</option>
+        <option value="terminal">Terminal</option>
+        <option value="bold">Bold</option>
+    </select>
+
+    <div id="color-picker-container" style="display: none; margin-top: 10px;">
+        <label for="color-select">Theme Color:</label>
+        <select id="color-select" onchange="changeColor(this.value)">
+            <option value="blue">Blue (Default)</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+            <option value="black">Black</option>
+            <option value="grey">Grey</option>
+        </select>
+    </div>
+</div>
+
+<script>
+    function changeTheme(theme) {
+        // 1. Update stylesheet
+        var link = document.getElementById('theme-style');
+        if (link) {
+            link.href = 'theme-' + theme + '.css';
+        }
+
+        // 2. Show/Hide Color Picker
+        var colorPicker = document.getElementById('color-picker-container');
+        if (theme === 'modern') {
+            colorPicker.style.display = 'block';
+            // Apply current color
+            var colorSelect = document.getElementById('color-select');
+            changeColor(colorSelect.value);
+        } else {
+            colorPicker.style.display = 'none';
+            document.body.className = ''; // Clear color class
+            updatePdfLink(theme, null);
+        }
+        
+        // 3. Save preference
+        localStorage.setItem('resume-theme', theme);
+    }
+
+    function changeColor(color) {
+        document.body.className = 'color-' + color;
+        updatePdfLink('modern', color);
+        localStorage.setItem('resume-modern-color', color);
+    }
+
+    function updatePdfLink(theme, color) {
+        var pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
+        pdfLinks.forEach(function(a) {
+            var filename = 'resume';
+            if (theme !== 'clean') {
+                filename += '-' + theme;
+            }
+            // Only add color suffix if it's not the default blue
+            if (theme === 'modern' && color && color !== 'blue') {
+                 filename += '-' + color;
+            }
+            a.href = filename + '.pdf';
+        });
+    }
+
+    // Initialize theme from localStorage if available
+    document.addEventListener('DOMContentLoaded', function() {
+        var savedTheme = localStorage.getItem('resume-theme');
+        var savedColor = localStorage.getItem('resume-modern-color');
+        
+        if (savedColor) {
+            var colorSelect = document.getElementById('color-select');
+            if (colorSelect) {
+                colorSelect.value = savedColor;
+            }
+        }
+
+        if (savedTheme) {
+            var select = document.getElementById('theme-select');
+            if (select) {
+                select.value = savedTheme;
+                changeTheme(savedTheme);
+            }
+        }
+    });
+</script>

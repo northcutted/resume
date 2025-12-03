@@ -1,0 +1,241 @@
+/* Theme: Modern */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #2c3e50;
+    line-height: 1.6;
+    background-color: #f4f6f7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #3498db; /* Default Blue */
+    padding-bottom: 10px;
+    text-align: left;
+    color: #2c3e50;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #3498db; /* Default Blue */
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Links */
+a {
+    color: #3498db; /* Default Blue */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9; /* Default Blue Dark */
+    text-decoration: underline;
+}
+
+/* Lists */
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* Code Blocks */
+pre, code {
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: #e74c3c;
+}
+
+pre {
+    padding: 15px;
+    border: 1px solid #bdc3c7;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 5px solid #3498db; /* Default Blue */
+    background-color: #ecf0f1;
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Theme Switcher Styles */
+#theme-switcher {
+    background: #fff;
+    border: none;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    border-top: 4px solid #3498db; /* Default Blue */
+}
+
+#theme-switcher label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#theme-select, #color-select {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #bdc3c7;
+    border-radius: 2px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+/* =========================================
+   Color Variants (Explicit Overrides)
+   ========================================= */
+
+/* Red */
+body.color-red h1 { border-bottom-color: #e74c3c; }
+body.color-red h2 { color: #e74c3c; }
+body.color-red a { color: #e74c3c; }
+body.color-red a:hover { color: #c0392b; }
+body.color-red blockquote { border-left-color: #e74c3c; }
+body.color-red #theme-switcher { border-top-color: #e74c3c; }
+
+/* Orange */
+body.color-orange h1 { border-bottom-color: #e67e22; }
+body.color-orange h2 { color: #e67e22; }
+body.color-orange a { color: #e67e22; }
+body.color-orange a:hover { color: #d35400; }
+body.color-orange blockquote { border-left-color: #e67e22; }
+body.color-orange #theme-switcher { border-top-color: #e67e22; }
+
+/* Green */
+body.color-green h1 { border-bottom-color: #2ecc71; }
+body.color-green h2 { color: #2ecc71; }
+body.color-green a { color: #2ecc71; }
+body.color-green a:hover { color: #27ae60; }
+body.color-green blockquote { border-left-color: #2ecc71; }
+body.color-green #theme-switcher { border-top-color: #2ecc71; }
+
+/* Purple */
+body.color-purple h1 { border-bottom-color: #9b59b6; }
+body.color-purple h2 { color: #9b59b6; }
+body.color-purple a { color: #9b59b6; }
+body.color-purple a:hover { color: #8e44ad; }
+body.color-purple blockquote { border-left-color: #9b59b6; }
+body.color-purple #theme-switcher { border-top-color: #9b59b6; }
+
+/* Black */
+body.color-black h1 { border-bottom-color: #2c3e50; }
+body.color-black h2 { color: #2c3e50; }
+body.color-black a { color: #2c3e50; }
+body.color-black a:hover { color: #1a252f; }
+body.color-black blockquote { border-left-color: #2c3e50; }
+body.color-black #theme-switcher { border-top-color: #2c3e50; }
+
+/* Grey */
+body.color-grey h1 { border-bottom-color: #7f8c8d; }
+body.color-grey h2 { color: #7f8c8d; }
+body.color-grey a { color: #7f8c8d; }
+body.color-grey a:hover { color: #95a5a6; }
+body.color-grey blockquote { border-left-color: #7f8c8d; }
+body.color-grey #theme-switcher { border-top-color: #7f8c8d; }
+
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #fff;
+        padding: 0;
+        margin: 0;
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-top: 0;
+        border-bottom: 2px solid #3498db; /* Default */
+    }
+    
+    /* Print Overrides for Colors */
+    body.color-red h1 { border-bottom-color: #e74c3c; }
+    body.color-orange h1 { border-bottom-color: #e67e22; }
+    body.color-green h1 { border-bottom-color: #2ecc71; }
+    body.color-purple h1 { border-bottom-color: #9b59b6; }
+    body.color-black h1 { border-bottom-color: #2c3e50; }
+    body.color-grey h1 { border-bottom-color: #7f8c8d; }
+
+    h2 {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #2980b9; /* Default */
+    }
+    
+    /* Print Overrides for Colors */
+    body.color-red h2 { color: #c0392b; }
+    body.color-orange h2 { color: #d35400; }
+    body.color-green h2 { color: #27ae60; }
+    body.color-purple h2 { color: #8e44ad; }
+    body.color-black h2 { color: #1a252f; }
+    body.color-grey h2 { color: #95a5a6; }
+
+    h3 {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    /* Hide download link */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+    
+    /* Reset margins for print to let the printer handle it */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff;
+    }
+    
+    #theme-switcher {
+        display: none !important;
+    }
+}
