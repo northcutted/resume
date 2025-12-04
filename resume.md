@@ -47,11 +47,11 @@ Experienced Software Engineer with a strong focus on platform engineering, DevOp
 
 _April 2024 - Present_
 
-Sole engineer responsible for transforming enterprise container image management from ad-hoc community efforts into a governed, multi-architecture product. Architected and delivered a standardized ecosystem that now powers the majority of production kubernetes workloads, reducing operational variance and accelerating delivery across the enterprise.
+Sole engineer responsible for transforming enterprise container image management from ad-hoc community efforts into a governed, multi-architecture product. Architected and delivered a standardized base image ecosystem that now powers the majority of production kubernetes workloads, reducing operational variance and accelerating delivery across the enterprise.
 
 *Achievements:*
 
-* **Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** in 2025, processing over **108,000 image builds**.
+* **Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** leveraging official enterprise base images in 2025, used in over **108,000 image builds**.
 * **Multi-Architecture & Optimization:** Architected a modular image suite supporting both **Linux/arm64 and Linux/amd64**, enabling runtime cost savings. Implemented layered inheritance to maximize caching, minimize storage footprint and transfer costs.
 * **JVM Middleware Innovation:** Delivered a tool integrated into base image designed to optimize heap sizing and garbage collection for JVM applications on Kubernetes, significantly improving stability and reducing cognitive load for teams migrating from legacy platforms.
 * **Security Automation:** Slashed vulnerability remediation time to **under 24 hours** (down from days) by implementing automated patching pipelines and integrating State Farm Certificate Authority trust directly into base images.
