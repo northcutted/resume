@@ -1,0 +1,264 @@
+/* Theme: Modern */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* CSS Variables for Theming */
+:root {
+    --accent-color: #3498db; /* Default Blue */
+    --accent-color-dark: #2980b9;
+}
+
+/* Color Variants */
+body.color-blue { --accent-color: #3498db; --accent-color-dark: #2980b9; }
+body.color-red { --accent-color: #e74c3c; --accent-color-dark: #c0392b; }
+body.color-orange { --accent-color: #e67e22; --accent-color-dark: #d35400; }
+body.color-green { --accent-color: #2ecc71; --accent-color-dark: #27ae60; }
+body.color-purple { --accent-color: #9b59b6; --accent-color-dark: #8e44ad; }
+body.color-black { --accent-color: #2c3e50; --accent-color-dark: #1a252f; }
+body.color-grey { --accent-color: #7f8c8d; --accent-color-dark: #95a5a6; }
+
+/* Base Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #2c3e50;
+    line-height: 1.6;
+    background-color: #f4f6f7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 13px; /* 10px padding + 3px border space */
+    text-align: left;
+    color: #2c3e50;
+    border-bottom: none;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--accent-color);
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    transition: color 1.5s ease;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 1.5s ease;
+}
+
+a:hover {
+    color: var(--accent-color-dark);
+    text-decoration: underline;
+}
+
+/* Lists */
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* Code Blocks */
+pre, code {
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: #e74c3c;
+}
+
+pre {
+    padding: 15px;
+    border: 1px solid #bdc3c7;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 5px solid var(--accent-color);
+    background-color: #ecf0f1;
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Theme Switcher Styles */
+#theme-switcher {
+    background: #fff;
+    border: none;
+    padding: 24px 20px 20px 20px; /* Increased top padding for border space */
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    position: relative;
+}
+
+#theme-switcher::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-color);
+}
+
+#theme-switcher label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#theme-select, #color-select {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #bdc3c7;
+    border-radius: 2px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+/* =========================================
+   Wipe Animation Styles
+   ========================================= */
+
+@keyframes wipeRight {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Apply wipe animation to the pseudo-elements (lines) */
+body.wiping h1::after,
+body.wiping #theme-switcher::before {
+    background-image: linear-gradient(to right, var(--new-color) 50%, var(--old-color) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: wipeRight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Blockquotes use simple transition */
+blockquote {
+    transition: border-left-color 1.5s ease;
+}
+
+body.wiping blockquote {
+    border-left-color: var(--new-color) !important;
+}
+
+
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #fff;
+        padding: 0;
+        margin: 0;
+        font-size: 5px;
+        line-height: 1.0;
+    }
+
+    h1 {
+        font-size: 12px;
+        margin-top: 0;
+        border-bottom: 1px solid #3498db; /* Default */
+        padding-bottom: 2px;
+    }
+    
+    /* Explicit Print Overrides for Colors (wkhtmltopdf fallback) */
+    body.color-red h1 { border-bottom-color: #e74c3c; }
+    body.color-orange h1 { border-bottom-color: #e67e22; }
+    body.color-green h1 { border-bottom-color: #2ecc71; }
+    body.color-purple h1 { border-bottom-color: #9b59b6; }
+    body.color-black h1 { border-bottom-color: #2c3e50; }
+    body.color-grey h1 { border-bottom-color: #7f8c8d; }
+
+    h2 {
+        font-size: 8px;
+        margin-top: 4px;
+        color: #3498db; /* Default */
+    }
+    
+    /* Explicit Print Overrides for Colors */
+    body.color-red h2 { color: #e74c3c; }
+    body.color-orange h2 { color: #e67e22; }
+    body.color-green h2 { color: #2ecc71; }
+    body.color-purple h2 { color: #9b59b6; }
+    body.color-black h2 { color: #2c3e50; }
+    body.color-grey h2 { color: #7f8c8d; }
+
+    h3 {
+        font-size: 6px;
+        margin-top: 2px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #3498db; /* Default */
+    }
+    
+    /* Explicit Print Overrides for Colors */
+    body.color-red a { color: #e74c3c; }
+    body.color-orange a { color: #e67e22; }
+    body.color-green a { color: #2ecc71; }
+    body.color-purple a { color: #9b59b6; }
+    body.color-black a { color: #2c3e50; }
+    body.color-grey a { color: #7f8c8d; }
+    
+    /* Hide download link */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+    
+    /* Reset margins for print to let the printer handle it */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff;
+    }
+    
+    #theme-switcher {
+        display: none !important;
+    }
+}

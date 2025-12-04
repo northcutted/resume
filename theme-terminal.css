@@ -1,0 +1,208 @@
+/* Theme: Terminal */
+/* Hacker style, monospace, green on black */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@400;700&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    color: #00ff00; /* Terminal Green */
+    line-height: 1.4;
+    background-color: #000000;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    position: relative; /* For CRT effect positioning */
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* CRT Scanline Effect */
+body::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9999;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fira Code', monospace;
+    color: #00ff00;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+/* Typing Animation for Name */
+h1 {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+    display: block;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: none;
+    padding-right: 0.6em;
+    background-image: linear-gradient(#00ff00, #00ff00);
+    background-repeat: no-repeat;
+    background-size: 0.6em 0.15em;
+    background-position: right bottom 10px;
+    animation: 
+        typing 2s steps(19, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 19ch }
+}
+
+@keyframes blink-caret {
+    from, to { background-size: 0 0 }
+    50% { background-size: 0.6em 0.15em }
+}
+
+h1::before {
+    content: "./";
+    margin-right: 10px;
+    opacity: 0.7;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-bottom: 1px dashed #00ff00;
+    padding-bottom: 5px;
+}
+
+h2::before {
+    content: ">";
+    margin-right: 10px;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+h3::before {
+    content: ">>";
+    margin-right: 8px;
+}
+
+/* Links */
+a {
+    color: #00ff00;
+    text-decoration: none;
+    border-bottom: 1px solid #00ff00;
+}
+
+a:hover {
+    background-color: #00ff00;
+    color: #000000;
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    position: relative;
+}
+
+li::before {
+    content: "$";
+    position: absolute;
+    left: 0;
+    color: #00ff00;
+    opacity: 0.7;
+}
+
+/* Code Blocks */
+pre, code {
+    background-color: #111;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 2px 5px;
+}
+
+pre {
+    padding: 15px;
+    overflow-x: auto;
+}
+
+/* Theme Switcher Styles */
+#theme-switcher {
+    background: #000;
+    border: 2px solid #00ff00;
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+}
+
+#theme-switcher label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #00ff00;
+    text-transform: uppercase;
+}
+
+#theme-switcher label::before {
+    content: "> ";
+}
+
+#theme-select {
+    padding: 6px;
+    width: 100%;
+    border: 1px solid #00ff00;
+    border-radius: 0;
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #000000 !important;
+        color: #00ff00 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 4px; /* Monospace tends to be wide */
+        line-height: 1.0;
+    }
+
+    h1, h2, h3, a, li::before {
+        color: #00ff00 !important;
+    }
+    
+    h1 {
+        border-bottom: 2px solid #00ff00;
+    }
+    
+    /* Hide download link */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+    
+    #theme-switcher {
+        display: none !important;
+    }
+}

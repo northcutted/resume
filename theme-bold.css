@@ -1,0 +1,217 @@
+/* Theme: Bold */
+/* International Typographic Style - Clean, Grid-like, Bold */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
+
+/* CSS Variables for Theming */
+:root {
+    --accent-color: #ff0000; /* Default Swiss Red */
+}
+
+/* Color Variants */
+body.color-blue { --accent-color: #0055ff; /* Swiss Blue */ }
+body.color-red { --accent-color: #ff0000; /* Swiss Red */ }
+body.color-orange { --accent-color: #ff6600; /* Swiss Orange */ }
+body.color-green { --accent-color: #00aa00; /* Swiss Green */ }
+body.color-purple { --accent-color: #8800cc; /* Swiss Purple */ }
+body.color-black { --accent-color: #000000; }
+body.color-grey { --accent-color: #666666; }
+
+/* Base Styles */
+body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000;
+    line-height: 1.4;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000;
+    margin: 0;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-top: 4px solid #000;
+    padding-top: 10px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+/* Accent Color (Swiss Red) */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 1.5s ease;
+}
+
+a:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+
+li::before {
+    content: "■";
+    color: var(--accent-color);
+    font-size: 0.6em;
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    transition: color 1.5s ease;
+}
+
+/* Layout adjustments */
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+}
+
+/* Theme Switcher Styles */
+#theme-switcher {
+    background: #fff;
+    border: 4px solid #000;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: 8px 8px 0px var(--accent-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: box-shadow 1.5s ease;
+}
+
+#theme-switcher label {
+    font-weight: 900;
+    display: block;
+    margin-bottom: 10px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+#theme-select, #color-select {
+    padding: 10px;
+    width: 100%;
+    border: 2px solid #000;
+    border-radius: 0;
+    font-weight: 700;
+}
+
+/* =========================================
+   Wipe Animation Styles
+   ========================================= */
+
+@keyframes wipeRight {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Apply wipe animation to links and list bullets */
+body.wiping a,
+body.wiping li::before {
+    background-image: linear-gradient(to right, var(--new-color) 50%, var(--old-color) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: wipeRight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* For the box shadow, we can't easily wipe it, so we'll just fade it */
+body.wiping #theme-switcher {
+    box-shadow: 8px 8px 0px var(--new-color) !important;
+}
+
+
+/* Print Styles */
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 5px;
+        line-height: 1.0;
+    }
+
+    h1 {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    h2 {
+        font-size: 8px;
+        margin-top: 8px;
+        border-top: 1px solid #000;
+        padding-top: 2px;
+    }
+
+    h3 {
+        font-size: 6px;
+        margin-top: 4px;
+    }
+    
+    a {
+        color: #ff0000; /* Default Red */
+        text-decoration: underline;
+    }
+    
+    li::before {
+        color: #ff0000; /* Default Red */
+    }
+    
+    /* Explicit Print Overrides for Colors (wkhtmltopdf fallback) */
+    body.color-blue a, body.color-blue li::before { color: #0055ff; }
+    body.color-red a, body.color-red li::before { color: #ff0000; }
+    body.color-orange a, body.color-orange li::before { color: #ff6600; }
+    body.color-green a, body.color-green li::before { color: #00aa00; }
+    body.color-purple a, body.color-purple li::before { color: #8800cc; }
+    body.color-black a, body.color-black li::before { color: #000000; }
+    body.color-grey a, body.color-grey li::before { color: #666666; }
+    
+    /* Hide download link */
+    body > *:last-child,
+    a[href$=".pdf"] {
+        display: none !important;
+    }
+
+    #theme-switcher {
+        display: none !important;
+    }
+}

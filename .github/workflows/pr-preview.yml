@@ -1,0 +1,12 @@
+name: PR Preview Build
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      artifact_name: resume-preview
+      retention_days: 5

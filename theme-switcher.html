@@ -1,0 +1,327 @@
+<div id="theme-switcher" style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
+    <style>
+        /* Global transition for theme switching */
+        body {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+        }
+    </style>
+    <label for="theme-select">Select Theme:</label>
+    <select id="theme-select" onchange="changeTheme(this.value)">
+        <option value="clean">Clean (Default)</option>
+        <option value="modern">Modern</option>
+        <option value="classic">Classic</option>
+        <option value="terminal">Terminal</option>
+        <option value="bold">Bold</option>
+    </select>
+
+    <!-- Modern Theme Controls -->
+    <div id="color-picker-container" style="display: none; margin-top: 10px;">
+        <label for="color-select">Theme Color:</label>
+        <select id="color-select" onchange="changeColor(this.value)">
+            <option value="blue">Blue (Default)</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+            <option value="black">Black</option>
+            <option value="grey">Grey</option>
+        </select>
+    </div>
+
+    <!-- Clean Theme Controls (Dark Mode) -->
+    <div id="dark-mode-container" style="display: none; margin-top: 10px;">
+        <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode(this.checked)" style="margin-right: 8px;">
+            Dark Mode
+        </label>
+    </div>
+
+    <!-- Classic Theme Controls (Reader View) -->
+    <div id="reader-view-container" style="display: none; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 10px;">
+        <div style="margin-bottom: 8px;">
+            <label for="reader-font">Font:</label>
+            <select id="reader-font" onchange="updateReaderView()">
+                <option value="'Merriweather', 'Georgia', serif">Merriweather</option>
+                <option value="'Georgia', serif">Georgia</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Arial', sans-serif">Arial (Sans)</option>
+            </select>
+        </div>
+        <div style="margin-bottom: 8px;">
+            <label for="reader-size">Size:</label>
+            <input type="range" id="reader-size" min="14" max="24" value="16" oninput="updateReaderView()" style="width: 100%;">
+        </div>
+        <div style="margin-bottom: 8px;">
+            <label for="reader-texture">Paper:</label>
+            <select id="reader-texture" onchange="updateReaderView()">
+                <option value="none">Clean White</option>
+                <option value="texture-paper">Cream Paper</option>
+                <option value="texture-sepia">Sepia</option>
+                <option value="texture-dark">Dark Reader</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeTheme(theme) {
+        // Fade out content
+        document.body.style.opacity = '0';
+
+        // Wait for fade out to complete before swapping
+        setTimeout(function() {
+            // 1. Update stylesheet
+            var link = document.getElementById('theme-style');
+            if (link) {
+                // Add timestamp to prevent caching issues during development
+                link.href = 'theme-' + theme + '.css?v=' + new Date().getTime();
+            }
+
+            // Reset body classes
+            document.body.className = '';
+
+            // Hide all specific controls first
+            document.getElementById('color-picker-container').style.display = 'none';
+            document.getElementById('dark-mode-container').style.display = 'none';
+            document.getElementById('reader-view-container').style.display = 'none';
+
+            // Show specific controls based on theme
+            if (theme === 'modern' || theme === 'bold') {
+                document.getElementById('color-picker-container').style.display = 'block';
+                var colorSelect = document.getElementById('color-select');
+                changeColor(colorSelect.value);
+            } else if (theme === 'clean') {
+                document.getElementById('dark-mode-container').style.display = 'block';
+                // Restore dark mode state
+                var isDark = localStorage.getItem('resume-dark-mode') === 'true';
+                document.getElementById('dark-mode-toggle').checked = isDark;
+                toggleDarkMode(isDark);
+            } else if (theme === 'classic') {
+                document.getElementById('reader-view-container').style.display = 'block';
+                updateReaderView();
+            } else {
+                updatePdfLink(theme, null);
+            }
+            
+            // Save preference
+            localStorage.setItem('resume-theme', theme);
+
+            // Fade in content after a short delay to allow CSS to parse
+            setTimeout(function() {
+                document.body.style.opacity = '1';
+            }, 100);
+
+        }, 300); // Match the transition duration (0.3s)
+    }
+
+    function changeColor(color) {
+        var theme = document.getElementById('theme-select').value;
+        var colors;
+
+        if (theme === 'bold') {
+             colors = {
+                'blue': '#0055ff',
+                'red': '#ff0000',
+                'orange': '#ff6600',
+                'green': '#00aa00',
+                'purple': '#8800cc',
+                'black': '#000000',
+                'grey': '#666666'
+            };
+        } else {
+            // Default to Modern colors
+            colors = {
+                'blue': '#3498db',
+                'red': '#e74c3c',
+                'orange': '#e67e22',
+                'green': '#2ecc71',
+                'purple': '#9b59b6',
+                'black': '#2c3e50',
+                'grey': '#7f8c8d'
+            };
+        }
+
+        var currentColor = localStorage.getItem('resume-modern-color') || 'blue';
+        var oldHex = colors[currentColor] || colors['blue']; // Fallback
+        var newHex = colors[color];
+
+        // Set CSS variables for the wipe animation
+        document.documentElement.style.setProperty('--old-color', oldHex);
+        document.documentElement.style.setProperty('--new-color', newHex);
+
+        // Add wiping class to trigger animation
+        document.body.classList.add('wiping');
+
+        // Wait for animation to complete
+        setTimeout(function() {
+            document.body.classList.remove('wiping');
+            document.body.className = 'color-' + color;
+            updatePdfLink(theme, color);
+            localStorage.setItem('resume-modern-color', color);
+        }, 1500); // Match animation duration
+    }
+
+    function toggleDarkMode(isDark) {
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+        localStorage.setItem('resume-dark-mode', isDark);
+        
+        // Update PDF link for dark mode
+        if (isDark) {
+            updatePdfLink('clean', 'dark');
+        } else {
+            updatePdfLink('clean', null);
+        }
+    }
+
+    function updateReaderView() {
+        var fontValue = document.getElementById('reader-font').value;
+        var size = document.getElementById('reader-size').value + 'px';
+        var texture = document.getElementById('reader-texture').value;
+
+        document.documentElement.style.setProperty('--classic-font-family', fontValue);
+        document.documentElement.style.setProperty('--classic-font-size', size);
+        
+        // Remove old texture and font classes
+        document.body.classList.remove('texture-paper', 'texture-sepia', 'texture-dark');
+        document.body.classList.remove('font-merriweather', 'font-georgia', 'font-times', 'font-arial');
+        
+        if (texture !== 'none') {
+            document.body.classList.add(texture);
+        }
+        
+        // Map font value to class name for PDF generation consistency
+        var fontClass = 'merriweather'; // default
+        if (fontValue.includes('Georgia') && !fontValue.includes('Merriweather')) fontClass = 'georgia';
+        if (fontValue.includes('Times')) fontClass = 'times';
+        if (fontValue.includes('Arial')) fontClass = 'arial';
+        
+        // Add font class to body (optional for screen, but good for consistency)
+        document.body.classList.add('font-' + fontClass);
+
+        // Save preferences
+        localStorage.setItem('resume-reader-font', fontValue);
+        localStorage.setItem('resume-reader-size', size);
+        localStorage.setItem('resume-reader-texture', texture);
+        
+        // Update PDF link
+        // Map texture value to filename part
+        var textureName = 'clean';
+        if (texture === 'texture-paper') textureName = 'paper';
+        if (texture === 'texture-sepia') textureName = 'sepia';
+        if (texture === 'texture-dark') textureName = 'dark';
+        
+        updatePdfLink('classic', { font: fontClass, texture: textureName });
+    }
+
+    function updatePdfLink(theme, options) {
+        var pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
+        pdfLinks.forEach(function(a) {
+            var filename = 'resume';
+            
+            if (theme === 'clean') {
+                // Options is 'dark' or null
+                if (options === 'dark') {
+                    filename += '-dark';
+                }
+            } else if (theme === 'modern') {
+                // Options is color string
+                filename += '-modern';
+                if (options && options !== 'blue') {
+                    filename += '-' + options;
+                }
+            } else if (theme === 'bold') {
+                filename += '-bold';
+                // Options is color string. Red is default for Bold.
+                if (options && options !== 'red') {
+                    filename += '-' + options;
+                }
+            } else if (theme === 'classic') {
+                filename += '-classic';
+                // Options is object { font, texture }
+                if (options) {
+                    if (options.font && options.font !== 'merriweather') {
+                        filename += '-' + options.font;
+                    }
+                    if (options.texture && options.texture !== 'clean') {
+                        filename += '-' + options.texture;
+                    }
+                }
+            } else {
+                filename += '-' + theme;
+            }
+            
+            a.href = filename + '.pdf';
+        });
+    }
+
+    // Initialize theme from localStorage if available
+    document.addEventListener('DOMContentLoaded', function() {
+        var savedTheme = localStorage.getItem('resume-theme');
+        var savedColor = localStorage.getItem('resume-modern-color');
+        
+        // Restore Reader View preferences
+        var savedFont = localStorage.getItem('resume-reader-font');
+        var savedSize = localStorage.getItem('resume-reader-size');
+        var savedTexture = localStorage.getItem('resume-reader-texture');
+
+        if (savedFont) document.getElementById('reader-font').value = savedFont;
+        if (savedSize) document.getElementById('reader-size').value = parseInt(savedSize);
+        if (savedTexture) document.getElementById('reader-texture').value = savedTexture;
+
+        if (savedColor) {
+            var colorSelect = document.getElementById('color-select');
+            if (colorSelect) {
+                colorSelect.value = savedColor;
+            }
+        }
+
+        if (savedTheme) {
+            var select = document.getElementById('theme-select');
+            if (select) {
+                // Handle legacy "dark" theme preference by switching to clean + dark mode
+                if (savedTheme === 'dark') {
+                    savedTheme = 'clean';
+                    localStorage.setItem('resume-dark-mode', 'true');
+                }
+                
+                select.value = savedTheme;
+                // Don't fade on initial load
+                // changeTheme(savedTheme); 
+                
+                // Manually trigger logic without fade
+                var link = document.getElementById('theme-style');
+                if (link) {
+                    link.href = 'theme-' + savedTheme + '.css?v=' + new Date().getTime();
+                }
+                
+                // Show controls
+                if (savedTheme === 'modern' || savedTheme === 'bold') {
+                    document.getElementById('color-picker-container').style.display = 'block';
+                    var colorSelect = document.getElementById('color-select');
+                    changeColor(colorSelect.value);
+                } else if (savedTheme === 'clean') {
+                    document.getElementById('dark-mode-container').style.display = 'block';
+                    var isDark = localStorage.getItem('resume-dark-mode') === 'true';
+                    document.getElementById('dark-mode-toggle').checked = isDark;
+                    toggleDarkMode(isDark);
+                } else if (savedTheme === 'classic') {
+                    document.getElementById('reader-view-container').style.display = 'block';
+                    updateReaderView();
+                } else {
+                    updatePdfLink(savedTheme, null);
+                }
+            }
+        } else {
+            // Default initialization
+            // changeTheme('clean');
+            // Manual init for default
+            document.getElementById('dark-mode-container').style.display = 'block';
+            updatePdfLink('clean', null);
+        }
+    });
+</script>

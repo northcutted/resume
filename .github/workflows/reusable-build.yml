@@ -1,0 +1,36 @@
+name: Build Resume
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        required: false
+        type: string
+        default: 'resume-build-output'
+      retention_days:
+        required: false
+        type: number
+        default: 1
+
+env:
+  RESUME_MD: resume.md
+  RESUME_SITE_MD: resume-site.md
+  RESUME_HTML: index.html
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/northcutted/resume-ci:latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      
+      - name: Run Build Script
+        run: ./build.sh
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: output
+          retention-days: ${{ inputs.retention_days }}
