@@ -1,6 +1,21 @@
 /* Theme: Modern */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
 
+/* CSS Variables for Theming */
+:root {
+    --accent-color: #3498db; /* Default Blue */
+    --accent-color-dark: #2980b9;
+}
+
+/* Color Variants */
+body.color-blue { --accent-color: #3498db; --accent-color-dark: #2980b9; }
+body.color-red { --accent-color: #e74c3c; --accent-color-dark: #c0392b; }
+body.color-orange { --accent-color: #e67e22; --accent-color-dark: #d35400; }
+body.color-green { --accent-color: #2ecc71; --accent-color-dark: #27ae60; }
+body.color-purple { --accent-color: #9b59b6; --accent-color-dark: #8e44ad; }
+body.color-black { --accent-color: #2c3e50; --accent-color-dark: #1a252f; }
+body.color-grey { --accent-color: #7f8c8d; --accent-color-dark: #95a5a6; }
+
 /* Base Styles */
 body {
     font-family: 'Open Sans', sans-serif;
@@ -10,6 +25,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     padding: 40px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Headers */
@@ -25,19 +41,31 @@ h1 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 3px solid #3498db; /* Default Blue */
-    padding-bottom: 10px;
+    position: relative;
+    padding-bottom: 13px; /* 10px padding + 3px border space */
     text-align: left;
     color: #2c3e50;
+    border-bottom: none;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
 }
 
 h2 {
     font-size: 1.5em;
     font-weight: 600;
-    color: #3498db; /* Default Blue */
+    color: var(--accent-color);
     border-bottom: 1px solid #bdc3c7;
     padding-bottom: 5px;
     text-transform: uppercase;
+    transition: color 1.5s ease;
 }
 
 h3 {
@@ -48,13 +76,13 @@ h3 {
 
 /* Links */
 a {
-    color: #3498db; /* Default Blue */
+    color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 1.5s ease;
 }
 
 a:hover {
-    color: #2980b9; /* Default Blue Dark */
+    color: var(--accent-color-dark);
     text-decoration: underline;
 }
 
@@ -83,7 +111,7 @@ pre {
 
 /* Blockquotes */
 blockquote {
-    border-left: 5px solid #3498db; /* Default Blue */
+    border-left: 5px solid var(--accent-color);
     background-color: #ecf0f1;
     padding: 10px 20px;
     margin: 20px 0;
@@ -95,12 +123,22 @@ blockquote {
 #theme-switcher {
     background: #fff;
     border: none;
-    padding: 20px;
+    padding: 24px 20px 20px 20px; /* Increased top padding for border space */
     border-radius: 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    border-top: 4px solid #3498db; /* Default Blue */
+    position: relative;
+}
+
+#theme-switcher::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-color);
 }
 
 #theme-switcher label {
@@ -122,56 +160,32 @@ blockquote {
 }
 
 /* =========================================
-   Color Variants (Explicit Overrides)
+   Wipe Animation Styles
    ========================================= */
 
-/* Red */
-body.color-red h1 { border-bottom-color: #e74c3c; }
-body.color-red h2 { color: #e74c3c; }
-body.color-red a { color: #e74c3c; }
-body.color-red a:hover { color: #c0392b; }
-body.color-red blockquote { border-left-color: #e74c3c; }
-body.color-red #theme-switcher { border-top-color: #e74c3c; }
+@keyframes wipeRight {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+}
 
-/* Orange */
-body.color-orange h1 { border-bottom-color: #e67e22; }
-body.color-orange h2 { color: #e67e22; }
-body.color-orange a { color: #e67e22; }
-body.color-orange a:hover { color: #d35400; }
-body.color-orange blockquote { border-left-color: #e67e22; }
-body.color-orange #theme-switcher { border-top-color: #e67e22; }
+/* Apply wipe animation to the pseudo-elements (lines) */
+body.wiping h1::after,
+body.wiping #theme-switcher::before {
+    background-image: linear-gradient(to right, var(--new-color) 50%, var(--old-color) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: wipeRight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
 
-/* Green */
-body.color-green h1 { border-bottom-color: #2ecc71; }
-body.color-green h2 { color: #2ecc71; }
-body.color-green a { color: #2ecc71; }
-body.color-green a:hover { color: #27ae60; }
-body.color-green blockquote { border-left-color: #2ecc71; }
-body.color-green #theme-switcher { border-top-color: #2ecc71; }
+/* Blockquotes use simple transition */
+blockquote {
+    transition: border-left-color 1.5s ease;
+}
 
-/* Purple */
-body.color-purple h1 { border-bottom-color: #9b59b6; }
-body.color-purple h2 { color: #9b59b6; }
-body.color-purple a { color: #9b59b6; }
-body.color-purple a:hover { color: #8e44ad; }
-body.color-purple blockquote { border-left-color: #9b59b6; }
-body.color-purple #theme-switcher { border-top-color: #9b59b6; }
+body.wiping blockquote {
+    border-left-color: var(--new-color) !important;
+}
 
-/* Black */
-body.color-black h1 { border-bottom-color: #2c3e50; }
-body.color-black h2 { color: #2c3e50; }
-body.color-black a { color: #2c3e50; }
-body.color-black a:hover { color: #1a252f; }
-body.color-black blockquote { border-left-color: #2c3e50; }
-body.color-black #theme-switcher { border-top-color: #2c3e50; }
-
-/* Grey */
-body.color-grey h1 { border-bottom-color: #7f8c8d; }
-body.color-grey h2 { color: #7f8c8d; }
-body.color-grey a { color: #7f8c8d; }
-body.color-grey a:hover { color: #95a5a6; }
-body.color-grey blockquote { border-left-color: #7f8c8d; }
-body.color-grey #theme-switcher { border-top-color: #7f8c8d; }
 
 
 /* Print Styles */
@@ -180,17 +194,18 @@ body.color-grey #theme-switcher { border-top-color: #7f8c8d; }
         background-color: #fff;
         padding: 0;
         margin: 0;
-        font-size: 11px;
-        line-height: 1.4;
+        font-size: 5px;
+        line-height: 1.0;
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 12px;
         margin-top: 0;
-        border-bottom: 2px solid #3498db; /* Default */
+        border-bottom: 1px solid #3498db; /* Default */
+        padding-bottom: 2px;
     }
     
-    /* Print Overrides for Colors */
+    /* Explicit Print Overrides for Colors (wkhtmltopdf fallback) */
     body.color-red h1 { border-bottom-color: #e74c3c; }
     body.color-orange h1 { border-bottom-color: #e67e22; }
     body.color-green h1 { border-bottom-color: #2ecc71; }
@@ -199,28 +214,36 @@ body.color-grey #theme-switcher { border-top-color: #7f8c8d; }
     body.color-grey h1 { border-bottom-color: #7f8c8d; }
 
     h2 {
-        font-size: 14px;
-        margin-top: 10px;
-        color: #2980b9; /* Default */
+        font-size: 8px;
+        margin-top: 4px;
+        color: #3498db; /* Default */
     }
     
-    /* Print Overrides for Colors */
-    body.color-red h2 { color: #c0392b; }
-    body.color-orange h2 { color: #d35400; }
-    body.color-green h2 { color: #27ae60; }
-    body.color-purple h2 { color: #8e44ad; }
-    body.color-black h2 { color: #1a252f; }
-    body.color-grey h2 { color: #95a5a6; }
+    /* Explicit Print Overrides for Colors */
+    body.color-red h2 { color: #e74c3c; }
+    body.color-orange h2 { color: #e67e22; }
+    body.color-green h2 { color: #2ecc71; }
+    body.color-purple h2 { color: #9b59b6; }
+    body.color-black h2 { color: #2c3e50; }
+    body.color-grey h2 { color: #7f8c8d; }
 
     h3 {
-        font-size: 12px;
-        margin-top: 5px;
+        font-size: 6px;
+        margin-top: 2px;
     }
 
     a {
         text-decoration: none;
-        color: #000;
+        color: #3498db; /* Default */
     }
+    
+    /* Explicit Print Overrides for Colors */
+    body.color-red a { color: #e74c3c; }
+    body.color-orange a { color: #e67e22; }
+    body.color-green a { color: #2ecc71; }
+    body.color-purple a { color: #9b59b6; }
+    body.color-black a { color: #2c3e50; }
+    body.color-grey a { color: #7f8c8d; }
     
     /* Hide download link */
     body > *:last-child,

@@ -14,6 +14,7 @@ body {
     padding: 40px;
     position: relative; /* For CRT effect positioning */
     min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* CRT Scanline Effect */
@@ -183,7 +184,8 @@ pre {
         print-color-adjust: exact !important;
         margin: 0 !important;
         padding: 0 !important;
-        font-size: 10px; /* Monospace tends to be wide */
+        font-size: 4px; /* Monospace tends to be wide */
+        line-height: 1.0;
     }
 
     h1, h2, h3, a, li::before {

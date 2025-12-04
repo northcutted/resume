@@ -25,66 +25,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       
-      - name: Extract Name for PDF
-        id: get_filename
-        run: |
-          # Extract 'title' from frontmatter, replace spaces with underscores
-          PDF_NAME=$(grep "^title:" resume.md | sed 's/title: //g' | tr -d '"' | tr ' ' '_')
-          echo "PDF_NAME=${PDF_NAME}.pdf" >> $GITHUB_ENV
-
-      - name: "Create a folder called output"
-        run: |
-          mkdir output
-          cp theme-*.css output/
-          cp theme-switcher.html output/
-          cp ${{ env.RESUME_MD }} output/${{ github.actor }}-${{ env.RESUME_MD }}
-
-      - name: Create resume-site.md
-        run: |
-          cp ${{ env.RESUME_MD }} ${{ env.RESUME_SITE_MD }}
-          echo "\n\n### Like what you see? Download a PDF copy here by clicking the link below:\n[Download PDF](${{ env.PDF_NAME }})" >> ${{ env.RESUME_SITE_MD }}
-          echo "\n\n _Want to see how this is built and hosted? Checkout the Github Repo [here](https://github.com/northcutted/resume)_" >> ${{ env.RESUME_SITE_MD }}
-
-      - name: "Convert MD to HTML"
-        run: |
-          # Generate main HTML with default theme (clean) and switcher
-          pandoc ${{ env.RESUME_SITE_MD }} -f markdown -t html -c theme-clean.css -s --include-before-body=theme-switcher.html -o output/${{ env.RESUME_HTML }}
-          
-          # Add ID to the link tag so JS can find it
-          sed -i 's/href="theme-clean.css"/href="theme-clean.css" id="theme-style"/' output/${{ env.RESUME_HTML }}
-
-      - name: "Convert HTML to PDF "
-        run: |
-          # Define themes
-          THEMES=('clean' 'modern' 'classic' 'dark' 'terminal' 'bold')
-          BASE_NAME="$PDF_NAME"
-          BASE_NAME_NO_EXT="${BASE_NAME%.pdf}"
-          
-          for theme in "${THEMES[@]}"; do
-              echo "Building PDF for theme: $theme"
-              
-              # Create a temp html for this theme
-              pandoc ${{ env.RESUME_MD }} -f markdown -t html -c "theme-$theme.css" -s -o "output/resume-$theme.html"
-              
-              # Determine PDF filename
-              if [ "$theme" == "clean" ]; then
-                  OUT_PDF="output/$BASE_NAME"
-              else
-                  OUT_PDF="output/${BASE_NAME_NO_EXT}-$theme.pdf"
-              fi
-              
-              # Generate PDF
-              wkhtmltopdf --page-size Letter --margin-top 10mm --margin-bottom 10mm --margin-left 10mm --margin-right 10mm --enable-local-file-access "output/resume-$theme.html" "$OUT_PDF"
-              
-              # Cleanup temp html
-              rm "output/resume-$theme.html"
-          done
-      
-      - name: Fix permissions
-        run: |
-          chmod -c -R +rX "output/" | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
+      - name: Run Build Script
+        run: ./build.sh
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4

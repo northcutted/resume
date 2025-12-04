@@ -20,4 +20,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+COPY --chmod=755 build.sh /usr/local/bin/build-resume
+
 WORKDIR /data

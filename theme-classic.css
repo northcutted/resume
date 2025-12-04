@@ -2,22 +2,127 @@
 /* Elegant, Serif, Traditional */
 
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --classic-font-family: 'Merriweather', 'Georgia', serif;
+    --classic-font-size: 16px;
+    --classic-line-height: 1.6;
+    --classic-bg-color: #fff;
+    --classic-text-color: #111;
+    --classic-max-width: 800px;
+    --classic-texture: none;
+    --classic-header-color: #000;
+    --classic-link-color: #000;
+}
 
 /* Base Styles */
 body {
-    font-family: 'Merriweather', 'Georgia', serif;
-    color: #111;
+    font-family: 'Merriweather', 'Georgia', serif; /* Default fallback */
+    font-family: var(--classic-font-family);
+    color: #111; /* Default fallback */
+    color: var(--classic-text-color);
     line-height: 1.6;
-    background-color: #fff;
-    max-width: 800px;
-    margin: 0 auto;
+    line-height: var(--classic-line-height);
+    background-color: #fff; /* Default fallback */
+    background-color: var(--classic-bg-color);
+    background-image: none; /* Default fallback */
+    background-image: var(--classic-texture);
+    font-size: 16px; /* Default fallback */
+    font-size: var(--classic-font-size);
+    margin: 0;
     padding: 40px;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
 }
+
+/* Container for content to control width */
+body > * {
+    max-width: 800px;
+    max-width: var(--classic-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Reader View Textures - Explicit Overrides for PDF/No-Var Support */
+body.texture-paper {
+    --classic-bg-color: #f4ecd8;
+    --classic-texture: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    background-color: #f4ecd8;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+}
+
+body.texture-sepia {
+    --classic-bg-color: #e8dcb5;
+    --classic-texture: url('https://www.transparenttextures.com/patterns/natural-paper.png'); 
+    background-color: #e8dcb5;
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+}
+
+body.texture-dark {
+    --classic-bg-color: #222;
+    --classic-text-color: #ddd;
+    --classic-header-color: #fff;
+    --classic-link-color: #ccc;
+    --classic-texture: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    
+    background-color: #222;
+    color: #ddd;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+}
+
+body.texture-dark h1, 
+body.texture-dark h2, 
+body.texture-dark h3, 
+body.texture-dark h4, 
+body.texture-dark h5, 
+body.texture-dark h6 {
+    color: #fff;
+}
+
+body.texture-dark h1 {
+    border-bottom-color: #fff;
+}
+
+body.texture-dark a {
+    color: #ccc;
+}
+
+/* Reader View Fonts - Explicit Overrides for PDF/No-Var Support */
+body.font-merriweather {
+    --classic-font-family: 'Merriweather', 'Georgia', serif;
+    font-family: 'Merriweather', 'Georgia', serif;
+}
+
+body.font-georgia {
+    --classic-font-family: 'Gelasio', 'Georgia', serif;
+    font-family: 'Gelasio', 'Georgia', serif;
+}
+
+body.font-times {
+    --classic-font-family: 'Tinos', 'Times New Roman', 'Liberation Serif', serif;
+    font-family: 'Tinos', 'Times New Roman', 'Liberation Serif', serif;
+}
+
+body.font-arial {
+    --classic-font-family: 'Arial', 'Liberation Sans', sans-serif;
+    font-family: 'Arial', 'Liberation Sans', sans-serif;
+}
+
+/* Apply font overrides to headers too */
+body.font-merriweather h1, body.font-merriweather h2, body.font-merriweather h3 { font-family: 'Merriweather', 'Georgia', serif; }
+body.font-georgia h1, body.font-georgia h2, body.font-georgia h3 { font-family: 'Gelasio', 'Georgia', serif; }
+body.font-times h1, body.font-times h2, body.font-times h3 { font-family: 'Tinos', 'Times New Roman', 'Liberation Serif', serif; }
+body.font-arial h1, body.font-arial h2, body.font-arial h3 { font-family: 'Arial', 'Liberation Sans', sans-serif; }
+
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', 'Georgia', serif;
-    color: #000;
+    font-family: 'Merriweather', 'Georgia', serif; /* Default fallback */
+    font-family: var(--classic-font-family);
+    color: #000; /* Default fallback */
+    color: var(--classic-header-color);
     margin-top: 1.2em;
     margin-bottom: 0.5em;
 }
@@ -26,7 +131,8 @@ h1 {
     font-size: 2.2em;
     font-weight: normal;
     text-align: center;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #000; /* Default fallback */
+    border-bottom: 1px solid var(--classic-header-color);
     padding-bottom: 15px;
     margin-bottom: 20px;
     letter-spacing: 2px;
@@ -50,7 +156,8 @@ h3 {
 
 /* Links */
 a {
-    color: #000;
+    color: #000; /* Default fallback */
+    color: var(--classic-link-color);
     text-decoration: underline;
 }
 
@@ -70,13 +177,17 @@ li {
 
 /* Theme Switcher Styles */
 #theme-switcher {
-    background: #fff;
-    border: 1px double #000;
+    background: #fff; /* Default fallback */
+    background: var(--classic-bg-color);
+    border: 1px double #000; /* Default fallback */
+    border: 1px double var(--classic-header-color);
     padding: 15px;
     border-radius: 0;
     box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
     font-family: 'Georgia', serif;
     font-size: 14px;
+    color: #111; /* Default fallback */
+    color: var(--classic-text-color);
 }
 
 #theme-switcher label {
@@ -84,15 +195,43 @@ li {
     font-style: italic;
     display: block;
     margin-bottom: 8px;
-    color: #000;
+    color: #111; /* Default fallback */
+    color: var(--classic-text-color);
 }
 
-#theme-select {
+#theme-select, 
+#reader-font, 
+#reader-texture {
     padding: 5px;
     width: 100%;
-    border: 1px solid #000;
+    border: 1px solid #000; /* Default fallback */
+    border: 1px solid var(--classic-header-color);
     border-radius: 0;
     font-family: 'Georgia', serif;
+    background: #fff; /* Default fallback */
+    background: var(--classic-bg-color);
+    color: #111; /* Default fallback */
+    color: var(--classic-text-color);
+}
+
+/* Reader View Controls */
+.reader-controls {
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.reader-control-group {
+    margin-bottom: 10px;
+}
+
+.reader-control-group label {
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+.range-slider {
+    width: 100%;
 }
 
 /* Print Styles */
@@ -100,23 +239,72 @@ li {
     body {
         padding: 0;
         margin: 0;
-        font-size: 11px;
+        font-size: 5px;
+        line-height: 1.0;
+        background: #fff !important;
+        color: #000 !important;
+        background-image: none !important;
+    }
+    
+    /* Allow textures to print if specifically requested via class */
+    body.texture-paper {
+        background-color: #f4ecd8 !important;
+        background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png') !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body.texture-sepia {
+        background-color: #e8dcb5 !important;
+        background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png') !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body.texture-dark {
+        background-color: #222 !important;
+        color: #ddd !important;
+        background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png') !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Ensure font overrides work in print */
+    body.font-merriweather, body.font-merriweather h1, body.font-merriweather h2 { font-family: 'Merriweather', 'Georgia', serif !important; }
+    body.font-georgia, body.font-georgia h1, body.font-georgia h2 { font-family: 'Gelasio', 'Georgia', serif !important; }
+    body.font-times, body.font-times h1, body.font-times h2 { font-family: 'Tinos', 'Times New Roman', 'Liberation Serif', serif !important; }
+    body.font-arial, body.font-arial h1, body.font-arial h2 { font-family: 'Arial', 'Liberation Sans', sans-serif !important; }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #000 !important;
+    }
+    
+    /* Override header colors for dark mode print */
+    body.texture-dark h1, 
+    body.texture-dark h2, 
+    body.texture-dark h3 {
+        color: #fff !important;
+    }
+    
+    body.texture-dark h1 {
+        border-bottom-color: #fff !important;
     }
 
     h1 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
+        font-size: 10px;
+        margin-bottom: 4px;
+        padding-bottom: 2px;
+        border-bottom-color: #000 !important;
     }
 
     h2 {
-        font-size: 14px;
-        margin-top: 10px;
+        font-size: 7px;
+        margin-top: 4px;
         border-bottom: 1px solid #999;
     }
 
     h3 {
-        font-size: 12px;
+        font-size: 6px;
     }
     
     /* Hide download link */
@@ -129,7 +317,11 @@ li {
     html, body {
         margin: 0 !important;
         padding: 0 !important;
-        background: #fff;
+        /* Only reset background if NO texture class is present */
+    }
+    
+    body:not(.texture-paper):not(.texture-sepia):not(.texture-dark) {
+        background: #fff !important;
     }
 
     #theme-switcher {
