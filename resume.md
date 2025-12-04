@@ -38,8 +38,8 @@ Experienced Software Engineer with a strong focus on platform engineering, DevOp
 
 ## Publications
 
-* **[DevSecFinOps: The Challenge of Implementing a Secure and Cost-Effective Container-Based CI/CD System(https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-cd-c2257eac8eb4)** – *State Farm Engineering Blog (July 2025)*
-  * Co-authored a technical deep dive on the process to implement a robust CI/CD system, detailing how we overcame the various challenges that poses.
+* **[DevSecFinOps: The Challenge of Implementing a Secure and Cost-Effective Container-Based CI/CD System](https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-cd-c2257eac8eb4)** – *State Farm Engineering Blog (July 2025)*
+  * Co-authored a technical deep dive detailing the architecture and implementation of a secure, cost-effective container-based CI/CD system, highlighting solutions to key engineering challenges.
 
 ## Experience
 
@@ -51,8 +51,8 @@ Sole engineer responsible for transforming enterprise container image management
 
 *Achievements:*
 
-* **Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** in 2025, processing over **108,000 image builds** across all environments (12,500+ pushed to production registries).
-* **Multi-Architecture & Optimization:** Architected a modular image suite supporting both **Linux/arm64 and Linux/amd64**, enabling runtime cost savings. Implemented layered inheritance to maximize caching and minimize storage footprint.
+* **Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** in 2025, processing over **108,000 image builds**.
+* **Multi-Architecture & Optimization:** Architected a modular image suite supporting both **Linux/arm64 and Linux/amd64**, enabling runtime cost savings. Implemented layered inheritance to maximize caching, minimize storage footprint and transfer costs.
 * **JVM Middleware Innovation:** Delivered a tool integrated into base image designed to optimize heap sizing and garbage collection for JVM applications on Kubernetes, significantly improving stability and reducing cognitive load for teams migrating from legacy platforms.
 * **Security Automation:** Slashed vulnerability remediation time to **under 24 hours** (down from days) by implementing automated patching pipelines and integrating State Farm Certificate Authority trust directly into base images.
 * **Observability:** Built comprehensive OpenSearch/Kibana dashboards to visualize adoption trends and track legacy registry usage, enabling data-driven governance decisions.
