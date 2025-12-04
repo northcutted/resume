@@ -59,7 +59,7 @@ Sole engineer responsible for transforming enterprise container image management
 * **Developer Enablement:** Created searchable, RAG-optimized documentation to facilitate LLM-powered knowledge retrieval for engineering teams.
 
 
-### Lead Software Engineer, State Farm (_Bloomington, IL/Hyrbid-Remote_)
+### Lead Software Engineer, State Farm (_Bloomington, IL/Hybrid-Remote_)
 
 _August 2020 - April 2024_
 
