@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/northcutted/resume/compare/v2.4.0...v2.4.1) (2025-12-04)
+
+
+### Bug Fixes
+
+* clarify achievements and responsibilities in resume ([37fba24](https://github.com/northcutted/resume/commit/37fba2475390248bffbb743a5577fc0aaa90f03b))
+
 # [2.4.0](https://github.com/northcutted/resume/compare/v2.3.0...v2.4.0) (2025-12-04)
 
 
