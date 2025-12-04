@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/northcutted/resume/compare/v2.3.0...v2.4.0) (2025-12-04)
+
+
+### Features
+
+* winter updates and add theme support ([10be228](https://github.com/northcutted/resume/commit/10be228e731ad3fd71b6eed02e10e8d3f24438f1))
+
 # [2.3.0](https://github.com/northcutted/resume/compare/v2.2.2...v2.3.0) (2025-07-03)
 
 
