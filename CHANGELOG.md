@@ -1,3 +1,10 @@
+## [2.4.3](https://github.com/northcutted/resume/compare/v2.4.2...v2.4.3) (2025-12-04)
+
+
+### Bug Fixes
+
+* typ0 ([2113bcb](https://github.com/northcutted/resume/commit/2113bcba08659304e71e6d6f699c5e623ff8cb60))
+
 ## [2.4.2](https://github.com/northcutted/resume/compare/v2.4.1...v2.4.2) (2025-12-04)
 
 
