@@ -93,8 +93,9 @@ _Summer 2017 - Spring 2018_
 
 ## Education
 
-### B.S. in Agricultural and Consumer Economics
-**University of Illinois at Urbana-Champaign**
-*Fall 2014 - Spring 2018*
+### B.S. in Agricultural and Consumer Economics (University of Illinois at Urbana-Champaign)
+
+_Fall 2014 - Spring 2018_
+
 * Concentration in Finance in Agribusiness
 * Relevant Course Work: Data Structures (CS 225)
