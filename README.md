@@ -2,7 +2,7 @@
 
 This repository generates a professional resume in HTML, PDF, and DOCX formats from a single `resume.json` file. It follows the [JSON Resume](https://jsonresume.org/) schema standard.
 
-## 🚀 Quick Start (The "Idiot Proof" Way)
+## 🚀 Quick Start
 
 The easiest way to build your resume is using Docker. You don't need to install Node.js, Pandoc, or anything else on your machine besides Docker.
 
