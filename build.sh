@@ -10,6 +10,10 @@ cp theme-*.css output/
 cp resume.md resume-site.md
 echo -e "\n\n[Download PDF](resume.pdf)" >> resume-site.md
 
+if [ -n "$REPO_URL" ]; then
+    echo -e "\n\n<div class=\"footer\">View source on <a href=\"$REPO_URL\">GitHub</a></div>" >> resume-site.md
+fi
+
 # Generate HTML with the default theme (clean) and inject the switcher
 # We use -c theme-clean.css to link it, and --include-before-body to add the switcher
 pandoc resume-site.md -f markdown -t html -c theme-clean.css -s --include-before-body=theme-switcher.html -o output/index.html
@@ -42,6 +46,21 @@ for theme in "${THEMES[@]}"; do
             # Inject class into body
             sed "s/<body/<body class=\"color-$color\" /" "output/resume-$theme-$color.html" > "output/resume-$theme-$color.html.tmp" && mv "output/resume-$theme-$color.html.tmp" "output/resume-$theme-$color.html"
             
+            # Determine Hex Color for PDF injection (wkhtmltopdf doesn't support CSS variables)
+            case "$color" in
+                blue)   HEX="#3498db" ;;
+                red)    HEX="#e74c3c" ;;
+                orange) HEX="#e67e22" ;;
+                green)  HEX="#2ecc71" ;;
+                purple) HEX="#9b59b6" ;;
+                black)  HEX="#2c3e50" ;;
+                grey)   HEX="#7f8c8d" ;;
+            esac
+            
+            # Inject explicit styles for print
+            STYLE="<style>@media print { h1 { border-bottom-color: $HEX !important; } h2 { color: $HEX !important; } a { color: $HEX !important; } blockquote { border-left-color: $HEX !important; } }</style>"
+            sed "s|</head>|$STYLE</head>|" "output/resume-$theme-$color.html" > "output/resume-$theme-$color.html.tmp" && mv "output/resume-$theme-$color.html.tmp" "output/resume-$theme-$color.html"
+
             # Determine PDF filename
             if [ "$color" == "blue" ]; then
                 OUT_PDF="output/resume-$theme.pdf"
@@ -125,6 +144,21 @@ for theme in "${THEMES[@]}"; do
             # Inject class into body
             sed "s/<body/<body class=\"color-$color\" /" "output/resume-$theme-$color.html" > "output/resume-$theme-$color.html.tmp" && mv "output/resume-$theme-$color.html.tmp" "output/resume-$theme-$color.html"
             
+            # Determine Hex Color for PDF injection
+            case "$color" in
+                blue)   HEX="#0055ff" ;;
+                red)    HEX="#ff0000" ;;
+                orange) HEX="#ff6600" ;;
+                green)  HEX="#00aa00" ;;
+                purple) HEX="#8800cc" ;;
+                black)  HEX="#000000" ;;
+                grey)   HEX="#666666" ;;
+            esac
+            
+            # Inject explicit styles for print
+            STYLE="<style>@media print { a { color: $HEX !important; } li::before { color: $HEX !important; } }</style>"
+            sed "s|</head>|$STYLE</head>|" "output/resume-$theme-$color.html" > "output/resume-$theme-$color.html.tmp" && mv "output/resume-$theme-$color.html.tmp" "output/resume-$theme-$color.html"
+
             # Determine PDF filename
             if [ "$color" == "red" ]; then
                 OUT_PDF="output/resume-$theme.pdf"

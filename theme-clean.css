@@ -789,10 +789,20 @@ sub {
     top: -1px
 }
 
+.footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+}
+
 @media print {
     /* Hide the download link and footer in print view */
     body > *:last-child,
-    a[href$=".pdf"] {
+    a[href$=".pdf"],
+    .footer {
         display: none !important;
     }
 

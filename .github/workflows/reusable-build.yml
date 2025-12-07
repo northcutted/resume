@@ -27,9 +27,11 @@ jobs:
       
       - name: Run Build Script
         run: ./build.sh
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ inputs.artifact_name }}
           path: output
