@@ -15,10 +15,10 @@
     "semantic-release": "^25.0.2"
   },
   "devDependencies": {
-    "cspell": "^6.31.1",
+    "cspell": "^9.4.0",
     "live-server": "^1.2.2",
-    "markdownlint-cli": "^0.34.0",
-    "nodemon": "^2.0.22",
+    "markdownlint-cli": "^0.46.0",
+    "nodemon": "^3.1.11",
     "qrcode": "^1.5.3"
   }
 }
