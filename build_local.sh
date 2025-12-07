@@ -29,6 +29,6 @@ fi
 # 2. Run the container to generate output
 # We mount the current directory to /data in the container
 rm -rf output
-podman run --rm -v $(pwd):/data -w /data -e REPO_URL="$REPO_URL" resume-local build-resume
+podman run --rm -v $(pwd):/data -w /data -e REPO_URL="$REPO_URL" resume-local
 
 echo "Build complete! Check the 'output' folder."

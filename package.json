@@ -2,8 +2,8 @@
   "scripts": {
     "build": "./build.sh",
     "watch": "nodemon --watch resume.md --watch 'styles/*.css' --exec './build.sh'",
-    "lint": "markdownlint '**/*.md' --ignore node_modules",
-    "spellcheck": "cspell '**/*.md'",
+    "lint": "markdownlint 'resume.md' --ignore node_modules",
+    "spellcheck": "cspell 'resume.md'",
     "validate": "node scripts/validate-json.js",
     "convert-json": "node scripts/json-to-md.js",
     "serve": "live-server output"

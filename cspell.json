@@ -5,7 +5,9 @@
         "pandoc",
         "wkhtmltopdf",
         "northcutted",
-        "merriweather"
+        "merriweather",
+        "Sysbox",
+        "Northcutt"
     ],
     "ignorePaths": [
         "node_modules/**",

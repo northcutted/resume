@@ -25,6 +25,8 @@ RUN mkdir -p output && chown -R node:node /app
 # Switch to non-root user
 USER node
 
+WORKDIR /app
+
 COPY --chown=node:node package.json package-lock.json* ./
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
