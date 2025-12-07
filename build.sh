@@ -55,6 +55,10 @@ if [ -n "$REPO_URL" ]; then
     echo -e "\n\n<div class=\"footer\">View source on <a href=\"$REPO_URL\">GitHub</a></div>" >> resume-site.md
 fi
 
+if [ -n "$REPO_URL" ]; then
+    echo -e "\n\n<div class=\"footer\">View source on <a href=\"$REPO_URL\">GitHub</a></div>" >> resume-site.md
+fi
+
 # Generate HTML with the default theme (clean) and inject the switcher
 # We use -c theme-clean.css to link it, and --include-before-body to add the switcher
 pandoc resume-site.md -f markdown -t html -c theme-clean.css $CUSTOM_CSS_FLAG -s --include-before-body=assets/theme-switcher.html -o output/index.html
