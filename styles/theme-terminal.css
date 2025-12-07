@@ -195,9 +195,9 @@ pre {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         margin: 0 !important;
-        padding: 10mm !important;
-        font-size: 10pt; /* Monospace tends to be wide */
-        line-height: 1.2;
+        padding: 5mm !important;
+        font-size: 9pt; /* Monospace tends to be wide */
+        line-height: 1.1;
     }
 
     h1, h2, h3, a, li::before {

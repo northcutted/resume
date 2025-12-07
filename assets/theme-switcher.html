@@ -5,6 +5,10 @@
             transition: opacity 0.3s ease-in-out;
             opacity: 1;
         }
+        /* Prevent transitions during theme switch cleanup */
+        body.no-transition, body.no-transition * {
+            transition: none !important;
+        }
     </style>
     <label for="theme-select">Select Theme:</label>
     <select id="theme-select" onchange="changeTheme(this.value)">
@@ -155,10 +159,19 @@
 
         // Wait for animation to complete
         setTimeout(function() {
+            // Disable transitions temporarily to prevent flashing
+            document.body.classList.add('no-transition');
+            
             document.body.classList.remove('wiping');
-            document.body.className = 'color-' + color;
+            document.body.className = 'color-' + color + ' no-transition';
+            
             updatePdfLink(theme, color);
             localStorage.setItem('resume-modern-color', color);
+            
+            // Re-enable transitions after a brief moment
+            setTimeout(function() {
+                document.body.classList.remove('no-transition');
+            }, 50);
         }, 1500); // Match animation duration
     }
 

@@ -48,10 +48,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL
-          # Ignore libssl1.1 vulnerabilities as they are required for wkhtmltopdf
-          # and no fix is available for this specific legacy dependency chain
-          trivyignores: .trivyignore
+          severity: 'CRITICAL'
 
       - name: Build and push container image
         uses: docker/build-push-action@v6

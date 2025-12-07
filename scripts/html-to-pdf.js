@@ -59,6 +59,7 @@ async function processJobs(jobs) {
                 path: job.output,
                 format: 'Letter',
                 printBackground: true,
+                scale: 0.9,
                 margin: {
                     top: '0mm',
                     bottom: '0mm',

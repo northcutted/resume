@@ -65,7 +65,7 @@ h2 {
     border-bottom: 1px solid #bdc3c7;
     padding-bottom: 5px;
     text-transform: uppercase;
-    transition: color 1.5s ease;
+    transition: color 0.2s ease;
 }
 
 h3 {
@@ -78,7 +78,7 @@ h3 {
 a {
     color: var(--accent-color);
     text-decoration: none;
-    transition: color 1.5s ease;
+    transition: color 0.2s ease;
 }
 
 a:hover {
@@ -168,18 +168,29 @@ blockquote {
     100% { background-position: 0 0; }
 }
 
-/* Apply wipe animation to the pseudo-elements (lines) */
+/* Apply wipe animation to the pseudo-elements (lines) and text elements */
 body.wiping h1::after,
-body.wiping #theme-switcher::before {
+body.wiping #theme-switcher::before,
+body.wiping h2,
+body.wiping a {
     background-image: linear-gradient(to right, var(--new-color) 50%, var(--old-color) 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
     animation: wipeRight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Blockquotes use simple transition */
+/* Special handling for text elements to clip background */
+body.wiping h2,
+body.wiping a {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: none;
+}
+
+/* Blockquotes use simple transition but match timing */
 blockquote {
-    transition: border-left-color 1.5s ease;
+    transition: border-left-color 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 body.wiping blockquote {
@@ -208,15 +219,15 @@ body.wiping blockquote {
         background-color: #fff;
         padding: 0;
         margin: 0;
-        font-size: 11pt;
-        line-height: 1.4;
+        font-size: 10pt;
+        line-height: 1.2;
     }
 
     h1 {
-        font-size: 18pt;
+        font-size: 16pt;
         margin-top: 0;
         border-bottom: 1px solid #3498db; /* Default */
-        padding-bottom: 5px;
+        padding-bottom: 3px;
     }
 
     /* Hide the variable-based underline in print */
@@ -225,14 +236,14 @@ body.wiping blockquote {
     }
     
     h2 {
-        font-size: 14pt;
-        margin-top: 10px;
+        font-size: 13pt;
+        margin-top: 8px;
         color: #3498db; /* Default */
     }
 
     h3 {
-        font-size: 12pt;
-        margin-top: 8px;
+        font-size: 11pt;
+        margin-top: 6px;
     }
 
     a {
@@ -249,7 +260,7 @@ body.wiping blockquote {
     /* Reset margins for print to let the printer handle it */
     html, body {
         margin: 0 !important;
-        padding: 10mm !important;
+        padding: 5mm !important;
         background: #fff;
     }
     

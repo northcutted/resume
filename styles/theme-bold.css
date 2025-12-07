@@ -68,7 +68,7 @@ a {
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 700;
-    transition: color 1.5s ease;
+    transition: color 0.2s ease;
 }
 
 a:hover {
@@ -96,7 +96,7 @@ li::before {
     position: absolute;
     left: 0;
     top: 0.4em;
-    transition: color 1.5s ease;
+    transition: color 0.2s ease;
 }
 
 /* Layout adjustments */
@@ -152,6 +152,7 @@ body.wiping li::before {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    transition: none; /* Prevent color transition from interfering */
     animation: wipeRight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
@@ -181,26 +182,26 @@ body.wiping #theme-switcher {
 
     body {
         margin: 0 !important;
-        padding: 10mm !important;
-        font-size: 11pt;
-        line-height: 1.4;
+        padding: 5mm !important;
+        font-size: 10pt;
+        line-height: 1.2;
     }
 
     h1 {
-        font-size: 24pt;
-        margin-bottom: 15px;
+        font-size: 20pt;
+        margin-bottom: 10px;
     }
 
     h2 {
-        font-size: 16pt;
-        margin-top: 20px;
+        font-size: 14pt;
+        margin-top: 15px;
         border-top: 2px solid #000;
-        padding-top: 5px;
+        padding-top: 3px;
     }
 
     h3 {
-        font-size: 12pt;
-        margin-top: 10px;
+        font-size: 11pt;
+        margin-top: 8px;
     }
     
     a {
