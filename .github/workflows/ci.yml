@@ -60,7 +60,7 @@ jobs:
       contents: read
 
   build-resume:
-    needs: [lint, link-check, changes, build-image]
+    needs: [lint, changes, build-image]
     if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped') && (needs.lint.result == 'success')
     runs-on: ubuntu-latest
     container:
