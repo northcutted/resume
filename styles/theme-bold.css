@@ -181,26 +181,26 @@ body.wiping #theme-switcher {
 
     body {
         margin: 0 !important;
-        padding: 0 !important;
-        font-size: 5px;
-        line-height: 1.0;
+        padding: 10mm !important;
+        font-size: 11pt;
+        line-height: 1.4;
     }
 
     h1 {
-        font-size: 14px;
-        margin-bottom: 6px;
+        font-size: 24pt;
+        margin-bottom: 15px;
     }
 
     h2 {
-        font-size: 8px;
-        margin-top: 8px;
-        border-top: 1px solid #000;
-        padding-top: 2px;
+        font-size: 16pt;
+        margin-top: 20px;
+        border-top: 2px solid #000;
+        padding-top: 5px;
     }
 
     h3 {
-        font-size: 6px;
-        margin-top: 4px;
+        font-size: 12pt;
+        margin-top: 10px;
     }
     
     a {
@@ -213,7 +213,6 @@ body.wiping #theme-switcher {
     }
     
     /* Hide download link */
-    body > *:last-child,
     a[href$=".pdf"],
     .footer {
         display: none !important;

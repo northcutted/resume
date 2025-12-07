@@ -208,15 +208,15 @@ body.wiping blockquote {
         background-color: #fff;
         padding: 0;
         margin: 0;
-        font-size: 5px;
-        line-height: 1.0;
+        font-size: 11pt;
+        line-height: 1.4;
     }
 
     h1 {
-        font-size: 12px;
+        font-size: 18pt;
         margin-top: 0;
         border-bottom: 1px solid #3498db; /* Default */
-        padding-bottom: 2px;
+        padding-bottom: 5px;
     }
 
     /* Hide the variable-based underline in print */
@@ -225,14 +225,14 @@ body.wiping blockquote {
     }
     
     h2 {
-        font-size: 8px;
-        margin-top: 4px;
+        font-size: 14pt;
+        margin-top: 10px;
         color: #3498db; /* Default */
     }
 
     h3 {
-        font-size: 6px;
-        margin-top: 2px;
+        font-size: 12pt;
+        margin-top: 8px;
     }
 
     a {
@@ -241,7 +241,6 @@ body.wiping blockquote {
     }
     
     /* Hide download link */
-    body > *:last-child,
     a[href$=".pdf"],
     .footer {
         display: none !important;
@@ -250,7 +249,7 @@ body.wiping blockquote {
     /* Reset margins for print to let the printer handle it */
     html, body {
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 10mm !important;
         background: #fff;
     }
     

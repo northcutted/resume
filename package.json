@@ -16,9 +16,10 @@
   },
   "devDependencies": {
     "cspell": "^9.4.0",
-    "live-server": "^1.2.2",
+    "live-server": "^1.2.0",
     "markdownlint-cli": "^0.46.0",
     "nodemon": "^3.1.11",
-    "qrcode": "^1.5.3"
+    "puppeteer": "^24.32.0",
+    "qrcode": "^1.5.4"
   }
 }

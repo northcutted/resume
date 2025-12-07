@@ -46,7 +46,7 @@ podman run --rm -v "$(pwd):/data:Z" resume-builder ./build.sh
 If you prefer to run tools locally without Docker, you will need:
 *   **Node.js** (v20+)
 *   **Pandoc**
-*   **wkhtmltopdf**
+*   **Chrome/Chromium** (Puppeteer will download a local version automatically via `npm install`)
 
 ### Setup
 ```bash
