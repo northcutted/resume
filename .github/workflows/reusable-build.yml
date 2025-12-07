@@ -10,6 +10,10 @@ on:
         required: false
         type: number
         default: 1
+      image_tag:
+        required: false
+        type: string
+        default: 'latest'
 
 env:
   RESUME_MD: resume.md
@@ -20,10 +24,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/northcutted/resume-ci:latest
+      image: ghcr.io/${{ github.repository }}-ci:${{ inputs.image_tag }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Run Build Script
         run: ./build.sh

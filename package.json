@@ -1,8 +1,24 @@
 {
+  "scripts": {
+    "build": "./build.sh",
+    "watch": "nodemon --watch resume.md --watch 'styles/*.css' --exec './build.sh'",
+    "lint": "markdownlint '**/*.md' --ignore node_modules",
+    "spellcheck": "cspell '**/*.md'",
+    "validate": "node scripts/validate-json.js",
+    "convert-json": "node scripts/json-to-md.js",
+    "serve": "live-server output"
+  },
   "dependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^12.0.2",
     "semantic-release": "^25.0.2"
+  },
+  "devDependencies": {
+    "cspell": "^6.31.1",
+    "live-server": "^1.2.2",
+    "markdownlint-cli": "^0.34.0",
+    "nodemon": "^2.0.22",
+    "qrcode": "^1.5.3"
   }
 }

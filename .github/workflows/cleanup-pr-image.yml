@@ -1,0 +1,50 @@
+name: Cleanup PR Image
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Find Version ID
+        id: find-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          PACKAGE: ${{ github.event.repository.name }}-ci
+          TAG: pr-${{ github.event.pull_request.number }}
+        run: |
+          echo "Looking for tag $TAG in package $PACKAGE owned by $OWNER"
+          
+          # Determine if owner is User or Organization
+          TYPE=$(gh api "/users/$OWNER" --jq ".type" 2>/dev/null || echo "Organization")
+          
+          if [ "$TYPE" = "User" ]; then
+             ENDPOINT="/users/$OWNER/packages/container/$PACKAGE/versions"
+          else
+             ENDPOINT="/orgs/$OWNER/packages/container/$PACKAGE/versions"
+          fi
+          
+          # Fetch versions and find the ID for the tag
+          # We use || true to prevent failure if package doesn't exist or no versions found
+          VERSION_ID=$(gh api "$ENDPOINT" --jq ".[] | select(.metadata.container.tags[] | contains(\"$TAG\")) | .id" 2>/dev/null | head -n 1 || true)
+          
+          if [ -z "$VERSION_ID" ]; then
+            echo "No version found for tag $TAG"
+          else
+            echo "Found version ID: $VERSION_ID"
+            echo "version_id=$VERSION_ID" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Delete Package Version
+        uses: actions/delete-package-versions@v5
+        if: steps.find-version.outputs.version_id != ''
+        with:
+          package-name: ${{ github.event.repository.name }}-ci
+          package-type: 'container'
+          package-version-ids: ${{ steps.find-version.outputs.version_id }}
