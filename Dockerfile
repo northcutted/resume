@@ -1,5 +1,5 @@
 # Stage 1: Builder
-FROM node:24 AS builder
+FROM node:25 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY package.json ./
 RUN npm install
 
 # Stage 2: Final
-FROM node:24-slim
+FROM node:25-slim
 
 # Define versions
 ARG PANDOC_VERSION=3.6.3
