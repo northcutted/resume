@@ -27,7 +27,7 @@ jobs:
       image: ghcr.io/${{ github.repository }}-ci:${{ inputs.image_tag }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       
       - name: Run Build Script
         run: ./build.sh
