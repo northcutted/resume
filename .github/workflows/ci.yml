@@ -68,6 +68,7 @@ jobs:
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+      options: --user root
     steps:
       - uses: actions/checkout@v4
       - name: Run Build Script
