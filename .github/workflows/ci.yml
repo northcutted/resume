@@ -30,7 +30,7 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2
         with:
-          args: -a '100..=103,200..=299,403' --verbose --no-progress './**/*.md' './**/*.html'
+          args: -a '100..=103,200..=299,403' --verbose --no-progress 'resume.json'
           fail: false
         continue-on-error: true
 
@@ -111,11 +111,34 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+      packages: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate SBOM (SPDX)
+        uses: anchore/sbom-action@v0
+        with:
+          image: ghcr.io/${{ github.repository }}-ci:latest
+          format: spdx-json
+          output-file: sbom.spdx.json
+
+      - name: Generate SBOM (CycloneDX)
+        uses: anchore/sbom-action@v0
+        with:
+          image: ghcr.io/${{ github.repository }}-ci:latest
+          format: cyclonedx-json
+          output-file: sbom.cyclonedx.json
+
       - run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
       - run: npx semantic-release
         env:

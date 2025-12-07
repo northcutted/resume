@@ -6,6 +6,7 @@
 
 [![Security: Dependabot](https://img.shields.io/badge/Securtiy-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
 [![Security: Trivy](https://img.shields.io/badge/Security-Trivy-0077c2?style=for-the-badge&logo=trivy&logoColor=white)](https://github.com/northcutted/resume/actions/workflows/ci.yml)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20%7C%20CycloneDX-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://github.com/northcutted/resume/releases/latest)
 
 ![GitHub Release](https://img.shields.io/github/v/release/northcutted/resume?style=for-the-badge)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/northcutted/resume/ci.yml?style=for-the-badge)
