@@ -207,6 +207,153 @@ body.wiping blockquote {
     color: #7f8c8d;
 }
 
+/* Dynamic Backgrounds (Screen Only) */
+@media screen {
+    body {
+        position: relative;
+        z-index: 0;
+        background-color: transparent; /* Let the background div show through */
+    }
+
+    /* Background Container */
+    #modern-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+        background-color: #f4f6f7; /* Base color */
+        transition: background-color 0.3s ease;
+    }
+
+    /* Background Layers for Crossfading */
+    .bg-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .bg-layer.active {
+        opacity: var(--bg-opacity, 1);
+    }
+
+    /* Wipe animation layer (New Color) */
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1; /* Above background, below content */
+        opacity: var(--bg-opacity, 0.05);
+        pointer-events: none;
+        display: none; /* Hidden by default */
+    }
+
+    /* Activate wipe layer */
+    body.wiping::after {
+        display: none; /* Disabled background wipe in favor of crossfade */
+        /* Override variables to use the new color during wipe */
+        --accent-color: var(--new-color);
+        --accent-color-dark: var(--new-color-dark);
+        
+        /* Wipe animation */
+        animation: bgWipe 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes bgWipe {
+        from { clip-path: inset(0 0 0 100%); }
+        to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* Patterns - Applied to .bg-layer and body::after */
+    .bg-layer.bg-gradient, body.bg-gradient::after {
+        background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+        --bg-opacity: 0.08;
+    }
+
+    .bg-layer.bg-stripes, body.bg-stripes::after {
+        background: repeating-linear-gradient(
+            45deg,
+            var(--accent-color),
+            var(--accent-color) 1px,
+            transparent 1px,
+            transparent 10px
+        );
+        background-position: calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+        --bg-opacity: 0.05;
+    }
+
+    .bg-layer.bg-dots, body.bg-dots::after {
+        background-image: radial-gradient(var(--accent-color) 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-position: calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+        --bg-opacity: 0.15;
+    }
+
+    .bg-layer.bg-geometric, body.bg-geometric::after {
+        background-color: transparent;
+        --bg-opacity: 0.06;
+        background-image:  linear-gradient(30deg, var(--accent-color) 12%, transparent 12.5%, transparent 87%, var(--accent-color) 87.5%, var(--accent-color)), linear-gradient(150deg, var(--accent-color) 12%, transparent 12.5%, transparent 87%, var(--accent-color) 87.5%, var(--accent-color)), linear-gradient(30deg, var(--accent-color) 12%, transparent 12.5%, transparent 87%, var(--accent-color) 87.5%, var(--accent-color)), linear-gradient(150deg, var(--accent-color) 12%, transparent 12.5%, transparent 87%, var(--accent-color) 87.5%, var(--accent-color)), linear-gradient(60deg, var(--accent-color-dark) 25%, transparent 25.5%, transparent 75%, var(--accent-color-dark) 75%, var(--accent-color-dark)), linear-gradient(60deg, var(--accent-color-dark) 25%, transparent 25.5%, transparent 75%, var(--accent-color-dark) 75%, var(--accent-color-dark));
+        background-size: 80px 140px;
+        background-position: 
+            calc(0px + var(--bg-move-x, 0px)) calc(0px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)), 
+            calc(0px + var(--bg-move-x, 0px)) calc(0px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)), 
+            calc(40px + var(--bg-move-x, 0px)) calc(70px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)), 
+            calc(40px + var(--bg-move-x, 0px)) calc(70px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)), 
+            calc(0px + var(--bg-move-x, 0px)) calc(0px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)), 
+            calc(40px + var(--bg-move-x, 0px)) calc(70px + var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+    }
+    
+    .bg-layer.bg-waves, body.bg-waves::after {
+        background-image: 
+            radial-gradient(circle at 100% 50%, transparent 20%, var(--accent-color) 21%, var(--accent-color) 34%, transparent 35%, transparent), 
+            radial-gradient(circle at 0% 50%, transparent 20%, var(--accent-color) 21%, var(--accent-color) 34%, transparent 35%, transparent);
+        background-size: 75px 100px;
+        background-position: 
+            calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px)),
+            calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px) - 50px);
+        --bg-opacity: 0.05;
+    }
+
+    .bg-layer.bg-graph-paper, body.bg-graph-paper::after {
+        background-image:
+            linear-gradient(90deg, transparent 45%, var(--accent-color) 45%, var(--accent-color) 55%, transparent 55%),
+            linear-gradient(transparent 45%, var(--accent-color) 45%, var(--accent-color) 55%, transparent 55%);
+        background-size: 20px 20px;
+        background-position: calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+        --bg-opacity: 0.08;
+    }
+
+    .bg-layer.bg-crosshatch, body.bg-crosshatch::after {
+        background:
+            linear-gradient(45deg, transparent 48%, var(--accent-color) 49%, var(--accent-color) 51%, transparent 52%),
+            linear-gradient(-45deg, transparent 48%, var(--accent-color) 49%, var(--accent-color) 51%, transparent 52%);
+        background-size: 15px 15px;
+        background-position: calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+        --bg-opacity: 0.06;
+    }
+
+    .bg-layer.bg-circles, body.bg-circles::after {
+        background-image: radial-gradient(circle, transparent 30%, var(--accent-color) 31%, var(--accent-color) 34%, transparent 35%);
+        background-size: 20px 20px;
+        background-position: calc(var(--bg-move-x, 0px)) calc(var(--bg-move-y, 0px) + var(--bg-scroll-y, 0px));
+        --bg-opacity: 0.08;
+    }
+
+    /* None */
+    .bg-layer.bg-none, body.bg-none::after {
+        background: none;
+    }
+}
+
 /* Print Styles */
 @media print {
     /* Ensure colors print correctly */
@@ -221,6 +368,11 @@ body.wiping blockquote {
         margin: 0;
         font-size: 10pt;
         line-height: 1.2;
+    }
+    
+    /* Hide background patterns in print */
+    body::before {
+        display: none !important;
     }
 
     h1 {

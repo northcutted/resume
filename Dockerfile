@@ -1,39 +1,47 @@
 ARG PANDOC_VERSION=3.6.3
 ARG TARGETARCH
 
-FROM node:22-bookworm-slim
+FROM node:25-bookworm-slim
 
-ARG PANDOC_VERSION=3.6.3
+ARG PANDOC_VERSION
 ARG TARGETARCH
 
-ADD https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-${TARGETARCH}.deb /tmp/pandoc.deb
-
-# Install Chromium (installs all needed shared libs) and Pandoc dependencies
-# We combine updates and installs to keep the layer small
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
-    /tmp/pandoc.deb \
+    ca-certificates \
+    curl \
+    dumb-init \
+    && curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-${TARGETARCH}.deb -o /tmp/pandoc.deb \
+    && apt-get install -y /tmp/pandoc.deb \
     && rm /tmp/pandoc.deb \
+    && apt-get purge -y --auto-remove curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+# Create output directory and set ownership of /app to node user
+RUN mkdir -p output && chown -R node:node /app
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+# Switch to non-root user
+USER node
+
+COPY --chown=node:node package.json package-lock.json* ./
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Use cache mount to speed up npm install
-RUN --mount=type=cache,target=/root/.npm \
-    npm install
+RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 \
+    npm ci --omit=dev
 
-COPY . .
-
-# Fix permissions and setup path for build script
-RUN chmod +x build.sh && \
-    ln -s /app/build.sh /usr/local/bin/build-resume
+COPY --chown=node:node --chmod=755 build.sh ./build-resume
+COPY --chown=node:node scripts/ styles/ assets/ ./
 
 # Allow node to find modules in /app/node_modules even when running from /data
-ENV NODE_PATH=/app/node_modules
+ENV NODE_PATH=/app/node_modules \
+    NODE_ENV=production
 
-CMD ["build-resume"]
+# Use dumb-init to handle PID 1 signals (Ctrl+C, SIGTERM) correctly
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+CMD ["/app/build-resume"]

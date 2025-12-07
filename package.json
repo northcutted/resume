@@ -9,17 +9,12 @@
     "serve": "live-server output"
   },
   "dependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.2",
-    "semantic-release": "^25.0.2"
+    "puppeteer": "^24.32.0"
   },
   "devDependencies": {
     "cspell": "^9.4.0",
     "live-server": "^1.2.0",
     "markdownlint-cli": "^0.46.0",
-    "nodemon": "^3.1.11",
-    "puppeteer": "^24.32.0",
-    "qrcode": "^1.5.4"
+    "nodemon": "^3.1.11"
   }
 }

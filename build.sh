@@ -29,12 +29,6 @@ elif [ -f "custom.css" ]; then
     CUSTOM_CSS_FLAG="-c custom.css"
 fi
 
-# Generate QR Code if requested
-if [ -n "$QR_CODE_TEXT" ]; then
-    echo "Generating QR Code..."
-    node scripts/generate-qr.js "$QR_CODE_TEXT" "output/qr.png"
-fi
-
 # Create a temporary markdown file for the HTML site that includes the download link
 cp resume.md resume-site.md
 
@@ -46,10 +40,6 @@ if [ -f "resume.json" ]; then
 fi
 
 echo -e "$DOWNLOAD_LINKS" >> resume-site.md
-
-if [ -n "$QR_CODE_TEXT" ]; then
-    echo -e "\n\n![QR Code](qr.png)" >> resume-site.md
-fi
 
 if [ -n "$REPO_URL" ]; then
     echo -e "\n\n<div class=\"footer\">View source on <a href=\"$REPO_URL\">GitHub</a></div>" >> resume-site.md
@@ -255,6 +245,3 @@ node scripts/html-to-pdf.js --batch pdf-jobs.json
 echo "Cleaning up temporary HTML files..."
 find output -name "resume-*.html" -type f -delete
 rm pdf-jobs.json
-
-# Fix permissions (since docker runs as root)
-chmod 777 output/*

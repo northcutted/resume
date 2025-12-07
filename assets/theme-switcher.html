@@ -31,6 +31,19 @@
             <option value="black">Black</option>
             <option value="grey">Grey</option>
         </select>
+
+        <label for="bg-select" style="margin-top: 10px; display: block;">Background:</label>
+        <select id="bg-select" onchange="changeBackground(this.value)">
+            <option value="bg-none">Clean (Default)</option>
+            <option value="bg-gradient">Soft Gradient</option>
+            <option value="bg-stripes">Modern Stripes</option>
+            <option value="bg-dots">Polka Dots</option>
+            <option value="bg-geometric">Geometric</option>
+            <option value="bg-waves">Waves</option>
+            <option value="bg-graph-paper">Graph Paper</option>
+            <option value="bg-crosshatch">Crosshatch</option>
+            <option value="bg-circles">Circles</option>
+        </select>
     </div>
 
     <!-- Clean Theme Controls (Dark Mode) -->
@@ -95,6 +108,26 @@
                 document.getElementById('color-picker-container').style.display = 'block';
                 var colorSelect = document.getElementById('color-select');
                 changeColor(colorSelect.value);
+                
+                // Restore background for modern theme
+                if (theme === 'modern') {
+                    var bgSelect = document.getElementById('bg-select');
+                    if (bgSelect) {
+                        // Hide bg select for bold theme if we wanted, but here we just show it for modern
+                        document.getElementById('bg-select').style.display = 'block';
+                        document.querySelector('label[for="bg-select"]').style.display = 'block';
+                        
+                        // Clear any existing background layers to prevent stacking/darkening on theme switch
+                        var bgContainer = document.getElementById('modern-background');
+                        if (bgContainer) bgContainer.innerHTML = '';
+                        
+                        changeBackground(bgSelect.value);
+                    }
+                } else {
+                    // Hide bg select for bold theme
+                    document.getElementById('bg-select').style.display = 'none';
+                    document.querySelector('label[for="bg-select"]').style.display = 'none';
+                }
             } else if (theme === 'clean') {
                 document.getElementById('dark-mode-container').style.display = 'block';
                 // Restore dark mode state
@@ -125,36 +158,71 @@
 
         if (theme === 'bold') {
              colors = {
-                'blue': '#0055ff',
-                'red': '#ff0000',
-                'orange': '#ff6600',
-                'green': '#00aa00',
-                'purple': '#8800cc',
-                'black': '#000000',
-                'grey': '#666666'
+                'blue': { main: '#0055ff', dark: '#0055ff' },
+                'red': { main: '#ff0000', dark: '#ff0000' },
+                'orange': { main: '#ff6600', dark: '#ff6600' },
+                'green': { main: '#00aa00', dark: '#00aa00' },
+                'purple': { main: '#8800cc', dark: '#8800cc' },
+                'black': { main: '#000000', dark: '#000000' },
+                'grey': { main: '#666666', dark: '#666666' }
             };
         } else {
             // Default to Modern colors
             colors = {
-                'blue': '#3498db',
-                'red': '#e74c3c',
-                'orange': '#e67e22',
-                'green': '#2ecc71',
-                'purple': '#9b59b6',
-                'black': '#2c3e50',
-                'grey': '#7f8c8d'
+                'blue': { main: '#3498db', dark: '#2980b9' },
+                'red': { main: '#e74c3c', dark: '#c0392b' },
+                'orange': { main: '#e67e22', dark: '#d35400' },
+                'green': { main: '#2ecc71', dark: '#27ae60' },
+                'purple': { main: '#9b59b6', dark: '#8e44ad' },
+                'black': { main: '#2c3e50', dark: '#1a252f' },
+                'grey': { main: '#7f8c8d', dark: '#95a5a6' }
             };
         }
 
-        var currentColor = localStorage.getItem('resume-modern-color') || 'blue';
-        var oldHex = colors[currentColor] || colors['blue']; // Fallback
-        var newHex = colors[color];
+        var currentColor = localStorage.getItem('resume-modern-color') || (theme === 'bold' ? 'red' : 'blue');
+        var oldColorObj = colors[currentColor] || colors[theme === 'bold' ? 'red' : 'blue'];
+        var newColorObj = colors[color];
 
-        // Set CSS variables for the wipe animation
-        document.documentElement.style.setProperty('--old-color', oldHex);
-        document.documentElement.style.setProperty('--new-color', newHex);
+        // Set CSS variables for the wipe animation (text only)
+        document.documentElement.style.setProperty('--old-color', oldColorObj.main);
+        document.documentElement.style.setProperty('--new-color', newColorObj.main);
+        
+        // Set Dark variants for background gradients
+        document.documentElement.style.setProperty('--old-color-dark', oldColorObj.dark);
+        document.documentElement.style.setProperty('--new-color-dark', newColorObj.dark);
 
-        // Add wiping class to trigger animation
+        // Handle Background Transition (Crossfade)
+        var bgContainer = document.getElementById('modern-background');
+        if (bgContainer) {
+            // Get current background class
+            var currentBgClass = localStorage.getItem('resume-modern-bg') || 'bg-none';
+            
+            // Create new layer with new color variables inline
+            var newLayer = document.createElement('div');
+            newLayer.className = 'bg-layer ' + currentBgClass;
+            newLayer.style.setProperty('--accent-color', newColorObj.main);
+            newLayer.style.setProperty('--accent-color-dark', newColorObj.dark);
+            bgContainer.appendChild(newLayer);
+            
+            // Trigger reflow
+            void newLayer.offsetWidth;
+            
+            // Fade in
+            newLayer.classList.add('active');
+            
+            // Remove old layers after transition
+            var oldLayers = bgContainer.querySelectorAll('.bg-layer:not(:last-child)');
+            oldLayers.forEach(function(layer) {
+                layer.classList.remove('active');
+                setTimeout(function() {
+                    if (layer.parentNode) {
+                        layer.parentNode.removeChild(layer);
+                    }
+                }, 500);
+            });
+        }
+
+        // Add wiping class to trigger text animation
         document.body.classList.add('wiping');
 
         // Wait for animation to complete
@@ -163,7 +231,25 @@
             document.body.classList.add('no-transition');
             
             document.body.classList.remove('wiping');
-            document.body.className = 'color-' + color + ' no-transition';
+            
+            // Remove any existing color-* classes
+            var classes = document.body.className.split(' ');
+            for (var i = 0; i < classes.length; i++) {
+                if (classes[i].startsWith('color-')) {
+                    document.body.classList.remove(classes[i]);
+                }
+            }
+            
+            document.body.classList.add('color-' + color);
+            
+            // Clean up inline styles on the active layer so it respects future global changes
+            if (bgContainer) {
+                var activeLayer = bgContainer.lastElementChild;
+                if (activeLayer) {
+                    activeLayer.style.removeProperty('--accent-color');
+                    activeLayer.style.removeProperty('--accent-color-dark');
+                }
+            }
             
             updatePdfLink(theme, color);
             localStorage.setItem('resume-modern-color', color);
@@ -173,6 +259,46 @@
                 document.body.classList.remove('no-transition');
             }, 50);
         }, 1500); // Match animation duration
+    }
+
+    function changeBackground(bgClass) {
+        // Ensure background container exists
+        var bgContainer = document.getElementById('modern-background');
+        if (!bgContainer) {
+            bgContainer = document.createElement('div');
+            bgContainer.id = 'modern-background';
+            document.body.prepend(bgContainer);
+        }
+
+        // Create a new layer for the new background
+        var newLayer = document.createElement('div');
+        newLayer.className = 'bg-layer ' + bgClass;
+        bgContainer.appendChild(newLayer);
+
+        // Trigger reflow to ensure transition happens
+        void newLayer.offsetWidth;
+
+        // Fade in new layer
+        newLayer.classList.add('active');
+
+        // Update body class for the wipe animation to know which pattern to use
+        // Remove existing bg classes from body
+        document.body.classList.remove('bg-none', 'bg-gradient', 'bg-stripes', 'bg-dots', 'bg-geometric', 'bg-waves', 'bg-graph-paper', 'bg-crosshatch', 'bg-circles');
+        document.body.classList.add(bgClass);
+
+        // Remove old layers after transition
+        var oldLayers = bgContainer.querySelectorAll('.bg-layer:not(:last-child)');
+        oldLayers.forEach(function(layer) {
+            layer.classList.remove('active');
+            setTimeout(function() {
+                if (layer.parentNode) {
+                    layer.parentNode.removeChild(layer);
+                }
+            }, 500); // Match CSS transition time
+        });
+        
+        // Save preference
+        localStorage.setItem('resume-modern-bg', bgClass);
     }
 
     function toggleDarkMode(isDark) {
@@ -274,6 +400,33 @@
 
     // Initialize theme from localStorage if available
     document.addEventListener('DOMContentLoaded', function() {
+        // Dynamic Background Movement
+        var ticking = false;
+        document.addEventListener('mousemove', function(e) {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    var moveX = (e.clientX - window.innerWidth / 2) * -0.05;
+                    var moveY = (e.clientY - window.innerHeight / 2) * -0.05;
+                    document.documentElement.style.setProperty('--bg-move-x', moveX + 'px');
+                    document.documentElement.style.setProperty('--bg-move-y', moveY + 'px');
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        var scrollTicking = false;
+        document.addEventListener('scroll', function() {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(function() {
+                    var scrollY = window.scrollY;
+                    document.documentElement.style.setProperty('--bg-scroll-y', (scrollY * -0.2) + 'px');
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        });
+
         var savedTheme = localStorage.getItem('resume-theme');
         var savedColor = localStorage.getItem('resume-modern-color');
         
@@ -290,6 +443,14 @@
             var colorSelect = document.getElementById('color-select');
             if (colorSelect) {
                 colorSelect.value = savedColor;
+            }
+        }
+
+        var savedBg = localStorage.getItem('resume-modern-bg');
+        if (savedBg) {
+            var bgSelect = document.getElementById('bg-select');
+            if (bgSelect) {
+                bgSelect.value = savedBg;
             }
         }
 
@@ -317,6 +478,14 @@
                     document.getElementById('color-picker-container').style.display = 'block';
                     var colorSelect = document.getElementById('color-select');
                     changeColor(colorSelect.value);
+                    
+                    if (savedTheme === 'modern' && savedBg) {
+                        changeBackground(savedBg);
+                    } else {
+                        // Hide bg select for bold theme
+                        document.getElementById('bg-select').style.display = 'none';
+                        document.querySelector('label[for="bg-select"]').style.display = 'none';
+                    }
                 } else if (savedTheme === 'clean') {
                     document.getElementById('dark-mode-container').style.display = 'block';
                     var isDark = localStorage.getItem('resume-dark-mode') === 'true';

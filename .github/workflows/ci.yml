@@ -1,0 +1,121 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}-ci
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci
+      - name: Lint Markdown
+        run: npm run lint
+      - name: Check Spelling
+        run: npm run spellcheck
+      - name: Validate JSON
+        run: npm run validate
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: -a '100..=103,200..=299,403' --verbose --no-progress './**/*.md' './**/*.html'
+          fail: false
+        continue-on-error: true
+
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      docker: ${{ steps.filter.outputs.docker }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docker:
+              - 'Dockerfile'
+              - 'package.json'
+              - 'package-lock.json'
+
+  build-image:
+    needs: changes
+    if: ${{ needs.changes.outputs.docker == 'true' }}
+    uses: ./.github/workflows/build-push-ci-image.yml
+    with:
+      tags: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'latest' }}
+    permissions:
+      packages: write
+      contents: read
+
+  build-resume:
+    needs: [lint, link-check, changes, build-image]
+    if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped') && (needs.lint.result == 'success')
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository }}-ci:${{ (needs.changes.outputs.docker == 'true' && github.event_name == 'pull_request') && format('pr-{0}', github.event.pull_request.number) || 'latest' }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Build Script
+        run: ./build.sh
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resume-build-output
+          path: output
+          retention-days: ${{ github.event_name == 'pull_request' && 5 || 1 }}
+
+  deploy:
+    needs: build-resume
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: resume-build-output
+          path: output
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
+
+  release:
+    needs: deploy
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
