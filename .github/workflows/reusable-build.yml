@@ -24,7 +24,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/northcutted/resume-ci:${{ inputs.image_tag }}
+      image: ghcr.io/${{ github.repository }}-ci:${{ inputs.image_tag }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
