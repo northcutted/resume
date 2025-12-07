@@ -19,5 +19,5 @@ jobs:
         uses: lycheeverse/lychee-action@v2.7.0
         with:
           # Check markdown and html files
-          args: -a 100..=103,200..=299],403 --verbose --no-progress './**/*.md' './**/*.html'
+          args: -a '100..=103,200..=299],403' --verbose --no-progress './**/*.md' './**/*.html'
           fail: true
