@@ -160,9 +160,25 @@ body.wiping #theme-switcher {
     box-shadow: 8px 8px 0px var(--new-color) !important;
 }
 
+/* Footer */
+.footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 4px solid #000;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
 
 /* Print Styles */
 @media print {
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
     body {
         margin: 0 !important;
         padding: 0 !important;
@@ -196,18 +212,10 @@ body.wiping #theme-switcher {
         color: #ff0000; /* Default Red */
     }
     
-    /* Explicit Print Overrides for Colors (wkhtmltopdf fallback) */
-    body.color-blue a, body.color-blue li::before { color: #0055ff; }
-    body.color-red a, body.color-red li::before { color: #ff0000; }
-    body.color-orange a, body.color-orange li::before { color: #ff6600; }
-    body.color-green a, body.color-green li::before { color: #00aa00; }
-    body.color-purple a, body.color-purple li::before { color: #8800cc; }
-    body.color-black a, body.color-black li::before { color: #000000; }
-    body.color-grey a, body.color-grey li::before { color: #666666; }
-    
     /* Hide download link */
     body > *:last-child,
-    a[href$=".pdf"] {
+    a[href$=".pdf"],
+    .footer {
         display: none !important;
     }
 

@@ -175,6 +175,18 @@ pre {
     font-family: 'Fira Code', monospace;
 }
 
+/* Footer */
+.footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px dashed #00ff00;
+    text-align: center;
+    font-size: 0.9em;
+}
+.footer::before {
+    content: ">> ";
+}
+
 /* Print Styles */
 @media print {
     body {
@@ -198,7 +210,8 @@ pre {
     
     /* Hide download link */
     body > *:last-child,
-    a[href$=".pdf"] {
+    a[href$=".pdf"],
+    .footer {
         display: none !important;
     }
     

@@ -186,10 +186,24 @@ body.wiping blockquote {
     border-left-color: var(--new-color) !important;
 }
 
-
+/* Footer */
+.footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #bdc3c7;
+    text-align: center;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
 
 /* Print Styles */
 @media print {
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
     body {
         background-color: #fff;
         padding: 0;
@@ -204,28 +218,17 @@ body.wiping blockquote {
         border-bottom: 1px solid #3498db; /* Default */
         padding-bottom: 2px;
     }
-    
-    /* Explicit Print Overrides for Colors (wkhtmltopdf fallback) */
-    body.color-red h1 { border-bottom-color: #e74c3c; }
-    body.color-orange h1 { border-bottom-color: #e67e22; }
-    body.color-green h1 { border-bottom-color: #2ecc71; }
-    body.color-purple h1 { border-bottom-color: #9b59b6; }
-    body.color-black h1 { border-bottom-color: #2c3e50; }
-    body.color-grey h1 { border-bottom-color: #7f8c8d; }
 
+    /* Hide the variable-based underline in print */
+    h1::after {
+        display: none;
+    }
+    
     h2 {
         font-size: 8px;
         margin-top: 4px;
         color: #3498db; /* Default */
     }
-    
-    /* Explicit Print Overrides for Colors */
-    body.color-red h2 { color: #e74c3c; }
-    body.color-orange h2 { color: #e67e22; }
-    body.color-green h2 { color: #2ecc71; }
-    body.color-purple h2 { color: #9b59b6; }
-    body.color-black h2 { color: #2c3e50; }
-    body.color-grey h2 { color: #7f8c8d; }
 
     h3 {
         font-size: 6px;
@@ -237,17 +240,10 @@ body.wiping blockquote {
         color: #3498db; /* Default */
     }
     
-    /* Explicit Print Overrides for Colors */
-    body.color-red a { color: #e74c3c; }
-    body.color-orange a { color: #e67e22; }
-    body.color-green a { color: #2ecc71; }
-    body.color-purple a { color: #9b59b6; }
-    body.color-black a { color: #2c3e50; }
-    body.color-grey a { color: #7f8c8d; }
-    
     /* Hide download link */
     body > *:last-child,
-    a[href$=".pdf"] {
+    a[href$=".pdf"],
+    .footer {
         display: none !important;
     }
     
