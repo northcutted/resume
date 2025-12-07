@@ -1,3 +1,10 @@
+## [2.4.4](https://github.com/northcutted/resume/compare/v2.4.3...v2.4.4) (2025-12-07)
+
+
+### Bug Fixes
+
+* update GitHub Actions and dependencies; enhance footer styles across themes ([515882c](https://github.com/northcutted/resume/commit/515882c4481e4d9873b41a94058c6dcc3fc0c080))
+
 ## [2.4.3](https://github.com/northcutted/resume/compare/v2.4.2...v2.4.3) (2025-12-04)
 
 
