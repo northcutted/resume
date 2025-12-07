@@ -1,0 +1,178 @@
+{
+  "basics": {
+    "name": "Edward Northcutt",
+    "label": "Software Engineer",
+    "email": "northcutted@gmail.com",
+    "phone": "+1 (618) 541-8770",
+    "url": "https://northcutted.github.io/resume/",
+    "summary": "Experienced Software Engineer with a strong focus on platform engineering, DevOps, and secure, scalable cloud infrastructure. Specializes in building shared systems; including enterprise container images, CI/CD platforms, and developer tooling that simplify workflows, reduce duplication, and drive efficiency at scale. Proven track record of delivering solutions used by thousands of engineers, leading complex migrations, and embedding automation and security into core development platforms.",
+    "location": {
+      "postalCode": "61920",
+      "city": "Charleston",
+      "countryCode": "US",
+      "region": "Illinois"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/edward-northcutt-b06386101/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "position": "Lead Software Engineer II",
+      "name": "State Farm",
+      "location": "Bloomington, IL/Hybrid-Remote",
+      "summary": "Sole engineer responsible for transforming enterprise container image management from ad-hoc community efforts into a governed, multi-architecture product. Architected and delivered a standardized base image ecosystem that now powers the majority of production kubernetes workloads, reducing operational variance and accelerating delivery across the enterprise.",
+      "highlights": [
+        "**Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** leveraging official enterprise base images in 2025, used in over **108,000 image builds**.",
+        "**Multi-Architecture & Optimization:** Architected a modular image suite supporting both **Linux/arm64 and Linux/amd64**, enabling runtime cost savings. Implemented layered inheritance to maximize caching, minimize storage footprint and transfer costs.",
+        "**JVM Middleware Innovation:** Delivered a tool integrated into base image designed to optimize heap sizing and garbage collection for JVM applications on Kubernetes, significantly improving stability and reducing cognitive load for teams migrating from legacy platforms.",
+        "**Security Automation:** Slashed vulnerability remediation time to **under 24 hours** (down from days) by implementing automated patching pipelines and integrating State Farm Certificate Authority trust directly into base images.",
+        "**Observability:** Built comprehensive OpenSearch/Kibana dashboards to visualize adoption trends and track legacy registry usage, enabling data-driven governance decisions.",
+        "**Developer Enablement:** Created searchable, RAG-optimized documentation to facilitate LLM-powered knowledge retrieval for engineering teams."
+      ],
+      "startDate": "April 2024",
+      "endDate": "Present"
+    },
+    {
+      "position": "Lead Software Engineer",
+      "name": "State Farm",
+      "location": "Bloomington, IL/Hybrid-Remote",
+      "summary": "Directed and enhanced Source Control Management (SCM) and CI/CD capabilities, supporting over 10,000 engineers. Focused on pipeline architecture, service resiliency, and development best practices.",
+      "highlights": [
+        "**Shared CI/CD Service:** Engineered a shared CI/CD service using GitLab Runners, enabling users to leverage isolated, secure container builds via Sysbox. By 2022, this system managed over half of all pipelines at State Farm.",
+        "**Cloud Migration:** Successfully migrated the CI/CD infrastructure from on-premises to AWS in 2023, implementing robust autoscaling to handle peak loads.",
+        "**Inner-Source Leadership:** Launched Terraform modules and container images for pipeline usage to accelerate development velocity.",
+        "**Metrics & Observability:** Developed a cloud-based solution to collect CI/CD metrics, using Grafana to visualize usage data for consumer-facing dashboards.",
+        "**Platform Migration:** Transitioned users from legacy Jenkins services to the shared GitLab CI/CD platform, providing custom solutions for complex migration challenges."
+      ],
+      "startDate": "August 2020",
+      "endDate": "April 2024"
+    },
+    {
+      "position": "Software Developer",
+      "name": "State Farm",
+      "location": "Bloomington, IL",
+      "summary": "Collaborated with a team of seven engineers to maintain and enhance proprietary tools for insurance product design, managing complex backend validations and database integrations.",
+      "highlights": [
+        "**Security Tooling:** Developed an internal tool to scan projects for vulnerable dependencies and provide automated upgrade suggestions. This tool was adopted by the application security team.",
+        "**Legacy Modernization:** Maintained REST endpoints and Java IMS services interacting with IBM MQ. Played a pivotal role in migrating applications from a legacy WAS platform to Pivotal Cloud Foundry (Postgres, RabbitMQ, Spring Boot)."
+      ],
+      "startDate": "June 2018",
+      "endDate": "August 2020"
+    },
+    {
+      "position": "IT/Systems Intern",
+      "name": "State Farm",
+      "location": "Champaign, IL",
+      "summary": "",
+      "highlights": [
+        "Developed a solution to assist with PCI DSS compliance audits as a full-stack developer.",
+        "Assisted business partners in writing recovery plans for business continuity."
+      ],
+      "startDate": "Summer 2017",
+      "endDate": "Spring 2018"
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Illinois at Urbana-Champaign",
+      "area": "Agricultural and Consumer Economics - Finance in Agribusiness",
+      "studyType": "B.S.",
+      "startDate": "Fall 2014",
+      "endDate": "Spring 2018",
+      "score": "3.55",
+      "courses": [
+        "CS 225 - Data Structures"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming/Scripting",
+      "keywords": [
+        "Go",
+        "Python",
+        "Java",
+        "JavaScript/TypeScript",
+        "Ruby",
+        "HTML",
+        "CSS",
+        "Bash"
+      ]
+    },
+    {
+      "name": "Containerization & Orchestration",
+      "keywords": [
+        "Docker",
+        "Kubernetes",
+        "Red Hat OpenShift (ROSA)",
+        "Multi-Arch Builds (ARM64/AMD64)",
+        "Helm",
+        "Sysbox."
+      ]
+    },
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS (EC2",
+        "ECR",
+        "S3",
+        "IAM",
+        "CloudWatch)",
+        "Fargate",
+        "VPC Networking",
+        "Red Hat Openshift",
+        "Terraform/OpenTofu",
+        "Ansible",
+        "Puppet"
+      ]
+    },
+    {
+      "name": "CI/CD & DevOps",
+      "keywords": [
+        "GitLab CI/CD",
+        "GitHub Actions",
+        "Jenkins",
+        "Automated Vulnerability Remediation",
+        "Supply Chain Security."
+      ]
+    },
+    {
+      "name": "Observability",
+      "keywords": [
+        "Grafana",
+        "ELK Stack (Elasticsearch",
+        "Logstash",
+        "Kibana)",
+        "Prometheus",
+        "CloudWatch"
+      ]
+    },
+    {
+      "name": "System Design",
+      "keywords": [
+        "JVM Tuning/Profiling",
+        "Linux System Administration",
+        "Distributed Systems",
+        "API Design",
+        "LLM workflow integration."
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "name": "DevSecFinOps: The Challenge of Implementing a Secure and Cost-Effective Container-Based CI/CD System",
+      "publisher": "State Farm Engineering Blog",
+      "releaseDate": "2025-07-01",
+      "url": "https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-cd-c2257eac8eb4",
+      "summary": "Co-authored a technical deep dive detailing the architecture and implementation of a secure, cost-effective container-based CI/CD system, highlighting solutions to key engineering challenges."
+    }
+  ],
+  "languages": [{
+    "language": "English",
+    "fluency": "Native speaker"
+  }]
+}

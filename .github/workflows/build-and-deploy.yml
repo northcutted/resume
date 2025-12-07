@@ -7,11 +7,38 @@ on:
       - main
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      docker: ${{ steps.filter.outputs.docker }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docker:
+              - 'Dockerfile'
+              - 'package.json'
+              - 'package-lock.json'
+
+  build-image:
+    needs: changes
+    if: ${{ needs.changes.outputs.docker == 'true' }}
+    uses: ./.github/workflows/build-push-ci-image.yml
+    with:
+      tags: 'latest'
+    permissions:
+      packages: write
+      contents: read
+
   build:
+    needs: [changes, build-image]
+    if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped')
     uses: ./.github/workflows/reusable-build.yml
     with:
       artifact_name: resume-build-output
       retention_days: 1
+      image_tag: 'latest'
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,7 +75,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:

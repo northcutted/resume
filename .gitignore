@@ -22,3 +22,6 @@ Gemfile.lock
 
 # Local development files
 vendor/bundle/
+
+node_modules/*
+resume.md
