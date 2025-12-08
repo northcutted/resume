@@ -2,9 +2,8 @@ name: CI/CD
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ '**' ]
+    tags: [ 'v*.*.*' ]
   workflow_dispatch:
 
 env:
@@ -12,6 +11,24 @@ env:
   IMAGE_NAME: ${{ github.repository }}-ci
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      docker_tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - name: Calculate Docker Tag
+        id: tag
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "tag=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          else
+            # Sanitize branch name
+            SAFE_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+            echo "tag=$SAFE_NAME" >> $GITHUB_OUTPUT
+          fi
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -50,21 +67,21 @@ jobs:
               - 'package-lock.json'
 
   build-image:
-    needs: changes
+    needs: [setup, changes]
     if: ${{ needs.changes.outputs.docker == 'true' }}
     uses: ./.github/workflows/build-push-ci-image.yml
     with:
-      tags: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'latest' }}
+      tags: ${{ needs.setup.outputs.docker_tag }}
     permissions:
       packages: write
       contents: read
 
   build-resume:
-    needs: [lint, changes, build-image]
+    needs: [lint, setup, changes, build-image]
     if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped') && (needs.lint.result == 'success')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}-ci:${{ (needs.changes.outputs.docker == 'true' && github.event_name == 'pull_request') && format('pr-{0}', github.event.pull_request.number) || 'latest' }}
+      image: ghcr.io/${{ github.repository }}-ci:${{ needs.setup.outputs.docker_tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
