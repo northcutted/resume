@@ -14,7 +14,8 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      docker_tag: ${{ steps.tag.outputs.tag }}
+      target_tag: ${{ steps.tag.outputs.tag }}
+      image_exists: ${{ steps.check.outputs.exists }}
     steps:
       - name: Calculate Docker Tag
         id: tag
@@ -27,6 +28,25 @@ jobs:
             # Sanitize branch name
             SAFE_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
             echo "tag=$SAFE_NAME" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check Image Existence
+        id: check
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}-ci
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          if docker manifest inspect $IMAGE:$TAG > /dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
   lint:
@@ -68,10 +88,10 @@ jobs:
 
   build-image:
     needs: [setup, changes]
-    if: ${{ needs.changes.outputs.docker == 'true' }}
+    if: ${{ needs.changes.outputs.docker == 'true' || github.ref_type == 'tag' }}
     uses: ./.github/workflows/build-push-ci-image.yml
     with:
-      tags: ${{ needs.setup.outputs.docker_tag }}
+      tags: ${{ needs.setup.outputs.target_tag }}
     permissions:
       packages: write
       contents: read
@@ -81,7 +101,7 @@ jobs:
     if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped') && (needs.lint.result == 'success')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}-ci:${{ needs.setup.outputs.docker_tag }}
+      image: ghcr.io/${{ github.repository }}-ci:${{ (needs.changes.outputs.docker == 'true' || github.ref_type == 'tag' || needs.setup.outputs.image_exists == 'true') && needs.setup.outputs.target_tag || 'latest' }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
