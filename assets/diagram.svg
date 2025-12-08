@@ -1,0 +1,41 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="400" fill="#ffffff"/>
+
+    <g transform="translate(50, 50)">
+        <path d="M175 100C175 141.421 141.421 175 100 175C58.5786 175 25 141.421 25 100C25 58.5786 58.5786 25 100 25C141.421 25 175 58.5786 175 100Z" fill="#24292e"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M100 0C116.687 0 132.321 4.36247 145.882 11.9184L159.099 -11.0991L189.099 6.2213L175.882 29.2397C191.373 44.7313 200 66.1302 200 100C200 133.87 191.373 155.269 175.882 170.76L189.099 193.779L159.099 211.099L145.882 188.082C132.321 195.638 116.687 200 100 200C83.313 200 67.6789 195.638 54.1184 188.082L40.9009 211.099L10.9009 193.779L24.1184 170.76C8.62742 155.269 0 133.87 0 100C0 66.1302 8.62742 44.7313 24.1184 29.2397L10.9009 6.2213L40.9009 -11.0991L54.1184 11.9184C67.6789 4.36247 83.313 0 100 0ZM100 50C72.3858 50 50 72.3858 50 100C50 127.614 72.3858 150 100 150C127.614 150 150 127.614 150 100C150 72.3858 127.614 50 100 50Z" fill="#0366d6"/>
+
+        <text x="100" y="120" font-family="monospace" font-weight="bold" font-size="60" fill="white" text-anchor="middle">{}</text>
+
+        <g stroke="#0366d6" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M210 100 L300 50 L320 50"/>
+            <path d="M310 40 L325 50 L310 60" stroke="none" fill="#0366d6"/>
+            <path d="M210 100 L320 100"/>
+            <path d="M310 90 L325 100 L310 110" stroke="none" fill="#0366d6"/>
+            <path d="M210 100 L300 150 L320 150"/>
+            <path d="M310 140 L325 150 L310 160" stroke="none" fill="#0366d6"/>
+        </g>
+
+        <g transform="translate(340, 20)">
+            <g transform="translate(0, 0)">
+                <rect x="0" y="0" width="50" height="60" rx="4" fill="#E44D26"/>
+                <path d="M50 45 L35 60 L35 45 L50 45Z" fill="#F16529"/> <text x="25" y="35" font-family="sans-serif" font-weight="bold" font-size="14" fill="white" text-anchor="middle">&lt;/&gt;</text>
+                <text x="25" y="52" font-family="sans-serif" font-weight="bold" font-size="10" fill="white" text-anchor="middle">HTML</text>
+            </g>
+
+            <g transform="translate(0, 70)">
+                <rect x="0" y="0" width="50" height="60" rx="4" fill="#EC1C24"/>
+                <path d="M50 45 L35 60 L35 45 L50 45Z" fill="#C11920"/> <text x="25" y="40" font-family="sans-serif" font-weight="bold" font-size="16" fill="white" text-anchor="middle">PDF</text>
+            </g>
+
+            <g transform="translate(0, 140)">
+                <rect x="0" y="0" width="50" height="60" rx="4" fill="#2B579A"/>
+                <path d="M50 45 L35 60 L35 45 L50 45Z" fill="#1E3C6B"/> <text x="25" y="35" font-family="sans-serif" font-weight="bold" font-size="18" fill="white" text-anchor="middle">W</text>
+                 <text x="25" y="52" font-family="sans-serif" font-weight="bold" font-size="10" fill="white" text-anchor="middle">DOCX</text>
+            </g>
+        </g>
+    </g>
+
+    <text x="300" y="320" font-family="sans-serif" font-weight="800" font-size="32" fill="#24292e" text-anchor="middle" letter-spacing="1">JSON RESUME</text>
+    <text x="300" y="355" font-family="sans-serif" font-weight="500" font-size="24" fill="#0366d6" text-anchor="middle" letter-spacing="2">GENERATOR</text>
+</svg>

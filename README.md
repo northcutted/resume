@@ -1,19 +1,20 @@
 # JSON Resume Generator
 
-
-
-[![License](https://img.shields.io/github/license/northcutted/resume?style=for-the-badge)](LICENSE)
-
-[![Security: Dependabot](https://img.shields.io/badge/Security-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
-[![Security: Trivy](https://img.shields.io/badge/Security-Trivy-0077c2?style=for-the-badge&logo=trivy&logoColor=white)](https://github.com/northcutted/resume/actions/workflows/ci.yml)
-[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20%7C%20CycloneDX-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://github.com/northcutted/resume/releases/latest)
-
-![GitHub Release](https://img.shields.io/github/v/release/northcutted/resume?style=for-the-badge)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/northcutted/resume/ci.yml?style=for-the-badge)
-
+<p align="center">
+  <img src="assets/diagram.svg" alt="JSON Resume Generator Diagram" width="600">
+</p>
 
 [![View Resume](https://img.shields.io/badge/View_Resume-4DAAFC?style=for-the-badge&logo=github&logoColor=white)](https://northcutted.github.io/resume/)
 [![Download PDF](https://img.shields.io/badge/Download_PDF-EC1C24?style=for-the-badge&logo=&logoColor=white)](https://northcutted.github.io/resume/resume.pdf)
+
+
+
+![GitHub Release](https://img.shields.io/github/v/release/northcutted/resume?style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/northcutted/resume/ci.yml?style=for-the-badge)
+[![License](https://img.shields.io/github/license/northcutted/resume?style=for-the-badge)](LICENSE)
+[![Security: Dependabot](https://img.shields.io/badge/Securtiy-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
+[![Security: Trivy](https://img.shields.io/badge/Security-Trivy-0077c2?style=for-the-badge&logo=trivy&logoColor=white)](https://github.com/northcutted/resume/actions/workflows/ci.yml)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20%7C%20CycloneDX-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://github.com/northcutted/resume/releases/latest)
 
 This repository generates a professional resume in HTML, PDF, and DOCX formats from a single `resume.json` file. It follows the [JSON Resume](https://jsonresume.org/) schema standard.
 
