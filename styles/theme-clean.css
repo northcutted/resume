@@ -800,7 +800,6 @@ sub {
 
 @media print {
     /* Hide the download link and footer in print view */
-    body > *:last-child,
     a[href$=".pdf"],
     .footer {
         display: none !important;
@@ -815,37 +814,37 @@ sub {
     /* Reset margins for print to let the printer handle it */
     html, body {
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 5mm !important;
         background: #fff;
     }
 
     body {
-        font-size: 5px; /* Even smaller font for single page */
-        line-height: 1.0; /* Tighter line height */
+        font-size: 10pt;
+        line-height: 1.2;
     }
     
     /* Compact Headers */
     h1 {
-        font-size: 12px;
-        margin: 0 0 4px 0;
+        font-size: 16pt;
+        margin: 0 0 8px 0;
     }
 
     h2 {
-        font-size: 8px;
-        margin: 4px 0 2px 0;
-        padding-bottom: 1px;
+        font-size: 13pt;
+        margin: 8px 0 4px 0;
+        padding-bottom: 2px;
         page-break-after: avoid;
     }
 
     h3 {
-        font-size: 6px;
-        margin: 3px 0 1px 0;
+        font-size: 11pt;
+        margin: 6px 0 3px 0;
         page-break-after: avoid;
     }
 
     h4, h5, h6 {
-        font-size: 6px;
-        margin: 2px 0;
+        font-size: 10pt;
+        margin: 4px 0;
     }
 
     /* Compact Paragraphs and Lists */

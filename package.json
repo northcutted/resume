@@ -2,23 +2,19 @@
   "scripts": {
     "build": "./build.sh",
     "watch": "nodemon --watch resume.md --watch 'styles/*.css' --exec './build.sh'",
-    "lint": "markdownlint '**/*.md' --ignore node_modules",
-    "spellcheck": "cspell '**/*.md'",
+    "lint": "markdownlint 'resume.md' --ignore node_modules",
+    "spellcheck": "cspell 'resume.md'",
     "validate": "node scripts/validate-json.js",
     "convert-json": "node scripts/json-to-md.js",
     "serve": "live-server output"
   },
   "dependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.2",
-    "semantic-release": "^25.0.2"
+    "puppeteer": "^24.32.0"
   },
   "devDependencies": {
     "cspell": "^9.4.0",
-    "live-server": "^1.2.2",
+    "live-server": "^1.2.0",
     "markdownlint-cli": "^0.46.0",
-    "nodemon": "^3.1.11",
-    "qrcode": "^1.5.3"
+    "nodemon": "^3.1.11"
   }
 }

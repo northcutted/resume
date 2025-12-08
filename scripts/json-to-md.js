@@ -73,7 +73,7 @@ header-includes:
 
     // Skills
     if (resume.skills && resume.skills.length > 0) {
-        md += `## Skills\n`;
+        md += `## Skills\n\n`;
         resume.skills.forEach(skill => {
             md += `- **${skill.name}:** `;
             if (skill.keywords && skill.keywords.length > 0) {
@@ -92,7 +92,7 @@ header-includes:
             if (job.location) {
                 md += ` (_${job.location}_)`;
             }
-            md += `\n`;
+            md += `\n\n`;
             
             if (job.startDate) {
                 md += `_${job.startDate} - ${job.endDate || 'Present'}_\n\n`;
@@ -102,7 +102,7 @@ header-includes:
             
             if (job.highlights && job.highlights.length > 0) {
                 job.highlights.forEach(highlight => {
-                    md += `* ${highlight}\n`;
+                    md += `- ${highlight}\n`;
                 });
                 md += '\n';
             }
@@ -127,12 +127,12 @@ header-includes:
             }
 
             if (edu.score) {
-                md += `* GPA: ${edu.score}\n`;
+                md += `- GPA: ${edu.score}\n`;
             }
             
             if (edu.courses && edu.courses.length > 0) {
                 edu.courses.forEach(course => {
-                    md += `* ${course}\n`;
+                    md += `- ${course}\n`;
                 });
                 md += '\n';
             }
@@ -143,21 +143,21 @@ header-includes:
     if (resume.publications && resume.publications.length > 0) {
         md += `## Publications\n\n`;
         resume.publications.forEach(pub => {
-            let pubLine = `* **[${pub.name}](${pub.url})**`;
+            let pubLine = `- **[${pub.name}](${pub.url})**`;
             if (pub.publisher) {
-                pubLine += ` – *${pub.publisher}`;
+                pubLine += ` – _${pub.publisher}`;
                 if (pub.releaseDate) {
                     // Format date if needed, assuming YYYY-MM-DD
                     const date = new Date(pub.releaseDate);
                     const dateStr = isNaN(date.getTime()) ? pub.releaseDate : date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                     pubLine += ` (${dateStr})`;
                 }
-                pubLine += `*`;
+                pubLine += `_`;
             }
             md += `${pubLine}\n`;
             
             if (pub.summary) {
-                md += `  * ${pub.summary}\n`;
+                md += `  - ${pub.summary}\n`;
             }
         });
         md += `\n`;
@@ -167,14 +167,14 @@ header-includes:
     if (resume.projects && resume.projects.length > 0) {
         md += `## Projects\n\n`;
         resume.projects.forEach(proj => {
-            md += `### ${proj.name}\n`;
+            md += `### ${proj.name}\n\n`;
             if (proj.startDate) {
                 md += `_${proj.startDate} - ${proj.endDate || 'Present'}_\n\n`;
             }
             if (proj.description) md += `${proj.description}\n\n`;
             if (proj.highlights && proj.highlights.length > 0) {
                 proj.highlights.forEach(highlight => {
-                    md += `* ${highlight}\n`;
+                    md += `- ${highlight}\n`;
                 });
                 md += '\n';
             }
@@ -185,7 +185,7 @@ header-includes:
     if (resume.awards && resume.awards.length > 0) {
         md += `## Awards\n\n`;
         resume.awards.forEach(award => {
-            md += `### ${award.title} (${award.awarder})\n`;
+            md += `### ${award.title} (${award.awarder})\n\n`;
             if (award.date) md += `_${award.date}_\n\n`;
             if (award.summary) md += `${award.summary}\n\n`;
         });
@@ -195,14 +195,14 @@ header-includes:
     if (resume.volunteer && resume.volunteer.length > 0) {
         md += `## Volunteer\n\n`;
         resume.volunteer.forEach(vol => {
-            md += `### ${vol.position}, ${vol.organization}\n`;
+            md += `### ${vol.position}, ${vol.organization}\n\n`;
             if (vol.startDate) {
                 md += `_${vol.startDate} - ${vol.endDate || 'Present'}_\n\n`;
             }
             if (vol.summary) md += `${vol.summary}\n\n`;
             if (vol.highlights && vol.highlights.length > 0) {
                 vol.highlights.forEach(highlight => {
-                    md += `* ${highlight}\n`;
+                    md += `- ${highlight}\n`;
                 });
                 md += '\n';
             }
@@ -213,7 +213,7 @@ header-includes:
     if (resume.certificates && resume.certificates.length > 0) {
         md += `## Certificates\n\n`;
         resume.certificates.forEach(cert => {
-            md += `### ${cert.name}\n`;
+            md += `### ${cert.name}\n\n`;
             if (cert.issuer) md += `_${cert.issuer}_\n`;
             if (cert.date) md += `_${cert.date}_\n`;
             if (cert.url) md += `[Link](${cert.url})\n`;
@@ -225,7 +225,7 @@ header-includes:
     if (resume.languages && resume.languages.length > 0) {
         md += `## Languages\n\n`;
         resume.languages.forEach(lang => {
-            md += `* **${lang.language}**: ${lang.fluency}\n`;
+            md += `- **${lang.language}**: ${lang.fluency}\n`;
         });
         md += `\n`;
     }
@@ -234,7 +234,7 @@ header-includes:
     if (resume.interests && resume.interests.length > 0) {
         md += `## Interests\n\n`;
         resume.interests.forEach(interest => {
-            md += `* **${interest.name}**: `;
+            md += `- **${interest.name}**: `;
             if (interest.keywords && interest.keywords.length > 0) {
                 md += interest.keywords.join(', ');
             }
@@ -251,7 +251,7 @@ header-includes:
         });
     }
 
-    fs.writeFileSync(mdPath, md);
+    fs.writeFileSync(mdPath, md.trim() + '\n');
     console.log(`Generated ${mdPath} from ${jsonPath}`);
 
 } catch (err) {

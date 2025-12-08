@@ -29,12 +29,6 @@ elif [ -f "custom.css" ]; then
     CUSTOM_CSS_FLAG="-c custom.css"
 fi
 
-# Generate QR Code if requested
-if [ -n "$QR_CODE_TEXT" ]; then
-    echo "Generating QR Code..."
-    node scripts/generate-qr.js "$QR_CODE_TEXT" "output/qr.png"
-fi
-
 # Create a temporary markdown file for the HTML site that includes the download link
 cp resume.md resume-site.md
 
@@ -46,10 +40,6 @@ if [ -f "resume.json" ]; then
 fi
 
 echo -e "$DOWNLOAD_LINKS" >> resume-site.md
-
-if [ -n "$QR_CODE_TEXT" ]; then
-    echo -e "\n\n![QR Code](qr.png)" >> resume-site.md
-fi
 
 if [ -n "$REPO_URL" ]; then
     echo -e "\n\n<div class=\"footer\">View source on <a href=\"$REPO_URL\">GitHub</a></div>" >> resume-site.md
@@ -75,9 +65,23 @@ pandoc resume.md -f markdown -t plain -o output/resume.txt
 
 # Generate PDFs for all themes
 THEMES=('clean' 'modern' 'classic' 'terminal' 'bold')
+JOBS="[]"
+
+# Function to add job to JSON array
+add_job() {
+    local input="$1"
+    local output="$2"
+    # Simple JSON construction using string manipulation
+    if [ "$JOBS" == "[]" ]; then
+        JOBS="[{\"input\": \"$input\", \"output\": \"$output\"}]"
+    else
+        # Remove closing bracket, add comma, new object, closing bracket
+        JOBS="${JOBS%]},{\"input\": \"$input\", \"output\": \"$output\"}]"
+    fi
+}
 
 for theme in "${THEMES[@]}"; do
-    echo "Building PDF for theme: $theme"
+    echo "Preparing theme: $theme"
     
     # Create a temp html for this theme
     pandoc resume.md -f markdown -t html -c "theme-$theme.css" $CUSTOM_CSS_FLAG -s -o "output/resume-$theme.html"
@@ -87,8 +91,6 @@ for theme in "${THEMES[@]}"; do
         COLORS=('blue' 'red' 'orange' 'green' 'purple' 'black' 'grey')
         
         for color in "${COLORS[@]}"; do
-            echo "  Building variant: $theme-$color"
-            
             # Create a variant HTML with the color class injected
             cp "output/resume-$theme.html" "output/resume-$theme-$color.html"
             
@@ -117,9 +119,7 @@ for theme in "${THEMES[@]}"; do
                 OUT_PDF="output/resume-$theme-$color.pdf"
             fi
             
-            wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-$theme-$color.html" "$OUT_PDF"
-            
-            rm "output/resume-$theme-$color.html"
+            add_job "output/resume-$theme-$color.html" "$OUT_PDF"
         done
         
         # Clean up the base html
@@ -135,8 +135,6 @@ for theme in "${THEMES[@]}"; do
         
         for font in "${FONTS[@]}"; do
             for texture in "${TEXTURES[@]}"; do
-                echo "  Building variant: classic-$font-$texture"
-                
                 # Create variant HTML
                 cp "output/resume-$theme.html" "output/resume-$theme-$font-$texture.html"
                 
@@ -172,9 +170,7 @@ for theme in "${THEMES[@]}"; do
                 
                 OUT_PDF="output/resume-$theme$SUFFIX.pdf"
                 
-                wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-$theme-$font-$texture.html" "$OUT_PDF"
-                
-                rm "output/resume-$theme-$font-$texture.html"
+                add_job "output/resume-$theme-$font-$texture.html" "$OUT_PDF"
             done
         done
         
@@ -185,8 +181,6 @@ for theme in "${THEMES[@]}"; do
         COLORS=('blue' 'red' 'orange' 'green' 'purple' 'black' 'grey')
         
         for color in "${COLORS[@]}"; do
-            echo "  Building variant: $theme-$color"
-            
             # Create a variant HTML with the color class injected
             cp "output/resume-$theme.html" "output/resume-$theme-$color.html"
             
@@ -215,9 +209,7 @@ for theme in "${THEMES[@]}"; do
                 OUT_PDF="output/resume-$theme-$color.pdf"
             fi
             
-            wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-$theme-$color.html" "$OUT_PDF"
-            
-            rm "output/resume-$theme-$color.html"
+            add_job "output/resume-$theme-$color.html" "$OUT_PDF"
         done
         
         # Clean up the base html
@@ -227,26 +219,29 @@ for theme in "${THEMES[@]}"; do
         # Clean theme has a Dark Mode variant
         
         # 1. Default (Light)
-        wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-$theme.html" "output/resume.pdf"
+        add_job "output/resume-$theme.html" "output/resume.pdf"
         
         # 2. Dark Mode
-        echo "  Building variant: clean-dark"
         cp "output/resume-$theme.html" "output/resume-dark.html"
         sed "s/<body/<body class=\"dark-mode\" /" "output/resume-dark.html" > "output/resume-dark.html.tmp" && mv "output/resume-dark.html.tmp" "output/resume-dark.html"
-        wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-dark.html" "output/resume-dark.pdf"
-        rm "output/resume-dark.html"
+        add_job "output/resume-dark.html" "output/resume-dark.pdf"
         
-        rm "output/resume-$theme.html"
+        # Don't delete yet, we need them for the batch job
+        # rm "output/resume-$theme.html"
 
     else
         # Standard themes
         OUT_PDF="output/resume-$theme.pdf"
-        
-        wkhtmltopdf --page-size Letter --margin-top 0mm --margin-bottom 0mm --margin-left 0mm --margin-right 0mm --enable-local-file-access "output/resume-$theme.html" "$OUT_PDF"
-        
-        rm "output/resume-$theme.html"
+        add_job "output/resume-$theme.html" "$OUT_PDF"
     fi
 done
 
-# Fix permissions (since docker runs as root)
-chmod 777 output/*
+# Execute Batch PDF Generation
+echo "Generating PDFs in batch..."
+echo "$JOBS" > pdf-jobs.json
+node scripts/html-to-pdf.js --batch pdf-jobs.json
+
+# Cleanup HTML files (except index.html)
+echo "Cleaning up temporary HTML files..."
+find output -name "resume-*.html" -type f -delete
+rm pdf-jobs.json

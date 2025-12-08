@@ -1,58 +1,49 @@
-# Stage 1: Builder
-FROM node:25 AS builder
+ARG PANDOC_VERSION=3.6.3
+ARG TARGETARCH
+
+FROM node:25-bookworm-slim
+
+ARG PANDOC_VERSION
+ARG TARGETARCH
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium \
+    ca-certificates \
+    curl \
+    dumb-init \
+    && curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-${TARGETARCH}.deb -o /tmp/pandoc.deb \
+    && apt-get install -y /tmp/pandoc.deb \
+    && rm /tmp/pandoc.deb \
+    && apt-get purge -y --auto-remove curl \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json ./
+# Create output directory and set ownership of /app to node user
+RUN mkdir -p output && chown -R node:node /app
 
-# Install dependencies (including devDependencies like qrcode)
-RUN npm install
+# Switch to non-root user
+USER node
 
-# Stage 2: Final
-FROM node:25-slim
+WORKDIR /app
 
-# Define versions
-ARG PANDOC_VERSION=3.6.3
-# Using Bullseye package for wkhtmltopdf as Bookworm is not officially supported
-ARG WKHTML_VERSION=0.12.6.1-2
-ARG TARGETARCH
+COPY --chown=node:node package.json package-lock.json* ./
 
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       curl \
-       ca-certificates \
-       fonts-liberation \
-       fontconfig \
-       xfonts-75dpi \
-       xfonts-base \
-       gnupg \
-    && rm -rf /var/lib/apt/lists/*
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-# Download packages using ADD
-ADD https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-${TARGETARCH}.deb /tmp/pandoc.deb
-ADD https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTML_VERSION}/wkhtmltox_${WKHTML_VERSION}.bullseye_${TARGETARCH}.deb /tmp/wkhtmltox.deb
+# Use cache mount to speed up npm install
+RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 \
+    npm ci --omit=dev
 
-# Install downloaded packages and libssl (via curl due to domain differences)
-RUN dpkg -i /tmp/pandoc.deb \
-    && rm /tmp/pandoc.deb \
-    && if [ "$TARGETARCH" = "amd64" ]; then \
-      curl -L http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -o /tmp/libssl.deb; \
-    elif [ "$TARGETARCH" = "arm64" ]; then \
-      curl -L http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_arm64.deb -o /tmp/libssl.deb; \
-    fi \
-    && dpkg -i /tmp/libssl.deb \
-    && rm /tmp/libssl.deb \
-    && apt-get update \
-    && apt-get install -y /tmp/wkhtmltox.deb \
-    && rm /tmp/wkhtmltox.deb \
-    && rm -rf /var/lib/apt/lists/*
+COPY --chown=node:node --chmod=755 build.sh ./build-resume
+COPY --chown=node:node scripts/ styles/ assets/ ./
 
-# Copy node_modules from builder
-COPY --from=builder /app/node_modules /usr/local/lib/node_modules
-ENV NODE_PATH=/usr/local/lib/node_modules
+# Allow node to find modules in /app/node_modules even when running from /data
+ENV NODE_PATH=/app/node_modules \
+    NODE_ENV=production
 
-COPY --chmod=755 build.sh /usr/local/bin/build-resume
+# Use dumb-init to handle PID 1 signals (Ctrl+C, SIGTERM) correctly
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-WORKDIR /data
+CMD ["/app/build-resume"]

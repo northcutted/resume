@@ -250,8 +250,8 @@ li {
     body {
         padding: 0;
         margin: 0;
-        font-size: 5px;
-        line-height: 1.0;
+        font-size: 11pt;
+        line-height: 1.4;
         background: #fff !important;
         color: #000 !important;
         background-image: none !important;
@@ -302,24 +302,23 @@ li {
     }
 
     h1 {
-        font-size: 10px;
-        margin-bottom: 4px;
-        padding-bottom: 2px;
+        font-size: 16pt;
+        margin-bottom: 8px;
+        padding-bottom: 3px;
         border-bottom-color: #000 !important;
     }
 
     h2 {
-        font-size: 7px;
-        margin-top: 4px;
+        font-size: 13pt;
+        margin-top: 8px;
         border-bottom: 1px solid #999;
     }
 
     h3 {
-        font-size: 6px;
+        font-size: 11pt;
     }
     
     /* Hide download link */
-    body > *:last-child,
     a[href$=".pdf"],
     .footer {
         display: none !important;
@@ -328,7 +327,7 @@ li {
     /* Reset margins for print to let the printer handle it */
     html, body {
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 5mm !important;
         /* Only reset background if NO texture class is present */
     }
     
