@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/github/license/northcutted/resume?style=for-the-badge)](LICENSE)
 
-[![Security: Dependabot](https://img.shields.io/badge/Securtiy-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
+[![Security: Dependabot](https://img.shields.io/badge/Security-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
 [![Security: Trivy](https://img.shields.io/badge/Security-Trivy-0077c2?style=for-the-badge&logo=trivy&logoColor=white)](https://github.com/northcutted/resume/actions/workflows/ci.yml)
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%20%7C%20CycloneDX-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://github.com/northcutted/resume/releases/latest)
 
