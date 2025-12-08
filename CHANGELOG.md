@@ -1,3 +1,29 @@
+# [2.5.0](https://github.com/northcutted/resume/compare/v2.4.4...v2.5.0) (2025-12-08)
+
+
+### Bug Fixes
+
+* add error handling for container engine detection and improve build script output ([61ba9b8](https://github.com/northcutted/resume/commit/61ba9b8c9b80051344850352b67773ac2ffc7916))
+* add SBOM generation steps and update README with SBOM badge ([75035d9](https://github.com/northcutted/resume/commit/75035d979c2c868a697006bec27f32ac6eae6d76))
+* correct argument formatting in link checker configuration ([cdfd4bb](https://github.com/northcutted/resume/commit/cdfd4bbe0b09daad68e4450b013a611b708dd044))
+* correct argument formatting in link checker configuration ([3ad10b3](https://github.com/northcutted/resume/commit/3ad10b316df6bff79cd8348bf4e01a4dd5c27bcc))
+* enhance CI/CD workflow with image existence check and dynamic Docker tagging ([5aca457](https://github.com/northcutted/resume/commit/5aca4575e5a0a4ee4fa1cfa061fc07a9d78a39a0))
+* remove mail exclusion from link checker arguments ([92de675](https://github.com/northcutted/resume/commit/92de675192947bb454ec5451798f4ae198d9d56f))
+* update CI/CD workflow to support dynamic Docker tagging and improve image build dependencies ([534a711](https://github.com/northcutted/resume/commit/534a711eebc9712458920cb2dabd2911a9626488))
+* update Docker change detection logic in CI workflow ([4adcc7a](https://github.com/northcutted/resume/commit/4adcc7a1e8af68e9a65f1641b62efa6f395b4cf3))
+* update link checker arguments to include specific status codes ([bad63ea](https://github.com/northcutted/resume/commit/bad63eaddfb67bf952082b9dd4dcd8b0c333853c))
+* update markdown linting rules, enhance README formatting, and improve resume generation script output ([92ac09c](https://github.com/northcutted/resume/commit/92ac09c19c2522aed34db5236bb571e6dad82c8a))
+* update paths-filter configuration to improve Dockerfile detection ([958a068](https://github.com/northcutted/resume/commit/958a068eec70473592bdc1488cd9ea08ccc63711))
+* update workflow actions and improve theme styles for better print layout ([3b431da](https://github.com/northcutted/resume/commit/3b431dabc85275fdc2da8f5786780afa9cd8cb67))
+
+
+### Features
+
+* :boom: JSON Resume Schema overhaul ([627a11d](https://github.com/northcutted/resume/commit/627a11d17db409114c3a2dacddb34139ae275fe3))
+* add cleanup workflow for closed pull requests and remove redundant footer in build script ([3f55401](https://github.com/northcutted/resume/commit/3f55401a468a2832f2ef488765fa6134abd7296a))
+* enhance GitHub Actions workflows for PR previews and builds ([4979c9f](https://github.com/northcutted/resume/commit/4979c9fa68a875f001a7142f675cf66f0a37597f))
+* update dependencies and add HTML to PDF conversion script ([30a9e6f](https://github.com/northcutted/resume/commit/30a9e6f3805e5b7310bef7b22cc3988879f0868a))
+
 ## [2.4.4](https://github.com/northcutted/resume/compare/v2.4.3...v2.4.4) (2025-12-07)
 
 ### Bug Fixes

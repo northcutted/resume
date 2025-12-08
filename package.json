@@ -9,7 +9,11 @@
     "serve": "live-server output"
   },
   "dependencies": {
-    "puppeteer": "^24.32.0"
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.2",
+    "puppeteer": "^24.32.0",
+    "semantic-release": "^25.0.2"
   },
   "devDependencies": {
     "cspell": "^9.4.0",
