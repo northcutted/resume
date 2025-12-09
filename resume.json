@@ -29,7 +29,7 @@
         "**Enterprise Scale & Adoption:** Scaled adoption from zero to over **730 unique applications** leveraging official enterprise base images in 2025, used in over **108,000 image builds**.",
         "**Multi-Architecture & Optimization:** Architected a modular image suite supporting both **Linux/arm64 and Linux/amd64**, enabling runtime cost savings. Implemented layered inheritance to maximize caching, minimize storage footprint and transfer costs.",
         "**JVM Middleware Innovation:** Delivered a tool integrated into base image designed to optimize heap sizing and garbage collection for JVM applications on Kubernetes, significantly improving stability and reducing cognitive load for teams migrating from legacy platforms.",
-        "**Security Automation:** Slashed vulnerability remediation time to **under 24 hours** (down from days) by implementing automated patching pipelines and integrating State Farm Certificate Authority trust directly into base images.",
+        "**Security Automation:** Slashed vulnerability remediation time to **under 24 hours** (down from days) by implementing automated patching pipelines.",
         "**Observability:** Built comprehensive OpenSearch/Kibana dashboards to visualize adoption trends and track legacy registry usage, enabling data-driven governance decisions.",
         "**Developer Enablement:** Created searchable, RAG-optimized documentation to facilitate LLM-powered knowledge retrieval for engineering teams."
       ],
