@@ -31,7 +31,7 @@ jobs:
           fi
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -52,8 +52,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: 'npm'
@@ -76,7 +76,7 @@ jobs:
     outputs:
       docker: ${{ steps.filter.outputs.docker }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
       
@@ -89,7 +89,7 @@ jobs:
           # Check if HEAD~1 exists
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
             # Check for changes in specific files between HEAD~1 and HEAD
-            DIFF=$(git diff --name-only HEAD~1 HEAD | grep -E '^(Dockerfile|package.json|package-lock.json)$' || true)
+            DIFF=$(git diff --name-only HEAD~1 HEAD | grep -E '^(Dockerfile|package.json|package-lock.json|\.github/workflows/build-push-ci-image\.yml)$' || true)
             
             if [ -z "$DIFF" ]; then
               CHANGED="false"
@@ -108,6 +108,7 @@ jobs:
     permissions:
       packages: write
       contents: read
+      id-token: write
 
   build-resume:
     needs: [lint, setup, changes, build-image]
@@ -120,12 +121,19 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
       options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Run Build Script
         run: ./build.sh
         env:
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}
-      - uses: actions/upload-artifact@v4
+      - name: Zip Artifacts
+        run: zip -r resume-artifacts.zip output/
+      - uses: actions/upload-artifact@v7
+        with:
+          name: resume-artifacts
+          path: resume-artifacts.zip
+          retention-days: ${{ github.event_name == 'pull_request' && 5 || 1 }}
+      - uses: actions/upload-artifact@v7
         with:
           name: resume-build-output
           path: output
@@ -142,15 +150,15 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: resume-build-output
           path: output
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: output
-      - uses: actions/configure-pages@v5
-      - uses: actions/deploy-pages@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/deploy-pages@v5
         id: deployment
 
   release:
@@ -162,14 +170,26 @@ jobs:
       pull-requests: write
       issues: write
       packages: read
+      id-token: write
+      attestations: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: '24'
       
+      - uses: actions/download-artifact@v8
+        with:
+          name: resume-artifacts
+          path: .
+          
+      - name: Generate SLSA v3 Build Provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: 'resume-artifacts.zip'
+
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
