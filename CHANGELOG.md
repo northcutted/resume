@@ -1,3 +1,18 @@
+# [2.6.0](https://github.com/northcutted/resume/compare/v2.5.1...v2.6.0) (2026-04-05)
+
+
+### Bug Fixes
+
+* add missing permissions for id-token in CI workflow ([08c5e51](https://github.com/northcutted/resume/commit/08c5e51babcdfb398a7ae1f53160e9917ce5d1ba))
+* add zip package to Dockerfile dependencies ([5bf52c1](https://github.com/northcutted/resume/commit/5bf52c1c69dbb4315b2dc4fd682888555e00371f))
+* Q2 2026 Updates ([d3abf9f](https://github.com/northcutted/resume/commit/d3abf9fc8e50066df872cc6b4ad8f93956146ccf))
+* update builder image to alpine and streamline dependencies in Dockerfile ([9318435](https://github.com/northcutted/resume/commit/9318435d1dbb54e4cbe1ae519e884faa7ca35a9f))
+
+
+### Features
+
+* enhance CI/CD workflows with SLSA v3 support and artifact signing ([b94f5d6](https://github.com/northcutted/resume/commit/b94f5d644b185bfdea5cf68b8d7eb9d891de1fc4))
+
 ## [2.5.1](https://github.com/northcutted/resume/compare/v2.5.0...v2.5.1) (2026-01-02)
 
 
