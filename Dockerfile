@@ -1,43 +1,58 @@
 ARG PANDOC_VERSION=3.6.3
 ARG TARGETARCH
 
-FROM node:25-bookworm-slim
-
+# Builder stage to download and extract Pandoc binary securely
+FROM cgr.dev/chainguard/wolfi-base:latest AS builder
 ARG PANDOC_VERSION
 ARG TARGETARCH
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apk add --no-cache curl tar gzip
+
+RUN if [ "$TARGETARCH" = "arm64" ]; then ARCH="arm64"; else ARCH="amd64"; fi && \
+    curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-${ARCH}.tar.gz -o /tmp/pandoc.tar.gz && \
+    tar -xzf /tmp/pandoc.tar.gz -C /tmp && \
+    mv /tmp/pandoc-${PANDOC_VERSION}/bin/pandoc /usr/bin/pandoc
+
+# Final runtime image
+FROM cgr.dev/chainguard/wolfi-base:latest
+
+# Install dependencies required by the app and the GitHub Actions runner
+RUN apk add --no-cache \
+    nodejs \
+    npm \
     chromium \
-    ca-certificates \
-    curl \
     dumb-init \
-    && curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-${TARGETARCH}.deb -o /tmp/pandoc.deb \
-    && apt-get install -y /tmp/pandoc.deb \
-    && rm /tmp/pandoc.deb \
-    && apt-get purge -y --auto-remove curl \
-    && rm -rf /var/lib/apt/lists/*
+    bash \
+    git \
+    tar \
+    gzip \
+    coreutils \
+    findutils
+
+# Copy pandoc from builder
+COPY --from=builder /usr/bin/pandoc /usr/bin/pandoc
 
 WORKDIR /app
 
-# Create output directory and set ownership of /app to node user
-RUN mkdir -p output && chown -R node:node /app
+# Create output directory and set ownership to Chainguard's default non-root user
+RUN mkdir -p output && chown -R nonroot:nonroot /app
 
 # Switch to non-root user
-USER node
+USER nonroot
 
 WORKDIR /app
 
-COPY --chown=node:node package.json package-lock.json* ./
+COPY --chown=nonroot:nonroot package.json package-lock.json* ./
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Use cache mount to speed up npm install
-RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 \
+RUN --mount=type=cache,target=/home/nonroot/.npm,uid=65532,gid=65532 \
     npm ci --omit=dev
 
-COPY --chown=node:node --chmod=755 build.sh ./build-resume
-COPY --chown=node:node scripts/ styles/ assets/ ./
+COPY --chown=nonroot:nonroot --chmod=755 build.sh ./build-resume
+COPY --chown=nonroot:nonroot scripts/ styles/ assets/ ./
 
 # Allow node to find modules in /app/node_modules even when running from /data
 ENV NODE_PATH=/app/node_modules \
