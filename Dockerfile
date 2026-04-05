@@ -2,7 +2,7 @@ ARG PANDOC_VERSION=3.6.3
 ARG TARGETARCH
 
 # Builder stage to download and extract Pandoc binary securely
-FROM cgr.dev/chainguard/wolfi-base:latest AS builder
+FROM alpine:3.19 AS builder
 ARG PANDOC_VERSION
 ARG TARGETARCH
 
@@ -24,10 +24,7 @@ RUN apk add --no-cache \
     dumb-init \
     bash \
     git \
-    tar \
-    gzip \
-    coreutils \
-    findutils
+    busybox
 
 # Copy pandoc from builder
 COPY --from=builder /usr/bin/pandoc /usr/bin/pandoc
