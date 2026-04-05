@@ -12,7 +12,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/northcutted/resume?style=for-the-badge)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/northcutted/resume/ci.yml?style=for-the-badge)
 [![License](https://img.shields.io/github/license/northcutted/resume?style=for-the-badge)](LICENSE)
-[![Security: Dependabot](https://img.shields.io/badge/Securtiy-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
+[![Security: Dependabot](https://img.shields.io/badge/Security-dependabot-0077c2?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/dependabot)
 [![Security: SLSA Provenance (v3)](https://img.shields.io/badge/Security-SLSA%20v3-0077c2?style=for-the-badge&logo=slsa&logoColor=white)](https://slsa.dev)
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%20%7C%20CycloneDX-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://github.com/northcutted/resume/releases/latest)
 

@@ -9,7 +9,7 @@ ARG TARGETARCH
 RUN apk add --no-cache curl tar gzip
 
 RUN if [ "$TARGETARCH" = "arm64" ]; then ARCH="arm64"; else ARCH="amd64"; fi && \
-    curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-${ARCH}.tar.gz -o /tmp/pandoc.tar.gz && \
+    curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-${ARCH}.tar.gz -o /tmp/pandoc.tar.gz --fail --show-error && \
     tar -xzf /tmp/pandoc.tar.gz -C /tmp && \
     mv /tmp/pandoc-${PANDOC_VERSION}/bin/pandoc /usr/bin/pandoc
 

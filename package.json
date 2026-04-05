@@ -15,24 +15,6 @@
     "puppeteer": "^24.32.0",
     "semantic-release": "^25.0.2"
   },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {"path": "resume-artifacts.zip", "label": "Resume Artifacts (ZIP)"},
-            {"path": "sbom.spdx.json", "label": "Container Image SBOM (SPDX)"},
-            {"path": "sbom.cyclonedx.json", "label": "Container Image SBOM (CycloneDX)"}
-          ]
-        }
-      ],
-      "@semantic-release/git"
-    ]
-  },
   "devDependencies": {
     "cspell": "^9.4.0",
     "live-server": "^1.2.0",
