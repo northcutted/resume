@@ -24,6 +24,7 @@ RUN apk add --no-cache \
     dumb-init \
     bash \
     git \
+    zip \
     busybox
 
 # Copy pandoc from builder
