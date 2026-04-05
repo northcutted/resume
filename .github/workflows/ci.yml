@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}-ci
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   setup:
@@ -125,6 +126,13 @@ jobs:
         run: ./build.sh
         env:
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+      - name: Zip Artifacts
+        run: zip -r resume-artifacts.zip output/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resume-artifacts
+          path: resume-artifacts.zip
+          retention-days: ${{ github.event_name == 'pull_request' && 5 || 1 }}
       - uses: actions/upload-artifact@v4
         with:
           name: resume-build-output
@@ -162,12 +170,24 @@ jobs:
       pull-requests: write
       issues: write
       packages: read
+      id-token: write
+      attestations: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       
+      - uses: actions/download-artifact@v4
+        with:
+          name: resume-artifacts
+          path: .
+          
+      - name: Generate SLSA v3 Build Provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: 'resume-artifacts.zip'
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
