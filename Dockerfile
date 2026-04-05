@@ -2,11 +2,11 @@ ARG PANDOC_VERSION=3.6.3
 ARG TARGETARCH
 
 # Builder stage to download and extract Pandoc binary securely
-FROM alpine:3.19 AS builder
+FROM cgr.dev/chainguard/wolfi-base:latest AS builder
 ARG PANDOC_VERSION
 ARG TARGETARCH
 
-RUN apk add --no-cache curl tar gzip
+RUN apk add --no-cache curl busybox gzip
 
 RUN if [ "$TARGETARCH" = "arm64" ]; then ARCH="arm64"; else ARCH="amd64"; fi && \
     curl -L https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-${ARCH}.tar.gz -o /tmp/pandoc.tar.gz --fail --show-error && \
