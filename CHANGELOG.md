@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/northcutted/resume/compare/v2.6.0...v2.6.1) (2026-04-05)
+
+
+### Bug Fixes
+
+* update Dockerfile base image and resume URL ([577aca4](https://github.com/northcutted/resume/commit/577aca47a4393ad5ef353fa6b9ddb437a81a2ef6))
+
 # [2.6.0](https://github.com/northcutted/resume/compare/v2.5.1...v2.6.0) (2026-04-05)
 
 
