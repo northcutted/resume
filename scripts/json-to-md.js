@@ -109,36 +109,6 @@ header-includes:
         });
     }
 
-    // Education
-    if (resume.education && resume.education.length > 0) {
-        md += `## Education\n\n`;
-        resume.education.forEach(edu => {
-            // Format: StudyType in Area (Institution)
-            let title = edu.institution;
-            if (edu.studyType) {
-                title = `${edu.studyType}`;
-                if (edu.area) title += ` in ${edu.area}`;
-                title += ` (${edu.institution})`;
-            }
-            md += `### ${title}\n\n`;
-            
-            if (edu.startDate) {
-                md += `_${edu.startDate} - ${edu.endDate || 'Present'}_\n\n`;
-            }
-
-            if (edu.score) {
-                md += `- GPA: ${edu.score}\n`;
-            }
-            
-            if (edu.courses && edu.courses.length > 0) {
-                edu.courses.forEach(course => {
-                    md += `- ${course}\n`;
-                });
-                md += '\n';
-            }
-        });
-    }
-
     // Publications
     if (resume.publications && resume.publications.length > 0) {
         md += `## Publications\n\n`;
@@ -147,7 +117,6 @@ header-includes:
             if (pub.publisher) {
                 pubLine += ` – _${pub.publisher}`;
                 if (pub.releaseDate) {
-                    // Format date if needed, assuming YYYY-MM-DD
                     const date = new Date(pub.releaseDate);
                     const dateStr = isNaN(date.getTime()) ? pub.releaseDate : date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                     pubLine += ` (${dateStr})`;
@@ -181,6 +150,35 @@ header-includes:
             }
             if (proj.keywords && proj.keywords.length > 0) {
                 md += `_${proj.keywords.join(' • ')}_\n\n`;
+            }
+        });
+    }
+
+    // Education
+    if (resume.education && resume.education.length > 0) {
+        md += `## Education\n\n`;
+        resume.education.forEach(edu => {
+            let title = edu.institution;
+            if (edu.studyType) {
+                title = `${edu.studyType}`;
+                if (edu.area) title += ` in ${edu.area}`;
+                title += ` (${edu.institution})`;
+            }
+            md += `### ${title}\n\n`;
+            
+            if (edu.startDate) {
+                md += `_${edu.startDate} - ${edu.endDate || 'Present'}_\n\n`;
+            }
+
+            if (edu.score) {
+                md += `- GPA: ${edu.score}\n`;
+            }
+            
+            if (edu.courses && edu.courses.length > 0) {
+                edu.courses.forEach(course => {
+                    md += `- ${course}\n`;
+                });
+                md += '\n';
             }
         });
     }
