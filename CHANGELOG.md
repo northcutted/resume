@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/northcutted/resume/compare/v2.7.3...v2.8.0) (2026-05-02)
+
+
+### Features
+
+* update project description to reflect verified SLSA Build L3 provenance ([256839e](https://github.com/northcutted/resume/commit/256839e73e6bf15b550411baa68aa061243ee4ce))
+
 ## [2.7.3](https://github.com/northcutted/resume/compare/v2.7.2...v2.7.3) (2026-05-02)
 
 
