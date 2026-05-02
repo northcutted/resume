@@ -167,7 +167,8 @@ header-includes:
     if (resume.projects && resume.projects.length > 0) {
         md += `## Projects\n\n`;
         resume.projects.forEach(proj => {
-            md += `### ${proj.name}\n\n`;
+            const title = proj.url ? `[${proj.name}](${proj.url})` : proj.name;
+            md += `### ${title}\n\n`;
             if (proj.startDate) {
                 md += `_${proj.startDate} - ${proj.endDate || 'Present'}_\n\n`;
             }
@@ -177,6 +178,9 @@ header-includes:
                     md += `- ${highlight}\n`;
                 });
                 md += '\n';
+            }
+            if (proj.keywords && proj.keywords.length > 0) {
+                md += `_${proj.keywords.join(' • ')}_\n\n`;
             }
         });
     }
