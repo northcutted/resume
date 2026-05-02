@@ -113,6 +113,8 @@ jobs:
   build-resume:
     needs: [lint, setup, changes, build-image]
     if: always() && (needs.build-image.result == 'success' || needs.build-image.result == 'skipped') && (needs.lint.result == 'success')
+    outputs:
+      hashes: ${{ steps.hash.outputs.hashes }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository }}-ci:${{ (needs.changes.outputs.docker == 'true' || github.ref_type == 'tag' || needs.setup.outputs.image_exists == 'true') && needs.setup.outputs.target_tag || 'latest' }}
@@ -128,6 +130,10 @@ jobs:
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}
       - name: Zip Artifacts
         run: zip -r resume-artifacts.zip output/
+      - name: Generate artifact hash
+        id: hash
+        run: |
+          echo "hashes=$(sha256sum resume-artifacts.zip | base64 -w0)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v7
         with:
           name: resume-artifacts
@@ -161,9 +167,21 @@ jobs:
       - uses: actions/deploy-pages@v5
         id: deployment
 
+  provenance:
+    needs: [build-resume]
+    if: always() && needs.build-resume.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      actions: read
+      id-token: write
+      contents: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
+    with:
+      base64-subjects: "${{ needs.build-resume.outputs.hashes }}"
+      upload-assets: false
+
   release:
-    needs: deploy
-    if: always() && needs.deploy.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [deploy, provenance]
+    if: always() && needs.deploy.result == 'success' && needs.provenance.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -171,7 +189,6 @@ jobs:
       issues: write
       packages: read
       id-token: write
-      attestations: write
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -182,11 +199,6 @@ jobs:
         with:
           name: resume-artifacts
           path: .
-          
-      - name: Generate SLSA v3 Build Provenance
-        uses: actions/attest-build-provenance@v4
-        with:
-          subject-path: 'resume-artifacts.zip'
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v4
