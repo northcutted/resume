@@ -7,6 +7,7 @@
     ["@semantic-release/github", {
       "assets": [
         {"path": "resume-artifacts.zip", "label": "Resume Artifacts (ZIP)"},
+        {"path": "resume-artifacts.zip.intoto.jsonl", "label": "SLSA L3 Provenance Attestation"},
         {"path": "sbom.spdx.json", "label": "SBOM (SPDX)"},
         {"path": "sbom.cyclonedx.json", "label": "SBOM (CycloneDX)"}
       ]
