@@ -1,3 +1,10 @@
+## [2.7.1](https://github.com/northcutted/resume/compare/v2.7.0...v2.7.1) (2026-05-02)
+
+
+### Bug Fixes
+
+* accept linkedin 999 status code in link checker ([ce86106](https://github.com/northcutted/resume/commit/ce86106cde85655dfda74eb3079d7c3d3999546c))
+
 # [2.7.0](https://github.com/northcutted/resume/compare/v2.6.2...v2.7.0) (2026-05-02)
 
 
