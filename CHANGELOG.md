@@ -1,3 +1,12 @@
+## [2.6.2](https://github.com/northcutted/resume/compare/v2.6.1...v2.6.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* prevent deploy/release skip when build-image is skipped ([52ac2a1](https://github.com/northcutted/resume/commit/52ac2a1503f2abb7467d5cc0affc55e7347a56dd))
+* update resume ([d8dfec9](https://github.com/northcutted/resume/commit/d8dfec9ca367073bb17bc93f31eb10f12345013f))
+* wording fixes ([94e753e](https://github.com/northcutted/resume/commit/94e753e4bbef6b35bbbb35e8a9953b1f75a114f1))
+
 ## [2.6.1](https://github.com/northcutted/resume/compare/v2.6.0...v2.6.1) (2026-04-05)
 
 
