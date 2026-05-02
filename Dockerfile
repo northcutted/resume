@@ -1,4 +1,4 @@
-ARG PANDOC_VERSION=3.6.3
+ARG PANDOC_VERSION=3.9.0.2
 ARG TARGETARCH
 
 # Builder stage to download and extract Pandoc binary securely
