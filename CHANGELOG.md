@@ -1,3 +1,11 @@
+## [2.7.3](https://github.com/northcutted/resume/compare/v2.7.2...v2.7.3) (2026-05-02)
+
+
+### Bug Fixes
+
+* attach SLSA L3 provenance attestation to GitHub release assets ([d609189](https://github.com/northcutted/resume/commit/d6091895129dc5085b1f12fea81975e593ae4bea))
+* move education section below projects and publications ([c5172c0](https://github.com/northcutted/resume/commit/c5172c08271112aa94e892b86f4ca310962a7307))
+
 ## [2.7.2](https://github.com/northcutted/resume/compare/v2.7.1...v2.7.2) (2026-05-02)
 
 
