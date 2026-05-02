@@ -1,3 +1,10 @@
+## [2.7.2](https://github.com/northcutted/resume/compare/v2.7.1...v2.7.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* render project URLs as links and display keywords in projects section ([d29b380](https://github.com/northcutted/resume/commit/d29b380a22cb2a41b3f84acb8c021759308d4ed1))
+
 ## [2.7.1](https://github.com/northcutted/resume/compare/v2.7.0...v2.7.1) (2026-05-02)
 
 
