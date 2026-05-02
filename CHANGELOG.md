@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/northcutted/resume/compare/v2.6.2...v2.7.0) (2026-05-02)
+
+
+### Features
+
+* replace attest-build-provenance with slsa-framework/slsa-github-generator for true SLSA L3 artifact provenance ([8702d89](https://github.com/northcutted/resume/commit/8702d8954af8445cc7c12b65a50862cf9cf19522))
+
 ## [2.6.2](https://github.com/northcutted/resume/compare/v2.6.1...v2.6.2) (2026-05-02)
 
 
