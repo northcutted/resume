@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/northcutted/resume/compare/v2.8.0...v2.8.1) (2026-05-02)
+
+
+### Bug Fixes
+
+* update Pandoc version to 3.9.0.2 and clarify SLSA build posture in resume ([fdd1050](https://github.com/northcutted/resume/commit/fdd10502692f9e196483b84f3d50f913611bfb61))
+
 # [2.8.0](https://github.com/northcutted/resume/compare/v2.7.3...v2.8.0) (2026-05-02)
 
 
