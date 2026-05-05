@@ -1,13 +1,12 @@
 {
   "basics": {
     "name": "Edward Northcutt",
-    "label": "Principal Platform Engineer",
+    "label": "Staff Platform Engineer | Secure Container Infrastructure | CI/CD",
     "email": "northcutted@gmail.com",
     "phone": "+1 (618) 541-8770",
     "url": "https://resume.northcutt.dev",
-    "summary": "Principal Platform Engineer with 8+ years of experience specializing in container infrastructure, software supply chain security, and developer tooling at enterprise scale. Founding engineer and technical owner of a multi-architecture, multi-runtime container platform delivering hardened, distroless images across 700+ applications and 100,000+ builds at a Fortune 50 company. Broad, hands-on expertise across application development, CI/CD infrastructure, cloud migration, and container build systems. Proven track record of driving organizational adoption of zero-trust supply chain security, automated vulnerability remediation, and SLSA compliance through technical influence. Proficient in Go, architecting production services and CLI tooling within the container security ecosystem.",
+    "summary": "Platform engineering lead with 8+ years of experience building secure container, CI/CD, and developer infrastructure at enterprise scale. Founding technical owner of a multi-architecture container image platform adopted by 700+ applications and used in 100,000+ image builds. Specialized in distroless images, software supply chain security, SLSA provenance, SBOM and vulnerability automation, GitLab CI/CD, AWS, OpenShift, and Go-based platform tooling.",
     "location": {
-      "postalCode": "61920",
       "city": "Charleston",
       "countryCode": "US",
       "region": "Illinois"
@@ -29,187 +28,60 @@
       "position": "Lead Software Engineer II",
       "name": "State Farm",
       "location": "Bloomington, IL / Hybrid-Remote",
-      "summary": "Founding engineer and technical owner of the enterprise container image platform, delivering hardened, production-ready base images across the organization's containerized workloads. Shaped long-term platform direction, drove cross-functional adoption, and established engineering quality standards for image build infrastructure — all through influence and technical leadership rather than formal authority.",
+      "summary": "Founding engineer and technical owner of the enterprise container image platform, delivering hardened, production-ready base images and secure CI/CD patterns for containerized workloads.",
       "highlights": [
-        "**Enterprise Scale & Adoption:** Grew adoption from zero to over **700 unique applications** using official enterprise container images in 2025, powering over **100,000 image builds** — achieved through technical credibility and inner-source evangelism, not mandates.",
-        "**Hardened, Distroless Image Platform:** Designed and maintain a distroless image suite modeled on the same principles as Google's distroless offering, drastically reducing attack surface. Built on Amazon Linux 2023 for broad compatibility, with runtime support across **Java/JVM, JavaScript/TypeScript, Python, Go, and .NET** in both distroless and development variants — a secure-by-default multi-runtime image ecosystem.",
-        "**Multi-Architecture Build System:** Architected a modular image build system supporting **Linux/arm64 and Linux/amd64** across all runtimes and distroless variants using **Docker Buildx**, with layered inheritance maximizing cache efficiency and minimizing storage footprint.",
-        "**Software Supply Chain Security:** Implemented cryptographic image signing and provenance attestation using **Cosign** (Sigstore) and **Docker Buildx**, elevating the enterprise SLSA build posture to level 2. Integrated with **JFrog Artifactory Evidence** to deliver verifiable, zero-trust supply chain compliance across all base images.",
-        "**Automated Vulnerability Remediation:** Achieved a near-zero-CVE posture by driving vulnerability remediation time to **under 24 hours** after upstream fixes are published via automated patching pipelines. Built nightly health dashboards powered by **Syft** (SBOM generation) and **Grype** (vulnerability scanning), providing full package-level visibility and CVE tracking across the entire image ecosystem.",
-        "**Container Registry Operations:** Project-level admin of the internal JFrog Artifactory image registry — managing artifact lifecycle policies, automated cleanup, access control, and service account automation. Extensive experience with GitLab Container Registry and ECR for AWS workloads. Proficient in bit-for-bit image mirroring and promotion across registries using **crane**, **skopeo**, and **Docker Buildx**.",
-        "**Go-Based JVM Middleware & Auth Proxy:** Delivered a production tool written in **Go**, embedded in JVM base images, that automatically tunes heap sizing, CPU share mapping, and garbage collection for JVM workloads on Kubernetes. To emit telemetry securely without embedding credentials in the binary, built a companion **Go proxy service** implementing HMAC request signing with replay-attack defense (timestamp validation), forwarding validated metrics to an Entra-authenticated analytics endpoint — a zero-credential-exposure solution to a real security constraint.",
-        "**Mentorship & Engineering Quality:** Formally mentored an engineer through a career transition from QA/testing into software engineering — providing technical guidance, code review, and career coaching. Informally serves as a go-to technical resource across teams, consistently answering platform questions and guiding engineers toward secure, idiomatic usage of the image platform.",
-        "**Product Thinking & Roadmap:** Operated as a solo engineer owning the full product lifecycle — gathering user feedback, tracking adoption metrics, and supporting users directly. Currently researching **Cloud Native Buildpacks** to decouple base and application layers, enabling automated base image patching without requiring application teams to rebuild — addressing a key friction point identified through direct user engagement."
+        "Built and launched an enterprise container image platform adopted by 700+ applications and used in 100,000+ image builds within the first year.",
+        "Designed and maintain a secure-by-default base image ecosystem built on Amazon Linux 2023, supporting Java/JVM, JavaScript/TypeScript, Python, Go, and .NET across distroless and development variants.",
+        "Architected a modular Docker Buildx image build system supporting Linux/amd64 and Linux/arm64 across all runtime families, improving reuse through layered inheritance and cache-efficient build patterns.",
+        "Implemented Cosign-based image signing, Docker Buildx provenance, and JFrog Artifactory Evidence integration, raising enterprise base-image supply chain posture to SLSA Level 2.",
+        "Automated nightly SBOM generation and vulnerability scanning with Syft and Grype, reducing remediation time for fixable CVEs to under 24 hours after upstream patch availability.",
+        "Administered internal JFrog Artifactory container registry projects, including artifact lifecycle policy, cleanup automation, access control, service accounts, image mirroring, and registry promotion workflows using crane, skopeo, and Docker Buildx.",
+        "Built Go middleware embedded in JVM base images to auto-configure heap sizing, CPU share mapping, and garbage collection behavior for Kubernetes workloads.",
+        "Built companion Go telemetry proxy using HMAC request signing, timestamp validation, replay protection, and Entra-authenticated forwarding to emit JVM metrics without embedding credentials in container images.",
+        "Mentored an engineer through a transition from QA/testing into software engineering through code review, technical coaching, and platform implementation guidance.",
+        "Owned platform roadmap, adoption metrics, user support, and feedback loops as a solo engineer; evaluated Cloud Native Buildpacks to reduce application-team rebuild friction for base-image patching via rebasing."
       ],
-      "startDate": "April 2025",
+      "startDate": "2025-04",
       "endDate": "Present"
     },
     {
       "position": "Lead Software Engineer",
       "name": "State Farm",
       "location": "Bloomington, IL / Hybrid-Remote",
-      "summary": "Tech lead for Source Control Management and CI/CD platform capabilities supporting over 10,000 engineers. Focused on pipeline architecture, service resiliency, infrastructure as code, and developer platform quality.",
+      "summary": "Technical lead for source control management and CI/CD platform capabilities supporting 10,000+ engineers, with focus on pipeline architecture, service resiliency, infrastructure as code, and developer platform quality.",
       "highlights": [
-        "**Shared CI/CD Platform:** Engineered a shared CI/CD service using GitLab Runners with Sysbox-isolated container builds. By 2022, managed over half of all CI/CD pipelines at State Farm.",
-        "**Infrastructure as Code:** Authored reusable **Terraform modules** to deploy and manage the GitLab Runner fleet to enterprise spec on AWS, including cross-account IAM credential injection patterns for workloads running across isolated AWS accounts — enabling self-service, secure pipeline infrastructure at scale.",
-        "**Cloud Migration:** Migrated CI/CD infrastructure from on-premises to **AWS** in 2023 with robust autoscaling to handle peak build loads.",
-        "**Metrics & Observability:** Developed a cloud-based telemetry pipeline to collect CI/CD metrics across all jobs, visualized via **Grafana** dashboards for consumer-facing reporting.",
-        "**Platform Migration:** Transitioned engineering teams from legacy Jenkins infrastructure to the shared GitLab CI/CD platform, providing custom solutions for complex migration requirements."
+        "Engineered shared GitLab Runner infrastructure with Sysbox-isolated container builds; by 2022, the platform handled over half of State Farm's CI/CD pipelines.",
+        "Authored reusable Terraform modules for GitLab Runner fleet deployment on AWS, including cross-account IAM credential patterns for workloads running across isolated AWS accounts.",
+        "Migrated CI/CD infrastructure from on-premises systems to AWS in 2023, adding autoscaling capacity for peak build loads.",
+        "Developed a telemetry pipeline for CI/CD job metrics and surfaced consumer-facing reporting through Grafana dashboards.",
+        "Led migrations from legacy Jenkins infrastructure to shared GitLab CI/CD patterns, including custom solutions for teams with complex pipeline requirements."
       ],
-      "startDate": "August 2020",
-      "endDate": "April 2025"
+      "startDate": "2020-08",
+      "endDate": "2025-04"
     },
     {
       "position": "Software Developer",
       "name": "State Farm",
       "location": "Bloomington, IL",
-      "summary": "Full-stack developer maintaining and enhancing proprietary tools for insurance product design, with a focus on backend security tooling and platform modernization.",
+      "summary": "Full-stack developer maintaining proprietary insurance product design tools, backend security tooling, and platform modernization efforts.",
       "highlights": [
-        "**Security Tooling:** Built an internal tool to scan projects for vulnerable dependencies and surface automated upgrade suggestions — adopted by the application security team.",
-        "**Legacy Modernization:** Migrated applications from legacy WAS platform to Pivotal Cloud Foundry/Tanzu (Postgres, RabbitMQ, Spring Boot); maintained REST endpoints and Java IMS services over IBM MQ."
+        "Built an internal dependency-scanning tool that surfaced vulnerable packages and automated upgrade suggestions; the tool was adopted by the application security team.",
+        "Migrated applications from legacy WebSphere Application Server infrastructure to Pivotal Cloud Foundry/Tanzu using Spring Boot, PostgreSQL, RabbitMQ, REST APIs, Java IMS services, and IBM MQ."
       ],
-      "startDate": "June 2018",
-      "endDate": "August 2020"
+      "startDate": "2018-06",
+      "endDate": "2020-08"
     },
     {
-      "position": "Software Developer (IT/Systems Intern)",
+      "position": "Software Developer Intern",
       "name": "State Farm",
       "location": "Champaign, IL",
       "summary": "",
       "highlights": [
-        "Developed a full-stack solution to assist with PCI DSS compliance audits.",
-        "Assisted business partners in writing recovery plans for business continuity."
+        "Developed a full-stack solution to support PCI DSS compliance audit workflows.",
+        "Assisted business partners with recovery-plan documentation for business continuity."
       ],
-      "startDate": "Summer 2017",
-      "endDate": "Spring 2018"
-    }
-  ],
-  "projects": [
-    {
-      "name": "JSON Resume Generator",
-      "description": "A containerized resume build pipeline that generates HTML, PDF, and DOCX outputs from a single resume.json source of truth — and a practical demonstration that SLSA supply chain security principles are artifact-agnostic. The resume you are reading was built and published by this pipeline. Applies the same signing, provenance, and attestation model used for software releases to document artifacts: keyless image signing with Sigstore/Cosign via OIDC, non-forgeable SLSA provenance attestations for all release artifacts, and an SBOM published with every release. Builder runs on cgr.dev/chainguard/wolfi-base for a minimal, zero-CVE footprint with continuous patch updates.",
-      "url": "https://github.com/northcutted/resume",
-      "keywords": ["SLSA Level 3", "Sigstore / Cosign", "SBOM", "Chainguard Wolfi", "GitHub Actions", "Provenance Attestation", "Zero-CVE", "Docker", "Supply Chain Security"]
-    },
-    {
-      "name": "dock-docs",
-      "description": "A Go CLI tool that generates comprehensive Markdown documentation from Dockerfiles. Integrates Syft for SBOM generation, Grype for vulnerability scanning, and Dive for layer analysis — providing automated visibility into image composition and security posture.",
-      "url": "https://github.com/northcutted/dock-docs",
-      "keywords": ["Go", "Syft", "Grype", "Dive", "SBOM", "Container Security", "CLI"]
-    },
-    {
-      "name": "Gitleaks (Open Source Contribution)",
-      "description": "Contributed to gitleaks, a widely-used open source secrets detection tool for identifying hardcoded credentials and sensitive data in git repositories. Contribution submitted via a corporate GitHub account in 2021.",
-      "url": "https://github.com/gitleaks/gitleaks/pull/487",
-      "keywords": ["Secrets Detection", "Security", "Open Source", "Go"]
-    }
-  ],
-  "education": [
-    {
-      "institution": "University of Illinois at Urbana-Champaign",
-      "area": "Agricultural and Consumer Economics - Finance in Agribusiness",
-      "studyType": "B.S.",
-      "startDate": "Fall 2014",
-      "endDate": "Spring 2018",
-      "score": "3.55",
-      "courses": [
-        "CS 225 - Data Structures"
-      ]
-    }
-  ],
-  "skills": [
-    {
-      "name": "Containerization & Orchestration",
-      "keywords": [
-        "Docker",
-        "Docker Buildx",
-        "Kubernetes",
-        "Distroless Images",
-        "Multi-Arch Builds (ARM64/AMD64)",
-        "Red Hat OpenShift (ROSA)",
-        "Helm",
-        "Sysbox",
-        "crane",
-        "skopeo",
-        "cert-manager",
-        "Kyverno",
-        "Reloader",
-        "Cloud Native Buildpacks"
-      ]
-    },
-    {
-      "name": "Supply Chain Security",
-      "keywords": [
-        "Sigstore / Cosign",
-        "SLSA Framework",
-        "Docker Buildx Provenance",
-        "Syft (SBOM)",
-        "Grype",
-        "JFrog Artifactory",
-        "JFrog Evidence",
-        "Zero-Trust Architecture"
-      ]
-    },
-    {
-      "name": "Programming / Scripting",
-      "keywords": [
-        "Go",
-        "Python",
-        "Bash",
-        "Java",
-        "JavaScript/TypeScript",
-        "Ruby",
-        "HTML",
-        "CSS"
-      ]
-    },
-    {
-      "name": "Infrastructure as Code",
-      "keywords": [
-        "Terraform / OpenTofu",
-        "Reusable Module Authorship",
-        "AWS IAM & Cross-Account Patterns",
-        "Ansible",
-        "Puppet"
-      ]
-    },
-    {
-      "name": "Cloud & Infrastructure",
-      "keywords": [
-        "AWS (EC2, ECR, S3, IAM, CloudWatch)",
-        "Fargate",
-        "VPC Networking",
-        "Red Hat OpenShift"
-      ]
-    },
-    {
-      "name": "CI/CD & DevOps",
-      "keywords": [
-        "GitLab CI/CD",
-        "GitHub Actions",
-        "Jenkins",
-        "Supply Chain Security"
-      ]
-    },
-    {
-      "name": "Observability",
-      "keywords": [
-        "Grafana",
-        "OpenSearch / Kibana",
-        "ELK Stack",
-        "Prometheus",
-        "CloudWatch"
-      ]
-    },
-    {
-      "name": "System Design",
-      "keywords": [
-        "Distributed Systems",
-        "API Design",
-        "JVM Tuning / Profiling",
-        "Linux System Administration",
-        "LLM Workflow Integration"
-      ]
+      "startDate": "2017-05",
+      "endDate": "2018-05"
     }
   ],
   "publications": [
@@ -218,13 +90,149 @@
       "publisher": "State Farm Engineering Blog",
       "releaseDate": "2025-07-01",
       "url": "https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-cd-c2257eac8eb4",
-      "summary": "Co-authored a technical deep dive detailing the architecture and implementation of a secure, cost-effective container-based CI/CD system, highlighting solutions to key engineering challenges."
+      "summary": "Co-authored a technical deep dive on secure, cost-effective container-based CI/CD architecture, including engineering tradeoffs across isolation, security, cost, and developer experience."
     }
   ],
-  "languages": [
+  "projects": [
     {
-      "language": "English",
-      "fluency": "Native speaker"
+      "name": "dock-docs",
+      "description": "Go CLI tool that generates Dockerfile and container image documentation for platform teams, security reviews, and CI pipelines. Parses Dockerfiles and optionally integrates Syft, Grype, and Dive for SBOM generation, vulnerability scanning, and layer analysis.",
+      "url": "https://github.com/northcutted/dock-docs",
+      "keywords": [
+        "Go",
+        "Docker",
+        "Podman",
+        "Syft",
+        "Grype",
+        "Dive",
+        "SBOM",
+        "Container Security",
+        "CLI",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "name": "JSON Resume Generator",
+      "description": "Containerized resume-as-code pipeline that generates HTML, PDF, and DOCX artifacts from a single JSON Resume source. Demonstrates artifact-agnostic supply chain controls including keyless Sigstore/Cosign signing, SLSA provenance attestations, SBOM publishing, and minimal Wolfi-based builder images.",
+      "url": "https://github.com/northcutted/resume",
+      "keywords": [
+        "SLSA Level 3",
+        "Sigstore",
+        "Cosign",
+        "SBOM",
+        "Chainguard Wolfi",
+        "GitHub Actions",
+        "Provenance",
+        "Docker",
+        "Supply Chain Security"
+      ]
+    },
+    {
+      "name": "Gitleaks Open Source Contribution",
+      "description": "Contributed to gitleaks, a widely used open source secrets-detection tool. Added support for appending repository-specific and user-supplied configuration behavior via a merged pull request.",
+      "url": "https://github.com/gitleaks/gitleaks/pull/487",
+      "keywords": [
+        "Go",
+        "Security",
+        "Secrets Detection",
+        "Open Source"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Illinois at Urbana-Champaign",
+      "area": "Agricultural and Consumer Economics - Finance in Agribusiness",
+      "studyType": "B.S.",
+      "startDate": "2014-08",
+      "endDate": "2018-05",
+      "courses": [
+        "CS 225 - Data Structures"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Platform / Containers",
+      "keywords": [
+        "Docker",
+        "Docker Buildx",
+        "Kubernetes",
+        "OpenShift",
+        "Distroless Images",
+        "Multi-Arch Builds",
+        "Helm",
+        "Sysbox",
+        "crane",
+        "skopeo",
+        "Cloud Native Buildpacks"
+      ]
+    },
+    {
+      "name": "Software Supply Chain Security",
+      "keywords": [
+        "SLSA",
+        "Sigstore",
+        "Cosign",
+        "SBOMs",
+        "Syft",
+        "Grype",
+        "Docker Buildx Provenance",
+        "JFrog Artifactory",
+        "JFrog Evidence",
+        "Vulnerability Remediation"
+      ]
+    },
+    {
+      "name": "CI/CD",
+      "keywords": [
+        "GitLab CI/CD",
+        "GitLab Runners",
+        "GitHub Actions",
+        "Jenkins",
+        "Release Automation",
+        "Artifact Promotion",
+        "Container Registry Workflows"
+      ]
+    },
+    {
+      "name": "Cloud / Infrastructure as Code",
+      "keywords": [
+        "AWS",
+        "ECR",
+        "IAM",
+        "S3",
+        "CloudWatch",
+        "Fargate",
+        "Terraform",
+        "OpenTofu",
+        "Ansible",
+        "VPC Networking"
+      ]
+    },
+    {
+      "name": "Programming",
+      "keywords": [
+        "Go",
+        "Python",
+        "Bash",
+        "Java",
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Observability / Systems",
+      "keywords": [
+        "Grafana",
+        "OpenSearch",
+        "Kibana",
+        "Prometheus",
+        "CloudWatch",
+        "Linux",
+        "JVM Tuning",
+        "API Design"
+      ]
     }
   ]
 }
