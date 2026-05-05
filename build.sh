@@ -48,7 +48,7 @@ fi
 
 # Generate HTML with the default theme (clean) and inject the switcher
 # We use -c theme-clean.css to link it, and --include-before-body to add the switcher
-pandoc resume-site.md -f markdown -t html -c theme-clean.css $CUSTOM_CSS_FLAG -s --include-before-body=assets/theme-switcher.html -o output/index.html
+pandoc resume-site.md -f markdown-smart -t html -c theme-clean.css $CUSTOM_CSS_FLAG -s --include-before-body=assets/theme-switcher.html -o output/index.html
 
 # Add ID to the link tag so JS can find it
 sed 's/href="theme-clean.css"/href="theme-clean.css" id="theme-style"/' output/index.html > output/index.html.tmp && mv output/index.html.tmp output/index.html
@@ -58,10 +58,10 @@ rm resume-site.md
 
 # Generate Extra Formats
 echo "Building DOCX..."
-pandoc resume.md -f markdown -t docx -o output/resume.docx
+pandoc resume.md -f markdown-smart -t docx -o output/resume.docx
 
 echo "Building TXT..."
-pandoc resume.md -f markdown -t plain -o output/resume.txt
+pandoc resume.md -f markdown-smart -t plain -o output/resume.txt
 
 # Generate PDFs for all themes
 THEMES=('clean' 'modern' 'classic' 'terminal' 'bold')
@@ -84,7 +84,7 @@ for theme in "${THEMES[@]}"; do
     echo "Preparing theme: $theme"
     
     # Create a temp html for this theme
-    pandoc resume.md -f markdown -t html -c "theme-$theme.css" $CUSTOM_CSS_FLAG -s -o "output/resume-$theme.html"
+    pandoc resume.md -f markdown-smart -t html -c "theme-$theme.css" $CUSTOM_CSS_FLAG -s -o "output/resume-$theme.html"
     
     if [ "$theme" == "modern" ]; then
         # Modern theme has color variants

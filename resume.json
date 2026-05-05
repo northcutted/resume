@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Edward Northcutt",
-    "label": "Staff Platform Engineer | Secure Container Infrastructure | CI/CD",
+    "label": "Staff Software Engineer | Platform Engineering | Secure Container Infrastructure | CI/CD",
     "email": "northcutted@gmail.com",
     "phone": "+1 (618) 541-8770",
     "url": "https://resume.northcutt.dev",
@@ -35,11 +35,10 @@
         "Architected a modular Docker Buildx image build system supporting Linux/amd64 and Linux/arm64 across all runtime families, improving reuse through layered inheritance and cache-efficient build patterns.",
         "Implemented Cosign-based image signing, Docker Buildx provenance, and JFrog Artifactory Evidence integration, raising enterprise base-image supply chain posture to SLSA Level 2.",
         "Automated nightly SBOM generation and vulnerability scanning with Syft and Grype, reducing remediation time for fixable CVEs to under 24 hours after upstream patch availability.",
-        "Administered internal JFrog Artifactory container registry projects, including artifact lifecycle policy, cleanup automation, access control, service accounts, image mirroring, and registry promotion workflows using crane, skopeo, and Docker Buildx.",
-        "Built Go middleware embedded in JVM base images to auto-configure heap sizing, CPU share mapping, and garbage collection behavior for Kubernetes workloads.",
-        "Built companion Go telemetry proxy using HMAC request signing, timestamp validation, replay protection, and Entra-authenticated forwarding to emit JVM metrics without embedding credentials in container images.",
-        "Mentored an engineer through a transition from QA/testing into software engineering through code review, technical coaching, and platform implementation guidance.",
-        "Owned platform roadmap, adoption metrics, user support, and feedback loops as a solo engineer; evaluated Cloud Native Buildpacks to reduce application-team rebuild friction for base-image patching via rebasing."
+        "Managed Artifactory container registry lifecycle, access control, cleanup automation, image mirroring, and promotion workflows using crane, skopeo, and Docker Buildx.",
+        "Developed Go middleware embedded in JVM base images to auto-configure heap sizing, CPU share mapping, and garbage collection behavior for Kubernetes workloads.",
+        "Implemented a companion Go telemetry proxy with HMAC request signing, timestamp validation, replay protection, and Entra-authenticated forwarding to emit JVM metrics without embedding credentials in container images.",
+        "Owned platform roadmap, adoption metrics, user support, and feedback loops as a solo engineer."
       ],
       "startDate": "2025-04",
       "endDate": "Present"

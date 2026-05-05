@@ -12,6 +12,31 @@ try {
     const resume = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     let md = '';
 
+    const formatDate = (value) => {
+        if (!value || /present/i.test(value)) return value;
+
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const isoMonthMatch = /^(\d{4})-(\d{2})$/.exec(value);
+        if (isoMonthMatch) {
+            const year = isoMonthMatch[1];
+            const monthIndex = Number(isoMonthMatch[2]) - 1;
+            if (monthIndex >= 0 && monthIndex < 12) {
+                return `${monthNames[monthIndex]} ${year}`;
+            }
+        }
+
+        const isoDateMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+        if (isoDateMatch) {
+            const year = isoDateMatch[1];
+            const monthIndex = Number(isoDateMatch[2]) - 1;
+            if (monthIndex >= 0 && monthIndex < 12) {
+                return `${monthNames[monthIndex]} ${year}`;
+            }
+        }
+
+        return value;
+    };
+
     // Add Frontmatter
     // Extract keywords from skills for meta tags
     const metaKeywords = [];
@@ -63,7 +88,11 @@ header-includes:
         }
         
         if (contact.length > 0) {
-            md += `###### ${contact.join(' • ')}\n\n`;
+            md += `###### ${contact.join(' | ')}\n\n`;
+        }
+
+        if (resume.basics.label) {
+            md += `##### ${resume.basics.label}\n\n`;
         }
 
         if (resume.basics.summary) {
@@ -95,7 +124,7 @@ header-includes:
             md += `\n\n`;
             
             if (job.startDate) {
-                md += `_${job.startDate} - ${job.endDate || 'Present'}_\n\n`;
+                md += `_${formatDate(job.startDate)} - ${formatDate(job.endDate || 'Present')}_\n\n`;
             }
             
             if (job.summary) md += `${job.summary}\n\n`;
@@ -115,7 +144,7 @@ header-includes:
         resume.publications.forEach(pub => {
             let pubLine = `- **[${pub.name}](${pub.url})**`;
             if (pub.publisher) {
-                pubLine += ` – _${pub.publisher}`;
+                pubLine += ` - _${pub.publisher}`;
                 if (pub.releaseDate) {
                     const date = new Date(pub.releaseDate);
                     const dateStr = isNaN(date.getTime()) ? pub.releaseDate : date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -139,7 +168,7 @@ header-includes:
             const title = proj.url ? `[${proj.name}](${proj.url})` : proj.name;
             md += `### ${title}\n\n`;
             if (proj.startDate) {
-                md += `_${proj.startDate} - ${proj.endDate || 'Present'}_\n\n`;
+                md += `_${formatDate(proj.startDate)} - ${formatDate(proj.endDate || 'Present')}_\n\n`;
             }
             if (proj.description) md += `${proj.description}\n\n`;
             if (proj.highlights && proj.highlights.length > 0) {
@@ -149,7 +178,7 @@ header-includes:
                 md += '\n';
             }
             if (proj.keywords && proj.keywords.length > 0) {
-                md += `_${proj.keywords.join(' • ')}_\n\n`;
+                md += `_${proj.keywords.join(' | ')}_\n\n`;
             }
         });
     }
@@ -167,7 +196,7 @@ header-includes:
             md += `### ${title}\n\n`;
             
             if (edu.startDate) {
-                md += `_${edu.startDate} - ${edu.endDate || 'Present'}_\n\n`;
+                md += `_${formatDate(edu.startDate)} - ${formatDate(edu.endDate || 'Present')}_\n\n`;
             }
 
             if (edu.score) {
@@ -188,7 +217,7 @@ header-includes:
         md += `## Awards\n\n`;
         resume.awards.forEach(award => {
             md += `### ${award.title} (${award.awarder})\n\n`;
-            if (award.date) md += `_${award.date}_\n\n`;
+            if (award.date) md += `_${formatDate(award.date)}_\n\n`;
             if (award.summary) md += `${award.summary}\n\n`;
         });
     }
@@ -199,7 +228,7 @@ header-includes:
         resume.volunteer.forEach(vol => {
             md += `### ${vol.position}, ${vol.organization}\n\n`;
             if (vol.startDate) {
-                md += `_${vol.startDate} - ${vol.endDate || 'Present'}_\n\n`;
+                md += `_${formatDate(vol.startDate)} - ${formatDate(vol.endDate || 'Present')}_\n\n`;
             }
             if (vol.summary) md += `${vol.summary}\n\n`;
             if (vol.highlights && vol.highlights.length > 0) {
@@ -217,7 +246,7 @@ header-includes:
         resume.certificates.forEach(cert => {
             md += `### ${cert.name}\n\n`;
             if (cert.issuer) md += `_${cert.issuer}_\n`;
-            if (cert.date) md += `_${cert.date}_\n`;
+            if (cert.date) md += `_${formatDate(cert.date)}_\n`;
             if (cert.url) md += `[Link](${cert.url})\n`;
             md += `\n`;
         });
