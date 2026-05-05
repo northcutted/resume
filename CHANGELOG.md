@@ -1,3 +1,10 @@
+## [2.8.3](https://github.com/northcutted/resume/compare/v2.8.2...v2.8.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* enhance markdown formatting and update resume details ([3d15470](https://github.com/northcutted/resume/commit/3d1547002803bf75ab8eed7e316050eeb5d4fb07))
+
 ## [2.8.2](https://github.com/northcutted/resume/compare/v2.8.1...v2.8.2) (2026-05-05)
 
 
