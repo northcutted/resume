@@ -1,3 +1,10 @@
+## [2.8.4](https://github.com/northcutted/resume/compare/v2.8.3...v2.8.4) (2026-05-20)
+
+
+### Bug Fixes
+
+* wording ([114a2da](https://github.com/northcutted/resume/commit/114a2dab0a9775b14162d7f7b3ae07d3a609411f))
+
 ## [2.8.3](https://github.com/northcutted/resume/compare/v2.8.2...v2.8.3) (2026-05-05)
 
 
