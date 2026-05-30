@@ -146,22 +146,6 @@
       ]
     },
     {
-      "name": "JSON Resume Generator",
-      "description": "Containerized resume-as-code pipeline that generates HTML, PDF, and DOCX artifacts from a single JSON Resume source. Demonstrates artifact-agnostic supply chain controls including keyless Sigstore/Cosign signing, SLSA provenance attestations, SBOM publishing, and minimal Wolfi-based builder images.",
-      "url": "https://github.com/northcutted/resume",
-      "keywords": [
-        "SLSA Level 3",
-        "Sigstore",
-        "Cosign",
-        "SBOM",
-        "Chainguard Wolfi",
-        "GitHub Actions",
-        "Provenance",
-        "Docker",
-        "Supply Chain Security"
-      ]
-    },
-    {
       "name": "Gitleaks Open Source Contribution",
       "description": "Contributed to gitleaks, a widely used open source secrets-detection tool. Added support for appending repository-specific and user-supplied configuration behavior via a merged pull request.",
       "url": "https://github.com/gitleaks/gitleaks/pull/487",
