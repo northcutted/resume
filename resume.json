@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Edward Northcutt",
-    "label": "Senior Software Engineer | Platform Engineering | Secure Container Infrastructure | CI/CD",
+    "label": "Lead Platform Engineer | Software Engineering | Secure Container Infrastructure | CI/CD",
     "email": "northcutted@gmail.com",
     "phone": "+1 (618) 541-8770",
     "url": "https://resume.northcutt.dev",
@@ -108,6 +108,41 @@
         "Container Security",
         "CLI",
         "GitHub Actions"
+      ]
+    },
+    {
+      "name": "ClearCutt",
+      "description": "Work-in-progress declarative framework ([project site](https://northcutted.github.io/clearcutt/)) for building hardened, minimal container base images using Nix flakes and a Go governance CLI, compiling language runtimes into reproducible, hermetically sealed closures across dev, slim, and distroless tiers. Layers keyless Sigstore/Cosign signing, SLSA Level 3 provenance, SBOMs, and Kyverno admission policies to enforce signed images from source through Kubernetes and OpenShift deployment.",
+      "url": "https://github.com/northcutted/clearcutt",
+      "keywords": [
+        "Nix",
+        "Go",
+        "Distroless",
+        "Kubernetes",
+        "OpenShift",
+        "Kyverno",
+        "Cosign",
+        "SLSA Level 3",
+        "SBOM",
+        "FIPS 140-3",
+        "Supply Chain Security"
+      ]
+    },
+    {
+      "name": "PicStrip",
+      "description": "Published iOS app ([App Store](https://apps.apple.com/us/app/picstrip/id6765989071)) that strips metadata and redacts PII from photos entirely on-device — no network calls, analytics, or third-party SDKs — using a two-pass ImageIO pipeline plus Vision OCR and face detection that flags 30 categories of sensitive data across four risk tiers. Built in Swift/SwiftUI and shipped through an automated GitHub Actions and Fastlane release pipeline with SLSA Level 3 build provenance attestation.",
+      "url": "https://github.com/northcutted/picstrip",
+      "keywords": [
+        "Swift",
+        "SwiftUI",
+        "iOS",
+        "Vision",
+        "ImageIO",
+        "Privacy Engineering",
+        "OCR",
+        "Fastlane",
+        "GitHub Actions",
+        "SLSA Level 3"
       ]
     },
     {
