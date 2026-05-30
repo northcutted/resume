@@ -1,3 +1,11 @@
+## [2.8.5](https://github.com/northcutted/resume/compare/v2.8.4...v2.8.5) (2026-05-30)
+
+
+### Bug Fixes
+
+* add projects to resume ([0e4a87c](https://github.com/northcutted/resume/commit/0e4a87c0e4c40b814ae037d1c3691ae720c61463))
+* clean up projects ([5fc9cea](https://github.com/northcutted/resume/commit/5fc9cea79f18eb550a16d165dcc41f4d4f6ac02f))
+
 ## [2.8.4](https://github.com/northcutted/resume/compare/v2.8.3...v2.8.4) (2026-05-20)
 
 
