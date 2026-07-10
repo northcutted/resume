@@ -1,11 +1,11 @@
 {
   "basics": {
     "name": "Edward Northcutt",
-    "label": "Lead Platform Engineer | Software Engineering | Secure Container Infrastructure | CI/CD",
+    "label": "Lead Software Engineer | Platform Engineering | Containers | Software Supply Chain Security",
     "email": "northcutted@gmail.com",
     "phone": "+1 (618) 541-8770",
     "url": "https://resume.northcutt.dev",
-    "summary": "Platform engineering lead with 8+ years of experience building secure container, CI/CD, and developer infrastructure at enterprise scale. Founding technical owner of a multi-architecture container image platform adopted by 700+ applications and used in 100,000+ image builds. Specialized in distroless images, software supply chain security, SLSA provenance, SBOM and vulnerability automation, GitLab CI/CD, AWS, OpenShift, and Go-based platform tooling.",
+    "summary": "Lead Software Engineer with 9+ years of experience building secure CI/CD and container platforms at enterprise scale. Founding engineer and technical owner of a multi-architecture base-image platform adopted by 700+ applications and used in 100,000+ image builds annually. Specializes in secure-by-default developer infrastructure, software supply chain security, automated vulnerability remediation, AWS, GitLab CI/CD, and Go.",
     "location": {
       "city": "Charleston",
       "countryCode": "US",
@@ -28,19 +28,16 @@
       "position": "Lead Software Engineer II",
       "name": "State Farm",
       "location": "Bloomington, IL / Hybrid-Remote",
-      "summary": "Founding engineer and technical owner of the enterprise container image platform, delivering hardened, production-ready base images and secure CI/CD patterns for containerized workloads.",
+      "summary": "Promoted to Lead Software Engineer II on the CI/CD platform team in April 2024, then transitioned in early 2025 to become the founding engineer and technical owner of the enterprise container image platform.",
       "highlights": [
-        "Built and launched an enterprise container image platform adopted by 700+ applications and used in 100,000+ image builds within the first year.",
-        "Designed and maintain a secure-by-default base image ecosystem built on Amazon Linux 2023, supporting Java/JVM, JavaScript/TypeScript, Python, Go, and .NET across distroless and development variants.",
-        "Architected a modular Docker Buildx image build system supporting Linux/amd64 and Linux/arm64 across all runtime families, improving reuse through layered inheritance and cache-efficient build patterns.",
-        "Implemented Cosign-based image signing, Docker Buildx provenance, and JFrog Artifactory Evidence integration, raising enterprise base-image supply chain posture to SLSA Level 2.",
-        "Automated nightly SBOM generation and vulnerability scanning with Syft and Grype, reducing remediation time for fixable CVEs to under 24 hours after upstream patch availability.",
-        "Managed Artifactory container registry lifecycle, access control, cleanup automation, image mirroring, and promotion workflows using crane, skopeo, and Docker Buildx.",
-        "Developed Go middleware embedded in JVM base images to auto-configure heap sizing, CPU share mapping, and garbage collection behavior for Kubernetes workloads.",
-        "Implemented a companion Go telemetry proxy with HMAC request signing, timestamp validation, replay protection, and Entra-authenticated forwarding to emit JVM metrics without embedding credentials in container images.",
-        "Owned platform roadmap, adoption metrics, user support, and feedback loops as a solo engineer."
+        "Beginning in Q1 2025, built and launched an enterprise container image platform adopted by 700+ applications and used in 100,000+ image builds annually.",
+        "Designed and now operate a secure-by-default, multi-architecture base-image ecosystem on Amazon Linux 2023, using Docker Buildx to support Linux/amd64 and Linux/arm64 variants for Java/JVM, JavaScript/TypeScript, Python, Go, and .NET across distroless and development tiers.",
+        "Implemented Cosign image signing, Docker Buildx provenance, and JFrog Artifactory Evidence integration, advancing enterprise base-image supply chain posture to SLSA Build Level 2.",
+        "Automated nightly SBOM generation and vulnerability scanning with Syft and Grype, reducing remediation time for fixable CVEs to under 24 hours after upstream patches became available.",
+        "Developed Go runtime middleware for Kubernetes-aware JVM heap, CPU, and garbage-collection tuning, plus an HMAC-secured telemetry proxy with replay protection and Entra-authenticated forwarding that avoided embedding credentials in images.",
+        "Served as sole technical owner through the platform's first 18 months, setting its roadmap, adoption metrics, registry lifecycle and promotion policies, support strategy, and stakeholder feedback loops."
       ],
-      "startDate": "2025-04",
+      "startDate": "2024-04",
       "endDate": "Present"
     },
     {
@@ -52,11 +49,10 @@
         "Engineered shared GitLab Runner infrastructure with Sysbox-isolated container builds; by 2022, the platform handled over half of State Farm's CI/CD pipelines.",
         "Authored reusable Terraform modules for GitLab Runner fleet deployment on AWS, including cross-account IAM credential patterns for workloads running across isolated AWS accounts.",
         "Migrated CI/CD infrastructure from on-premises systems to AWS in 2023, adding autoscaling capacity for peak build loads.",
-        "Developed a telemetry pipeline for CI/CD job metrics and surfaced consumer-facing reporting through Grafana dashboards.",
-        "Led migrations from legacy Jenkins infrastructure to shared GitLab CI/CD patterns, including custom solutions for teams with complex pipeline requirements."
+        "Built Grafana-backed CI/CD telemetry and led migrations from legacy Jenkins infrastructure to shared GitLab patterns, including custom solutions for complex workloads."
       ],
-      "startDate": "2020-08",
-      "endDate": "2025-04"
+      "startDate": "2021-12",
+      "endDate": "2024-04"
     },
     {
       "position": "Software Developer",
@@ -68,7 +64,7 @@
         "Migrated applications from legacy WebSphere Application Server infrastructure to Pivotal Cloud Foundry/Tanzu using Spring Boot, PostgreSQL, RabbitMQ, REST APIs, Java IMS services, and IBM MQ."
       ],
       "startDate": "2018-06",
-      "endDate": "2020-08"
+      "endDate": "2021-12"
     },
     {
       "position": "Software Developer Intern",
@@ -87,32 +83,15 @@
     {
       "name": "DevSecFinOps: The Challenge of Implementing a Secure and Cost-Effective Container-Based CI/CD System",
       "publisher": "State Farm Engineering Blog",
-      "releaseDate": "2025-07-01",
-      "url": "https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-cd-c2257eac8eb4",
+      "releaseDate": "2025-07-17",
+      "url": "https://engineering.statefarm.com/devsecfinops-the-challenge-of-implementing-a-secure-and-cost-effective-container-based-ci-c2257eac8eb4",
       "summary": "Co-authored a technical deep dive on secure, cost-effective container-based CI/CD architecture, including engineering tradeoffs across isolation, security, cost, and developer experience."
     }
   ],
   "projects": [
-    {
-      "name": "dock-docs",
-      "description": "Go CLI tool that generates Dockerfile and container image documentation for platform teams, security reviews, and CI pipelines. Parses Dockerfiles and optionally integrates Syft, Grype, and Dive for SBOM generation, vulnerability scanning, and layer analysis.",
-      "url": "https://github.com/northcutted/dock-docs",
-      "keywords": [
-        "Go",
-        "Docker",
-        "Podman",
-        "Syft",
-        "Grype",
-        "Dive",
-        "SBOM",
-        "Container Security",
-        "CLI",
-        "GitHub Actions"
-      ]
-    },
-    {
+        {
       "name": "ClearCutt",
-      "description": "Work-in-progress declarative framework ([project site](https://northcutted.github.io/clearcutt/)) for building hardened, minimal container base images using Nix flakes and a Go governance CLI, compiling language runtimes into reproducible, hermetically sealed closures across dev, slim, and distroless tiers. Layers keyless Sigstore/Cosign signing, SLSA Level 3 provenance, SBOMs, and Kyverno admission policies to enforce signed images from source through Kubernetes and OpenShift deployment.",
+      "description": "Open-source declarative framework ([project site](https://northcutted.github.io/clearcutt/)) for building hardened, minimal container images from reproducible Nix flakes through a Go governance CLI. Produces development, slim, and distroless runtime tiers and integrates keyless Sigstore/Cosign signing, SBOM generation, provenance workflows, and Kyverno admission policies for Kubernetes and OpenShift.",
       "url": "https://github.com/northcutted/clearcutt",
       "keywords": [
         "Nix",
@@ -129,7 +108,7 @@
     },
     {
       "name": "PicStrip",
-      "description": "Published iOS app ([App Store](https://apps.apple.com/us/app/picstrip/id6765989071)) that strips metadata and redacts PII from photos entirely on-device — no network calls, analytics, or third-party SDKs — using a two-pass ImageIO pipeline plus Vision OCR and face detection that flags 30 categories of sensitive data across four risk tiers. Built in Swift/SwiftUI and shipped through an automated GitHub Actions and Fastlane release pipeline with SLSA Level 3 build provenance attestation.",
+      "description": "Published iOS app ([App Store](https://apps.apple.com/us/app/picstrip/id6765989071)) that removes metadata and redacts PII entirely on-device, with no network calls, analytics, or third-party SDKs. Uses ImageIO, Vision OCR, and face detection to identify 30 categories of sensitive data across four risk tiers. Built in Swift/SwiftUI and released through GitHub Actions and Fastlane, with provenance attestations covering the public release IPA and a build workflow designed to support SLSA Build Level 3.",
       "url": "https://github.com/northcutted/picstrip",
       "keywords": [
         "Swift",
@@ -145,8 +124,25 @@
       ]
     },
     {
+      "name": "dock-docs",
+      "description": "Go CLI that generates Dockerfile and container image documentation for platform teams, security reviews, and CI pipelines, with optional Syft, Grype, and Dive integration for SBOM generation, vulnerability scanning, and layer analysis.",
+      "url": "https://github.com/northcutted/dock-docs",
+      "keywords": [
+        "Go",
+        "Docker",
+        "Podman",
+        "Syft",
+        "Grype",
+        "Dive",
+        "SBOM",
+        "Container Security",
+        "CLI",
+        "GitHub Actions"
+      ]
+    },
+    {
       "name": "Gitleaks Open Source Contribution",
-      "description": "Contributed to gitleaks, a widely used open source secrets-detection tool. Added support for appending repository-specific and user-supplied configuration behavior via a merged pull request.",
+      "description": "Merged contribution to gitleaks adding support for appending repository-specific and user-supplied configuration.",
       "url": "https://github.com/gitleaks/gitleaks/pull/487",
       "keywords": [
         "Go",
@@ -167,7 +163,7 @@
   ],
   "skills": [
     {
-      "name": "Platform / Containers",
+      "name": "Platform Engineering / Containers",
       "keywords": [
         "Docker",
         "Docker Buildx",
@@ -178,12 +174,11 @@
         "Helm",
         "Sysbox",
         "crane",
-        "skopeo",
-        "Cloud Native Buildpacks"
+        "skopeo"
       ]
     },
     {
-      "name": "Software Supply Chain Security",
+      "name": "Software Supply Chain / CI/CD",
       "keywords": [
         "SLSA",
         "Sigstore",
@@ -191,22 +186,11 @@
         "SBOMs",
         "Syft",
         "Grype",
-        "Docker Buildx Provenance",
+        "GitLab CI/CD",
+        "GitHub Actions",
         "JFrog Artifactory",
         "JFrog Evidence",
         "Vulnerability Remediation"
-      ]
-    },
-    {
-      "name": "CI/CD",
-      "keywords": [
-        "GitLab CI/CD",
-        "GitLab Runners",
-        "GitHub Actions",
-        "Jenkins",
-        "Release Automation",
-        "Artifact Promotion",
-        "Container Registry Workflows"
       ]
     },
     {
@@ -225,25 +209,18 @@
       ]
     },
     {
-      "name": "Programming",
+      "name": "Programming / Systems",
       "keywords": [
         "Go",
         "Python",
         "Bash",
         "Java",
         "JavaScript",
-        "TypeScript"
-      ]
-    },
-    {
-      "name": "Observability / Systems",
-      "keywords": [
-        "Grafana",
-        "OpenSearch",
-        "Kibana",
-        "Prometheus",
-        "CloudWatch",
+        "TypeScript",
         "Linux",
+        "Grafana",
+        "Prometheus",
+        "OpenSearch",
         "JVM Tuning",
         "API Design"
       ]
