@@ -1,3 +1,11 @@
+## [2.8.6](https://github.com/northcutted/resume/compare/v2.8.5...v2.8.6) (2026-07-10)
+
+
+### Bug Fixes
+
+* improve wording and add clarity around my promotion timeline ([944aa5e](https://github.com/northcutted/resume/commit/944aa5e0fb3035fb3d8250e4c456e69d1dda2faa))
+* use HR intern title ([43d61f8](https://github.com/northcutted/resume/commit/43d61f8792bb81eabef85244ecb43daac097c933))
+
 ## [2.8.5](https://github.com/northcutted/resume/compare/v2.8.4...v2.8.5) (2026-05-30)
 
 
